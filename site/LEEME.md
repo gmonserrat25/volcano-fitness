@@ -77,3 +77,17 @@ Buscar `[COMPLETAR` en `index.html`:
 - número de WhatsApp
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
+
+## Versión online
+
+Publicada como Artifact en:
+**https://claude.ai/code/artifact/5db6decc-b9fb-4610-b69e-8c9c8c02c3b5**
+
+Nace **privada**: solo la ve Guada hasta que le dé a *Share* en la barra de arriba.
+
+Para actualizarla después de tocar el sitio:
+1. `python3 site/publicar.py` — regenera `artifact.html` desde `index.html`
+   (Artifact envuelve el archivo en su propio `<head>`/`<body>`, así que recibe solo el contenido)
+2. Republicar ese archivo a la **misma URL**, pasándola como `url` si es desde otra conversación.
+
+`artifact.html` es generado: no editarlo a mano, se pisa. El que se edita es `index.html`.

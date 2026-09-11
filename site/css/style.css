@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root{
+  color-scheme:dark;   /* el sitio es oscuro a propósito; que los controles nativos acompañen */
   /* go180 usa #0D1E25 (petróleo). Acá el mismo rol, girado al azul del logo */
   --bg:        #0B1220;
   --bg-deep:   #070C16;
