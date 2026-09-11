@@ -9,8 +9,9 @@
   --bg-deep:   #070C16;
   --fg:        #E8E8E6;   /* go180: #E1E1E1 */
   --muted:     #8C96A8;
-  --accent:    #1E6BFF;   /* azul eléctrico del volcán */
-  --accent-dim:#1552C4;
+  --brand:     #154DA0;   /* azul exacto del volcán del logo */
+  --accent:    #347BE4;   /* mismo tono, aclarado para UI sobre fondo oscuro */
+  --accent-dim:#245FBF;
   --pill:      #E8E8E6;   /* pill blanco hueso, igual que el original */
   --pill-fg:   #14202E;
   --line:      rgba(232,232,230,.14);
@@ -36,21 +37,13 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 img,svg{display:block;max-width:100%}
 
-/* ── Wordmark: VOLCANO con el cráter dentro de la O ─────── */
-.wordmark{
-  display:inline-flex;align-items:center;
-  font-size:clamp(26px,2.7vw,34px);font-weight:800;letter-spacing:-.02em;
-  line-height:1;white-space:nowrap;color:#fff;
+/* ── Logo real de la marca (extraído del perfil de Instagram) ── */
+.logo{
+  display:block;height:58px;width:auto;
+  image-rendering:-webkit-optimize-contrast;
 }
-.wordmark__mark{
-  display:inline-block;width:.92em;height:.92em;margin:0 .02em;
-  position:relative;top:.02em;
-}
-.wordmark__mark svg{width:100%;height:100%;overflow:visible}
-.wordmark__mark .ring{fill:none;stroke:var(--accent);stroke-width:5.4;stroke-linecap:round}
-.wordmark__mark .lip{fill:none;stroke:var(--accent);stroke-width:5.4;stroke-linecap:round}
-.wordmark__mark .spark{fill:var(--accent)}
-.wordmark--lg{font-size:clamp(34px,4.4vw,58px)}
+.logo--lg{height:clamp(64px,7vw,92px)}
+.preloader .logo{height:clamp(78px,9vw,112px)}
 
 /* ═══ 0 · PRELOADER ═══════════════════════════════════════ */
 .preloader{

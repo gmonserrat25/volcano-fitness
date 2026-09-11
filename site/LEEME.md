@@ -33,15 +33,42 @@ Después abrir http://localhost:8899
 - Logo: wordmark `VOLCANO` con la primera O convertida en cráter, igual que `GO180` tiene un
   glifo en su O.
 
-## Imágenes
+## Imágenes — fotos reales del Instagram
 
-Las 10 fotos son **generadas con IA** (modelo `z_image`, 1,5 créditos en total) siguiendo la
-descripción del interior real: paredes negras texturadas, arcos LED cálidos detrás de los racks,
-máquinas negras, ventanales, y las sierras para la caminata.
-**Son provisorias**: reemplazar por fotos reales del gym cuando estén.
+Las 9 fotos salen del Instagram público **@volcano_fitnesslafalda** (las 12 publicaciones más
+recientes, que son las del gimnasio nuevo). Se bajaron a 1080px por el endpoint
+`instagram.com/p/<código>/media/?size=l` y se redimensionaron a 1600px de alto.
 
-Archivos en `img/`: `hero-1..5.jpg` (slideshow del hero), `entrenamientos.jpg`, `profes.jpg`,
-`gym.jpg`, `historias.jpg`, `contacto.jpg`.
+| Archivo | Qué muestra |
+|---|---|
+| `hero-1.jpg` | rack negro con el círculo de luz LED cálida detrás |
+| `hero-2.jpg` | rack con el arco LED sobre la pared texturada |
+| `hero-3.jpg` | el espejo con el círculo LED de fondo |
+| `hero-4.jpg` | dominadas, blanco y negro, con VOLCANO pintado en la pared |
+| `entrenamientos.jpg` | entrenando en la sala |
+| `profes.jpg` | la remera de Volcano (camuflado + sol argentino) |
+| `gym.jpg` | las cintas frente al ventanal, con VOLCANO en el vidrio |
+| `historias.jpg` | el cartel de "Matecitos ❤" |
+| `contacto.jpg` | el grupo con las remeras, bajo el arco LED |
+
+**Ojo con el encuadre.** Las fotos de Instagram son verticales (3:4 y 9:16) y los paneles son
+horizontales a pantalla completa, así que se recortan bastante. Cada una tiene su
+`background-position` ajustado a mano en el HTML (`center 18%`, `center 32%`…). Si se cambia
+una foto hay que revisar ese valor. Fotos horizontales se verían bastante mejor.
+
+Quedaron afuera dos de las 12: una en negro (video) y otra con texto quemado encima.
+
+## Logo
+
+`img/logo.png` es el logo real, recortado de la foto de perfil de Instagram (150x150, que es
+la máxima resolución que Instagram sirve sin login). El fondo negro se convirtió en
+transparencia real y se escaló x4 a 520x396.
+
+Por eso el logo **no da para usarse mucho más grande** que en el footer (92px de alto).
+Si aparece el archivo original del logo, reemplazar `img/logo.png` y listo.
+
+El azul de la marca se muestreó del propio logo: `#154DA0` (`--brand`), y el acento de
+interfaz `#347BE4` (`--accent`) es ese mismo tono aclarado para que se lea sobre el fondo oscuro.
 
 ## Falta completar
 
