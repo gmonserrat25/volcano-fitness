@@ -78,6 +78,36 @@ Buscar `[COMPLETAR` en `index.html`:
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
 
+## Páginas internas
+
+Igual que en go180, las secciones del menú son páginas aparte:
+
+- **`rutina.html`** — "Tu rutina". Una rutina de ejemplo (tren inferior) con series,
+  repeticiones, descanso y los kilos de la última sesión. Los ejercicios son inventados
+  para mostrar cómo se ve; dice explícitamente que es un ejemplo.
+- **`profes.html`** — "Los profes". Ludmi Porrino con su foto, y dos lugares más con
+  solo la silueta, sin datos inventados, para cuando se sumen los otros profes.
+
+Las dos **se generan** con `python3 paginas.py`, que copia el preloader, el header, el
+menú y el footer desde `index.html` para que no se desincronicen, y les reescribe los
+anclas (`#gym` pasa a `index.html#gym`). Si cambiás el menú en `index.html`, corré ese
+script para que las internas se actualicen. El contenido propio de cada página está
+adentro de `paginas.py`, en el diccionario `CONTENIDO`.
+
+La foto `img/profe-ludmi.jpg` es un recorte de retrato del posteo de @ludmiporrino.
+Esa foto se sacó del slideshow del hero, que ahora rota entre 3.
+
+## Cómo levantarlo
+
+```
+cd ~/Proyectos/volcano-fitness/site
+python3 servidor.py        # http://localhost:8899
+```
+
+Usá `servidor.py`, no `python3 -m http.server`: manda `Cache-Control: no-store`, así el
+navegador no te muestra versiones viejas del HTML o del CSS después de editarlos. Si igual
+ves algo desactualizado, un **Cmd+Shift+R** lo destraba.
+
 ## Versión online
 
 Publicada como Artifact en:

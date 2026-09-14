@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu rutina — Volcano Fitness</title>
+<meta name="description" content="La rutina del día para los socios de Volcano Fitness: ejercicios, series, repeticiones y los kilos de la última vez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="interior">
+
+<div class="preloader" id="preloader">
+  <div class="preloader__logo">
+    <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+  </div>
+  <div class="preloader__curtain"></div>
+</div>
+
+<header class="header" id="header">
+  <a href="index.html#hero" class="header__logo" aria-label="Volcano Fitness — inicio">
+    <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+  </a>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <ul class="menu__list">
+    <li><a href="index.html#hero">Somos Volcano</a></li>
+    <li class="has-sub">
+      <a href="index.html#entrenamientos">Entrenamientos <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <ul class="menu__sub">
+        <li><a href="index.html#entrenamientos">Musculación</a></li>
+        <li><a href="index.html#entrenamientos">Funcional</a></li>
+        <li><a href="index.html#entrenamientos">Personalizado</a></li>
+        <li><a href="index.html#entrenamientos">Caminatas a las sierras</a></li>
+        <li><a href="rutina.html">Tu rutina</a></li>
+      </ul>
+    </li>
+    <li><a href="profes.html">Profes</a></li>
+    <li><a href="index.html#gym">El gym</a></li>
+    <li><a href="index.html#historias">Historias</a></li>
+    <li><a href="index.html#contacto">Precios</a></li>
+    <li><a href="index.html#contacto">Clase de prueba</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <a class="menu__cta pill pill--sm" href="index.html#contacto">Sumate</a>
+</nav>
+
+<main class="pagina">
+  <header class="cabecera">
+    <span class="lbl">Tu rutina · Día 2 de 4</span>
+    <h1 class="cabecera__titulo">Tren inferior completo</h1>
+    <p class="cabecera__bajada">Entrás, mirás qué te toca hoy y arrancás. Los kilos que ves
+    al final son los de la última vez que lo hiciste.</p>
+  </header>
+
+  <section class="rutina">
+    <div class="tabla-scroll">
+      <table class="rt">
+        <caption class="visualmente-oculto">Ejercicios del día, con series, repeticiones, descanso y el peso de la última sesión</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visualmente-oculto">Orden</span></th>
+            <th scope="col">Ejercicio</th>
+            <th scope="col">Series</th>
+            <th scope="col">Reps</th>
+            <th scope="col">Descanso</th>
+            <th scope="col">La última vez</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="rt__n">1</td>
+          <td class="rt__ej">Sentadilla con barra</td>
+          <td class="rt__num">4</td>
+          <td class="rt__num">8</td>
+          <td class="rt__num rt__desc">90 s</td>
+          <td class="rt__num rt__peso">40 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">2</td>
+          <td class="rt__ej">Prensa 45°</td>
+          <td class="rt__num">3</td>
+          <td class="rt__num">12</td>
+          <td class="rt__num rt__desc">75 s</td>
+          <td class="rt__num rt__peso">100 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">3</td>
+          <td class="rt__ej">Peso muerto rumano</td>
+          <td class="rt__num">3</td>
+          <td class="rt__num">10</td>
+          <td class="rt__num rt__desc">90 s</td>
+          <td class="rt__num rt__peso">35 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">4</td>
+          <td class="rt__ej">Búlgaras con mancuernas</td>
+          <td class="rt__num">3</td>
+          <td class="rt__num">10 x pierna</td>
+          <td class="rt__num rt__desc">60 s</td>
+          <td class="rt__num rt__peso">10 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">5</td>
+          <td class="rt__ej">Extensión de cuádriceps</td>
+          <td class="rt__num">3</td>
+          <td class="rt__num">15</td>
+          <td class="rt__num rt__desc">45 s</td>
+          <td class="rt__num rt__peso">30 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">6</td>
+          <td class="rt__ej">Camilla femoral</td>
+          <td class="rt__num">3</td>
+          <td class="rt__num">12</td>
+          <td class="rt__num rt__desc">45 s</td>
+          <td class="rt__num rt__peso">25 kg</td>
+        </tr>
+        <tr>
+          <td class="rt__n">7</td>
+          <td class="rt__ej">Elevación de gemelos</td>
+          <td class="rt__num">4</td>
+          <td class="rt__num">20</td>
+          <td class="rt__num rt__desc">40 s</td>
+          <td class="rt__num rt__peso">50 kg</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <aside class="nota">
+      <h2>Antes de empezar</h2>
+      <p>Diez minutos de bici o cinta suave y movilidad de cadera. Si algo te molesta,
+      pará y avisale a tu profe: se cambia el ejercicio, no se aguanta.</p>
+    </aside>
+
+    <div class="cierre">
+      <p class="cierre__aviso">Esta es una rutina de ejemplo, para mostrar cómo se ve.
+      La tuya te la arma tu profe.</p>
+      <a class="pill" href="index.html#contacto">Pedí la tuya</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <img class="logo logo--lg" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+    <div class="footer__news">
+      <h3>¡Sumate!</h3>
+      <p>Suscribite a nuestro newsletter.</p>
+      <form class="news" onsubmit="return false">
+        <input type="email" placeholder="Tu email" aria-label="Tu email" required>
+        <button type="submit" aria-label="Suscribirme">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer__cols">
+    <div><span class="lbl">Dónde estamos</span><p>[COMPLETAR dirección]<br>La Falda, Córdoba</p></div>
+    <div><span class="lbl">Horarios</span><p>[COMPLETAR horarios]</p></div>
+    <div><span class="lbl">Contacto</span><p><a href="tel:">[COMPLETAR teléfono]</a><br><a href="mailto:">[COMPLETAR email]</a></p></div>
+    <div><span class="lbl">Seguinos</span><p><a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener">Instagram</a><br><a href="https://tiktok.com/@volcano.fitness" target="_blank" rel="noopener">TikTok</a></p></div>
+  </div>
+  <div class="footer__legal">
+    <nav><a href="#">Términos y condiciones</a><a href="#">Aviso legal</a><a href="#">Privacidad</a></nav>
+    <small>© <span id="year"></span> Volcano Fitness</small>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

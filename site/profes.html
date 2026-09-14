@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los profes — Volcano Fitness</title>
+<meta name="description" content="El equipo de profes de Volcano Fitness, el gimnasio de La Falda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="interior">
+
+<div class="preloader" id="preloader">
+  <div class="preloader__logo">
+    <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+  </div>
+  <div class="preloader__curtain"></div>
+</div>
+
+<header class="header" id="header">
+  <a href="index.html#hero" class="header__logo" aria-label="Volcano Fitness — inicio">
+    <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+  </a>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <ul class="menu__list">
+    <li><a href="index.html#hero">Somos Volcano</a></li>
+    <li class="has-sub">
+      <a href="index.html#entrenamientos">Entrenamientos <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <ul class="menu__sub">
+        <li><a href="index.html#entrenamientos">Musculación</a></li>
+        <li><a href="index.html#entrenamientos">Funcional</a></li>
+        <li><a href="index.html#entrenamientos">Personalizado</a></li>
+        <li><a href="index.html#entrenamientos">Caminatas a las sierras</a></li>
+        <li><a href="rutina.html">Tu rutina</a></li>
+      </ul>
+    </li>
+    <li><a href="profes.html">Profes</a></li>
+    <li><a href="index.html#gym">El gym</a></li>
+    <li><a href="index.html#historias">Historias</a></li>
+    <li><a href="index.html#contacto">Precios</a></li>
+    <li><a href="index.html#contacto">Clase de prueba</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <a class="menu__cta pill pill--sm" href="index.html#contacto">Sumate</a>
+</nav>
+
+<main class="pagina">
+  <header class="cabecera">
+    <span class="lbl">El equipo</span>
+    <h1 class="cabecera__titulo">Los profes</h1>
+    <p class="cabecera__bajada">No te dejan solo con la máquina: te miran, te corrigen y te
+    bancan el día que no tenés ganas.</p>
+  </header>
+
+  <section class="equipo">
+    <article class="profe">
+      <div class="profe__foto">
+        <img src="img/profe-ludmi.jpg" alt="Ludmi Porrino" width="900" height="1200" loading="lazy">
+      </div>
+      <div class="profe__datos">
+        <h2 class="profe__nombre">Profe Ludmi Porrino</h2>
+      </div>
+    </article>
+
+    <article class="profe profe--vacio">
+      <div class="profe__foto">
+        <div class="profe__ph">
+          <svg class="silueta" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="23" r="12"/>
+            <path d="M8 60c0-13.3 10.7-22 24-22s24 8.7 24 22"/>
+          </svg>
+        </div>
+      </div>
+      <div class="profe__datos">
+        <h2 class="profe__nombre">&nbsp;</h2>
+      </div>
+    </article>
+
+    <article class="profe profe--vacio">
+      <div class="profe__foto">
+        <div class="profe__ph">
+          <svg class="silueta" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="23" r="12"/>
+            <path d="M8 60c0-13.3 10.7-22 24-22s24 8.7 24 22"/>
+          </svg>
+        </div>
+      </div>
+      <div class="profe__datos">
+        <h2 class="profe__nombre">&nbsp;</h2>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <img class="logo logo--lg" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+    <div class="footer__news">
+      <h3>¡Sumate!</h3>
+      <p>Suscribite a nuestro newsletter.</p>
+      <form class="news" onsubmit="return false">
+        <input type="email" placeholder="Tu email" aria-label="Tu email" required>
+        <button type="submit" aria-label="Suscribirme">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer__cols">
+    <div><span class="lbl">Dónde estamos</span><p>[COMPLETAR dirección]<br>La Falda, Córdoba</p></div>
+    <div><span class="lbl">Horarios</span><p>[COMPLETAR horarios]</p></div>
+    <div><span class="lbl">Contacto</span><p><a href="tel:">[COMPLETAR teléfono]</a><br><a href="mailto:">[COMPLETAR email]</a></p></div>
+    <div><span class="lbl">Seguinos</span><p><a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener">Instagram</a><br><a href="https://tiktok.com/@volcano.fitness" target="_blank" rel="noopener">TikTok</a></p></div>
+  </div>
+  <div class="footer__legal">
+    <nav><a href="#">Términos y condiciones</a><a href="#">Aviso legal</a><a href="#">Privacidad</a></nav>
+    <small>© <span id="year"></span> Volcano Fitness</small>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
