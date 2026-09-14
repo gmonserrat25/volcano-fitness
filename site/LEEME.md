@@ -108,16 +108,18 @@ Usá `servidor.py`, no `python3 -m http.server`: manda `Cache-Control: no-store`
 navegador no te muestra versiones viejas del HTML o del CSS después de editarlos. Si igual
 ves algo desactualizado, un **Cmd+Shift+R** lo destraba.
 
-## Versión online
+## Para verlo desde el celular o pasárselo a alguien
 
-Publicada como Artifact en:
-**https://claude.ai/code/artifact/5db6decc-b9fb-4610-b69e-8c9c8c02c3b5**
+El Artifact que había se borró. Para tener una URL que se abra desde cualquier lado:
 
-Nace **privada**: solo la ve Guada hasta que le dé a *Share* en la barra de arriba.
+```
+cd ~/Proyectos/volcano-fitness/site
+python3 servidor.py &
+~/bin/cloudflared tunnel --url http://localhost:8899
+```
 
-Para actualizarla después de tocar el sitio:
-1. `python3 site/publicar.py` — regenera `artifact.html` desde `index.html`
-   (Artifact envuelve el archivo en su propio `<head>`/`<body>`, así que recibe solo el contenido)
-2. Republicar ese archivo a la **misma URL**, pasándola como `url` si es desde otra conversación.
+Imprime una URL `*.trycloudflare.com` que funciona mientras la Mac esté prendida y el
+comando corriendo. El link cambia cada vez que se levanta.
 
-`artifact.html` es generado: no editarlo a mano, se pisa. El que se edita es `index.html`.
+Si hace falta una dirección fija que ande siempre, la opción es GitHub Pages
+(la cuenta `gmonserrat25` ya está configurada), pero eso deja el sitio público.
