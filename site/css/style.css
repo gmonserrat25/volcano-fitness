@@ -163,10 +163,10 @@ img,svg{display:block;max-width:100%}
   position:absolute;inset:0;z-index:-1;
   background:
     /* halo detrás del bloque de texto: lo despega de la foto sin tapar la imagen */
-    radial-gradient(ellipse 66% 52% at 50% 46%,
-      rgba(5,9,18,.74) 0%, rgba(5,9,18,.46) 52%, rgba(5,9,18,0) 100%),
+    radial-gradient(ellipse 72% 58% at 50% 47%,
+      rgba(4,7,14,.88) 0%, rgba(4,7,14,.74) 34%, rgba(4,7,14,.40) 66%, rgba(4,7,14,0) 100%),
     linear-gradient(180deg,
-      rgba(5,9,18,.72) 0%, rgba(5,9,18,.38) 26%, rgba(5,9,18,.42) 60%, rgba(5,9,18,.80) 100%);
+      rgba(4,7,14,.78) 0%, rgba(4,7,14,.50) 26%, rgba(4,7,14,.54) 60%, rgba(4,7,14,.86) 100%);
 }
 .panel__body{
   position:relative;z-index:1;
@@ -180,7 +180,11 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(40px,5.5vw,104px);
   font-weight:700;letter-spacing:-.025em;line-height:1.02;
   color:#fff;
-  text-shadow:0 1px 2px rgba(3,6,12,.55), 0 6px 34px rgba(3,6,12,.6);
+  text-shadow:
+    0 1px 1px rgba(2,4,9,.92),
+    0 2px 6px rgba(2,4,9,.85),
+    0 8px 26px rgba(2,4,9,.80),
+    0 16px 60px rgba(2,4,9,.65);
 }
 .panel__lead{
   margin:0 auto 1.9em;
@@ -188,7 +192,10 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(15px,1.34vw,18px);
   font-weight:500;line-height:1.95;
   color:rgba(255,255,255,.93);
-  text-shadow:0 1px 2px rgba(3,6,12,.62), 0 3px 20px rgba(3,6,12,.55);
+  text-shadow:
+    0 1px 1px rgba(2,4,9,.95),
+    0 2px 5px rgba(2,4,9,.88),
+    0 6px 22px rgba(2,4,9,.78);
 }
 
 /* Pill — blanco hueso con texto oscuro, igual que el original */
@@ -533,4 +540,16 @@ img,svg{display:block;max-width:100%}
 @media (max-width:520px){
   .app__botones{width:100%}
   .tienda{flex:1 1 100%;justify-content:center}
+}
+
+/* Placa detrás del texto del panel: sigue al bloque (se mueve con el parallax),
+   con los bordes difuminados por una máscara para que no se note el recorte. */
+.panel__body::before{
+  content:"";
+  position:absolute;
+  inset:-14% -10%;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 58% 50% at 50% 50%,
+    rgba(3,6,13,.78) 0%, rgba(3,6,13,.58) 45%, rgba(3,6,13,0) 100%);
 }

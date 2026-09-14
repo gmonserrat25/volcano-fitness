@@ -44,11 +44,12 @@ recientes, que son las del gimnasio nuevo). Se bajaron a 1080px por el endpoint
 | `hero-1.jpg` | rack negro con el círculo de luz LED cálida detrás |
 | `hero-2.jpg` | rack con el arco LED sobre la pared texturada |
 | `hero-3.jpg` | el espejo con el círculo LED de fondo |
+| `hero-3.jpg` | la sala con el logo VOLCANO (frame de un reel) |
 | `hero-4.jpg` | dominadas, blanco y negro, con VOLCANO pintado en la pared |
-| `entrenamientos.jpg` | entrenando en la sala |
+| `entrenamientos.jpg` | entrenando en la máquina (frame de un reel) |
 | `profes.jpg` | la remera de Volcano (camuflado + sol argentino) |
 | `gym.jpg` | las cintas frente al ventanal, con VOLCANO en el vidrio |
-| `historias.jpg` | el cartel de "Matecitos ❤" |
+| `historias.jpg` | la sala con el logo VOLCANO en la pared (frame de un reel) |
 | `contacto.jpg` | el grupo con las remeras, bajo el arco LED |
 
 **Ojo con el encuadre.** Las fotos de Instagram son verticales (3:4 y 9:16) y los paneles son
@@ -90,6 +91,17 @@ usa una de terceros, ahí van los links de esa.
 
 Los botones son propios, no los badges oficiales de Apple y Google. Si hace falta usar los
 oficiales hay que bajarlos de sus sitios de marca y respetar sus reglas de uso.
+
+## Frames sacados de los reels
+
+Instagram sin login sólo muestra 12 publicaciones, y varias no servían (una en negro, otra
+con texto quemado, selfies). Para conseguir más fotos del lugar se sacaron **frames de los
+reels**: no hay ffmpeg en esta máquina y los videos de Instagram van por `blob:` (no se
+pueden descargar), así que se capturaron desde el `<video>` de la página, dibujándolo en un
+`<canvas>` y mandando los JPEG a un servidor local.
+
+Salen a 810x1440, un poco más blandos que una foto, pero son del gimnasio y sirven.
+Si aparecen fotos de verdad, reemplazarlas.
 
 ## Legibilidad de los paneles
 
