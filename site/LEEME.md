@@ -78,6 +78,33 @@ Buscar `[COMPLETAR` en `index.html`:
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
 
+## La sección de la app
+
+Va en `index.html`, entre el último panel y las reseñas (`id="app"`), y también está en el
+menú. Muestra de qué sirve la app y tiene un teléfono dibujado con CSS que repite la misma
+rutina de `rutina.html`, para que lo que se ve prometido sea lo que hay.
+
+**Faltan los dos links de las tiendas**: buscá `[COMPLETAR link App Store]` y
+`[COMPLETAR link Google Play]` en `index.html`. Si el gimnasio no tiene app propia sino que
+usa una de terceros, ahí van los links de esa.
+
+Los botones son propios, no los badges oficiales de Apple y Google. Si hace falta usar los
+oficiales hay que bajarlos de sus sitios de marca y respetar sus reglas de uso.
+
+## Legibilidad de los paneles
+
+Los títulos sobre las fotos se perdían, sobre todo en las claras. Tres cosas lo arreglan,
+todas en `.panel__scrim` y `.panel__title` / `.panel__lead`:
+
+1. Un **halo radial** en el scrim, centrado donde va el texto, que lo despega de la foto sin
+   ensuciar toda la imagen.
+2. **Doble sombra** en el texto: una corta y cerrada que le da borde, y una amplia y difusa
+   que le da fondo.
+3. El **parallax** del contenido bajó de 46% a 24% de recorrido, así el texto no se va tanto
+   del centro mientras scrolleás.
+
+Si se cambia una foto por una muy clara, revisá que el título siga leyéndose.
+
 ## Páginas internas
 
 Igual que en go180, las secciones del menú son páginas aparte:
