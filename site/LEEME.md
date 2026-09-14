@@ -79,6 +79,28 @@ Buscar `[COMPLETAR` en `index.html`:
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
 
+## La página El gym
+
+`gym.html` (generada por `paginas.py`, como las otras) tiene tres partes:
+
+1. **Galería** en mosaico de 7 fotos. Las piezas están medidas para llenar la grilla de
+   4x3 sin dejar huecos: una ocupa 2x2, dos ocupan 1x2 y las otras cuatro 1x1. Si agregás
+   o sacás fotos, revisá que las áreas sigan cerrando o va a quedar un hueco.
+2. **Equipamiento**, agrupado en Fuerza / Máquinas / Cardio / La sala. **La lista se armó
+   mirando las fotos, una por una**: está sólo lo que se ve. No hay prensa 45°, ni sauna,
+   ni vestuarios, porque no aparecen en ninguna imagen. Si existen, agregarlos.
+3. **Dónde estamos**, con la dirección real (**Sarmiento 518, La Falda**), el mapa embebido
+   de Google y un botón "Cómo llegar" que abre la app de mapas del celular.
+
+El mapa es un iframe de Google, o sea que carga recursos de Google en la página. Si eso
+molesta, se puede cambiar por una imagen estática con un link encima.
+
+## Las caminatas ya no van
+
+Aparecían en el submenú y en la descripción. **El gimnasio no las ofrece** (confirmado el
+2026-09-14), así que se quitaron de todos lados. Estaban porque hay un destacado viejo de
+Instagram que las muestra: no volver a agregarlas por eso.
+
 ## La sección de la app
 
 Va en `index.html`, entre el último panel y las reseñas (`id="app"`), y también está en el

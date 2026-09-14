@@ -598,3 +598,102 @@ img,svg{display:block;max-width:100%}
   .wpp{height:52px;padding:0 14px}
   .wpp svg{width:26px;height:26px}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   EL GYM (gym.html)
+   ═══════════════════════════════════════════════════════════ */
+
+.seccion__tit{
+  margin:0 0 clamp(20px,2.6vw,30px);
+  font-size:clamp(22px,2.5vw,34px);font-weight:700;letter-spacing:-.022em;color:#fff;
+}
+
+/* Galería: mosaico donde algunas piezas pesan más que otras */
+.galeria{
+  display:grid;gap:clamp(8px,1.1vw,14px);
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:clamp(130px,15vw,210px);
+  grid-auto-flow:dense;
+  margin-bottom:clamp(48px,6.5vw,92px);
+}
+.shot{
+  margin:0;position:relative;overflow:hidden;
+  border-radius:12px;background:var(--bg-deep);
+}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot.ancha{grid-column:span 2;grid-row:span 2}
+.shot.alta{grid-row:span 2}
+.shot figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:26px 14px 11px;
+  font-size:12.5px;font-weight:600;color:#fff;
+  background:linear-gradient(180deg,transparent,rgba(4,7,14,.88));
+  opacity:0;transform:translateY(6px);
+  transition:opacity .3s ease,transform .3s var(--ease);
+}
+.shot:hover figcaption{opacity:1;transform:none}
+
+/* Equipamiento */
+.equipo-lista{margin-bottom:clamp(48px,6.5vw,92px)}
+.equipo__grid{
+  display:grid;gap:clamp(22px,3vw,40px);
+  grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+}
+.equipo__tit{
+  margin:0 0 14px;padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+}
+.equipo__grid ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.equipo__grid li{
+  position:relative;padding-left:18px;
+  font-size:clamp(14px,1.22vw,15.5px);font-weight:500;line-height:1.5;color:var(--fg);
+}
+.equipo__grid li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:6px;height:6px;border-radius:50%;background:var(--brand);
+}
+.equipo__nota{
+  margin:clamp(24px,3vw,34px) 0 0;max-width:56ch;
+  font-size:14px;font-weight:500;line-height:1.7;color:var(--muted);
+}
+
+/* Dónde estamos */
+.donde{
+  display:grid;gap:clamp(24px,3.4vw,48px);
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  align-items:center;
+}
+.donde__dir{
+  margin:0 0 clamp(20px,2.4vw,28px);
+  font-size:clamp(20px,2.1vw,27px);font-weight:700;letter-spacing:-.02em;color:#fff;
+  line-height:1.3;
+}
+.donde__dir span{display:block;font-size:.66em;font-weight:500;color:var(--muted);margin-top:.3em}
+.donde__dl{margin:0 0 clamp(22px,2.8vw,32px);display:grid;gap:12px}
+.donde__dl dt{
+  font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:3px;
+}
+.donde__dl dd{margin:0;font-size:15px;font-weight:500;color:var(--fg)}
+.donde__acciones{display:flex;gap:11px;flex-wrap:wrap}
+.donde__mapa{
+  border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);
+  aspect-ratio:4/3;max-width:100%;
+  background:var(--bg-deep);
+}
+.donde__mapa iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.25) contrast(1.05)}
+
+@media (max-width:820px){
+  .galeria{grid-template-columns:repeat(2,1fr)}
+  .shot.ancha{grid-column:span 2}
+  .donde{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .galeria{grid-template-columns:1fr;grid-auto-rows:190px}
+  .shot.ancha,.shot.alta{grid-column:auto;grid-row:auto}
+  .shot figcaption{opacity:1;transform:none}
+  .donde__acciones .pill{flex:1 1 100%;text-align:center}
+}

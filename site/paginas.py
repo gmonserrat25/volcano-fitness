@@ -170,7 +170,100 @@ CONTENIDO['profes'] = f"""  <header class="cabecera">
   </section>
 """
 
+
+# ──────────────────────────────── El gym ─────────────────────────────────
+fotos = [
+    ("hero-1.jpg",        "Los racks, con la luz cálida detrás", "ancha"),
+    ("gym.jpg",           "Las cintas, contra el ventanal", "alta"),
+    ("hero-3.jpg",        "La sala principal", "alta"),
+    ("entrenamientos.jpg","Las máquinas de tren inferior", ""),
+    ("hero-2.jpg",        "Barras y discos", ""),
+    ("hero-4.jpg",        "La jaula y el cruce de poleas", ""),
+    ("historias.jpg",     "Las poleas, contra la pared negra", ""),
+]
+galeria = '\n'.join(
+    f'      <figure class="shot {c}"><img src="img/{f}" alt="{a}" loading="lazy">'
+    f'<figcaption>{a}</figcaption></figure>' for f,a,c in fotos)
+
+equipo = [
+    ("Fuerza", [
+        "Jaula de sentadillas con barra olímpica y discos",
+        "Multipower (barra guiada)",
+        "Bancos planos y regulables",
+        "Mancuernas con su rack",
+        "Barra de dominadas",
+    ]),
+    ("Máquinas", [
+        "Cruce de poleas y multiestación",
+        "Extensión de cuádriceps",
+        "Camilla femoral",
+    ]),
+    ("Cardio", [
+        "Cintas de correr con pantalla",
+        "Bicicletas fijas",
+    ]),
+    ("La sala", [
+        "Espejos de pared entera",
+        "Pantallas y equipo de música",
+        "Ventanales a la calle, con luz natural",
+    ]),
+]
+listas = '\n'.join(
+    '      <div class="equipo__grupo">\n'
+    f'        <h3 class="equipo__tit">{t}</h3>\n        <ul>\n'
+    + '\n'.join(f'          <li>{x}</li>' for x in items)
+    + '\n        </ul>\n      </div>' for t, items in equipo)
+
+DIRECCION = "Sarmiento 518"
+CIUDAD = "La Falda, Córdoba"
+MAPA_Q = "Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina"
+
+CONTENIDO['gym'] = f"""  <header class="cabecera">
+    <span class="lbl">La casa</span>
+    <h1 class="cabecera__titulo">El gym</h1>
+    <p class="cabecera__bajada">Paredes negras, luz cálida detrás de los racks y ventanales
+    a la calle. Máquinas nuevas y todo lo que hace falta, sin tener que esperar turno.</p>
+  </header>
+
+  <section class="galeria">
+{galeria}
+  </section>
+
+  <section class="equipo-lista">
+    <h2 class="seccion__tit">Qué vas a encontrar</h2>
+    <div class="equipo__grid">
+{listas}
+    </div>
+    <p class="equipo__nota">Si buscás algo puntual y no lo ves en la lista, preguntanos:
+    el equipamiento se sigue sumando.</p>
+  </section>
+
+  <section class="donde">
+    <div class="donde__datos">
+      <h2 class="seccion__tit">Dónde estamos</h2>
+      <p class="donde__dir">{DIRECCION}<br><span>{CIUDAD}</span></p>
+      <dl class="donde__dl">
+        <dt>Horarios</dt><dd>[COMPLETAR horarios]</dd>
+        <dt>Teléfono</dt><dd>[COMPLETAR teléfono]</dd>
+      </dl>
+      <div class="donde__acciones">
+        <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPA_Q}"
+           target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="pill pill--ghost" href="index.html#contacto">Probá una clase</a>
+      </div>
+    </div>
+    <div class="donde__mapa">
+      <iframe title="Mapa: {DIRECCION}, {CIUDAD}" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q={MAPA_Q}&amp;z=16&amp;output=embed"></iframe>
+    </div>
+  </section>
+"""
+
 PAGINAS = {
+  'gym.html':    ('El gym — Volcano Fitness',
+                  'El gimnasio de Volcano Fitness en Sarmiento 518, La Falda: equipamiento, fotos y cómo llegar.',
+                  CONTENIDO['gym']),
   'rutina.html': ('Tu rutina — Volcano Fitness',
                   'La rutina del día para los socios de Volcano Fitness: ejercicios, series, repeticiones y los kilos de la última vez.',
                   CONTENIDO['rutina']),
