@@ -92,6 +92,36 @@ usa una de terceros, ahí van los links de esa.
 Los botones son propios, no los badges oficiales de Apple y Google. Si hace falta usar los
 oficiales hay que bajarlos de sus sitios de marca y respetar sus reglas de uso.
 
+## Video del hero
+
+`video/hero.mp4` — 532 KB, 16:9, sin sonido, en loop. Es un recorte del reel `DRzpTLAkSfe`,
+la parte donde se recorre la sala y se ve el logo VOLCANO en la pared, sin gente de frente.
+
+Se grabó con `MediaRecorder` sobre un `<canvas>`, tomando la franja central del reel (que es
+vertical) para que quede horizontal. `img/hero-1.jpg` queda de `poster`, y también es lo que
+se ve si alguien tiene activado "reducir movimiento".
+
+**Si la pestaña se abre en segundo plano, Chrome no arranca el autoplay.** Por eso `main.js`
+reintenta el `play()` cuando la pestaña se vuelve visible.
+
+Las fotos `hero-2`, `hero-3`, `hero-4` e `historias` quedaron **sin uso** pero siguen en
+`img/`: sirven como banco si hace falta cambiar alguna.
+
+## Botón de WhatsApp
+
+Flotante abajo a la derecha, fijo en todas las páginas. Se ensancha al pasar el mouse.
+**Falta el número**: buscá `wa.me/54[COMPLETAR]` en `index.html` (y en las internas, que se
+regeneran con `paginas.py`).
+
+El formato es `https://wa.me/549XXXXXXXXXX`, sin espacios ni guiones, con el 9 después del 54
+para celulares argentinos.
+
+## Se sacó la sección "Historias"
+
+Prometía testimonios que no existían, y las reseñas de Google que están abajo cumplen esa
+función. El panel, su punto de navegación y su ítem del menú se quitaron; la home quedó con
+cinco paneles.
+
 ## Frames sacados de los reels
 
 Instagram sin login sólo muestra 12 publicaciones, y varias no servían (una en negro, otra

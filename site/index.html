@@ -47,7 +47,6 @@
     </li>
     <li><a href="profes.html">Profes</a></li>
     <li><a href="#gym">El gym</a></li>
-    <li><a href="#historias">Historias</a></li>
     <li><a href="#contacto">Precios</a></li>
     <li><a href="#contacto">Clase de prueba</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -61,7 +60,6 @@
   <button data-go="entrenamientos" aria-label="Entrenamientos"></button>
   <button data-go="profes" aria-label="Profes"></button>
   <button data-go="gym" aria-label="El gym"></button>
-  <button data-go="historias" aria-label="Historias"></button>
   <button data-go="contacto" aria-label="Contacto"></button>
 </nav>
 
@@ -69,12 +67,13 @@
 <main class="stack">
 
   <!-- Panel 1 · Hero (slideshow de fondo) -->
-  <section class="panel" id="hero">
-    <div class="panel__media" data-slideshow>
-      <div class="slide is-active" style="background-image:url('img/hero-1.jpg');background-position:center 32%"></div>
-      <div class="slide" style="background-image:url('img/hero-2.jpg');background-position:center 18%"></div>
-      <div class="slide" style="background-image:url('img/hero-3.jpg');background-position:center 50%"></div>
-      <div class="slide" style="background-image:url('img/hero-4.jpg');background-position:center 32%"></div>
+  <section class="panel panel--hero" id="hero">
+    <div class="panel__media">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+             poster="img/hero-1.jpg" aria-hidden="true">
+        <source src="video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
     </div>
     <div class="panel__scrim"></div>
     <div class="panel__body">
@@ -117,18 +116,7 @@
     </div>
   </section>
 
-  <!-- Panel 5 · Historias -->
-  <section class="panel" id="historias">
-    <div class="panel__media" style="background-image:url('img/historias.jpg');background-position:center 46%"></div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <h2 class="panel__title">Historias</h2>
-      <p class="panel__lead">Conocé las historias de la gente que llegó a sus objetivos gracias a Volcano, y cómo lo hizo.</p>
-      <a class="pill" href="#contacto">Leé las historias</a>
-    </div>
-  </section>
-
-  <!-- Panel 6 · CTA final -->
+  <!-- Panel 5 · CTA final -->
   <section class="panel" id="contacto">
     <div class="panel__media" style="background-image:url('img/contacto.jpg');background-position:center 32%"></div>
     <div class="panel__scrim"></div>
@@ -235,6 +223,16 @@
     <small>© <span id="year"></span> Volcano Fitness</small>
   </div>
 </footer>
+
+<!-- ░░ WHATSAPP FLOTANTE ░░ -->
+<a class="wpp" href="https://wa.me/54[COMPLETAR]" target="_blank" rel="noopener"
+   aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/>
+    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3.1-.2-.3C4.1 15 3.7 13.5 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8.2-8.3 8.2z"/>
+  </svg>
+  <span class="wpp__txt">Escribinos</span>
+</a>
 
 <script src="js/main.js"></script>
 </body>

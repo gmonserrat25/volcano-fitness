@@ -553,3 +553,48 @@ img,svg{display:block;max-width:100%}
   background:radial-gradient(ellipse 58% 50% at 50% 50%,
     rgba(3,6,13,.78) 0%, rgba(3,6,13,.58) 45%, rgba(3,6,13,0) 100%);
 }
+
+/* ═══ Video del hero ═══════════════════════════════════════ */
+.hero-video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 50%;
+  display:block;
+}
+/* Si alguien prefiere menos movimiento, se queda el poster */
+@media (prefers-reduced-motion:reduce){
+  .hero-video{display:none}
+  .panel--hero .panel__media{
+    background-image:url('../img/hero-1.jpg');
+    background-size:cover;background-position:center 32%;
+  }
+}
+
+/* ═══ WhatsApp flotante ════════════════════════════════════ */
+.wpp{
+  position:fixed;right:clamp(16px,2.4vw,28px);bottom:clamp(16px,2.4vw,28px);
+  z-index:95;
+  display:inline-flex;align-items:center;gap:0;
+  height:56px;padding:0 16px;
+  border-radius:999px;
+  background:#25D366;color:#0A1F12;
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08) inset;
+  transition:gap .35s var(--ease), padding .35s var(--ease), transform .25s var(--ease);
+}
+.wpp svg{width:28px;height:28px;fill:currentColor;flex:none}
+.wpp__txt{
+  max-width:0;overflow:hidden;white-space:nowrap;
+  font-size:15px;font-weight:700;letter-spacing:-.01em;
+  transition:max-width .35s var(--ease);
+}
+.wpp:hover,.wpp:focus-visible{gap:10px;padding:0 22px 0 18px;transform:translateY(-2px)}
+.wpp:hover .wpp__txt,.wpp:focus-visible .wpp__txt{max-width:130px}
+.wpp:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* En el footer no hace falta que tape nada */
+.is-past-panels .wpp{box-shadow:0 10px 30px -8px rgba(0,0,0,.45)}
+
+@media (max-width:520px){
+  .wpp{height:52px;padding:0 14px}
+  .wpp svg{width:26px;height:26px}
+}
