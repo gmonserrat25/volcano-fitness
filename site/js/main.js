@@ -2,15 +2,49 @@
 (function () {
   'use strict';
 
-  /* ── 0 · Preloader: logo, luego cortina diagonal hacia arriba ── */
-  var pre = document.getElementById('preloader');
-  function dropCurtain() {
-    if (!pre) return;
-    pre.classList.add('is-out');
-    setTimeout(function () { pre.classList.add('is-done'); }, 1200);
+  /* ── 0 · Entrada ──
+     Mismos tiempos que go180: la cortina barre 1,2 s; las letras del título
+     entran escalonadas empezando 1 s antes de que termine; la bajada, 1,2 s antes. */
+
+  // el título se parte en letras para poder escalonarlas
+  var titulo = document.querySelector('[data-letras]');
+  if (titulo) {
+    var texto = titulo.textContent;
+    titulo.setAttribute('aria-label', texto);
+    titulo.textContent = '';
+    for (var k = 0; k < texto.length; k++) {
+      var ch = texto[k];
+      var sp = document.createElement('span');
+      sp.setAttribute('aria-hidden', 'true');
+      if (ch === ' ') { sp.className = 'letra letra--hueco'; sp.innerHTML = '&nbsp;'; }
+      else { sp.className = 'letra'; sp.textContent = ch; }
+      titulo.appendChild(sp);
+    }
   }
-  window.addEventListener('load', function () { setTimeout(dropCurtain, 900); });
-  setTimeout(dropCurtain, 4000); // red lenta: no dejar la cortina colgada
+
+  function repartirTiempos() {
+    var letras = document.querySelectorAll('.letra');
+    // el original reparte 0,6 s entre todas las letras y arranca a los 0,2 s
+    var total = 600, inicio = 200;
+    letras.forEach(function (l, idx) {
+      l.style.animationDelay = (inicio + (letras.length > 1 ? total * idx / (letras.length - 1) : 0)) + 'ms';
+    });
+    document.querySelectorAll('[data-sube]').forEach(function (e, idx) {
+      e.style.animationDelay = (idx === 0 ? 300 : 460) + 'ms';
+    });
+  }
+
+  function abrir() {
+    repartirTiempos();
+    document.body.classList.add('is-abriendo');
+    setTimeout(function () { document.body.classList.add('is-abierto'); }, 2200);
+  }
+
+  // Esperamos a que carguen las imágenes del hero, con un tope por si tardan
+  var abierto = false;
+  function abrirUnaVez() { if (!abierto) { abierto = true; abrir(); } }
+  window.addEventListener('load', function () { setTimeout(abrirUnaVez, 500); });
+  setTimeout(abrirUnaVez, 3500);
 
   /* ── 1 · Menú overlay ── */
   var burger = document.getElementById('burger');

@@ -130,6 +130,27 @@ poses quedan a mitad de movimiento. Se sacaron todos. Hoy cada imagen del sitio 
 Si en algún momento hace falta volver a sacar un frame, que sea a sabiendas y por poco
 tiempo: dejarlo marcado acá.
 
+## La animación de entrada
+
+Es la de go180, copiada de su timeline de GSAP (está en el `main.js` de su tema). Acá se hizo
+con animaciones CSS, sin librerías:
+
+| Pieza | Qué hace |
+|---|---|
+| `.wipe` | Un cuadrado de **200vw × 200vw** anclado en `top:100svh; left:0`, con `transform-origin:0 0`. Arranca en `rotate(-90deg)`, que así cubre toda la pantalla, y **rota hasta -180°** en 1,2 s. Al pivotear sobre la esquina de abajo a la izquierda, su borde barre la pantalla en diagonal: ese es el efecto. |
+| `.wipe-logo` | El logo centrado con un **anillo girando** (360° cada 1,8 s), como la O que gira en el logo de go180 mientras carga. Se desvanece en 0,4 s. |
+| `.letra` | El título se parte en letras por JS. Cada una entra desde `translateY(100%) rotate(20deg)`, **escalonadas**: 0,6 s repartidos entre todas. |
+| `[data-sube]` | La bajada y el botón suben desde abajo, un poco después. |
+
+El `ease` es `cubic-bezier(.645,.045,.355,1)`, que es el Power2.easeInOut que usa el original.
+
+**Al probarla, ojo:** en una pestaña en segundo plano el navegador congela las animaciones CSS
+y parece que no pasa nada. Para revisarla conviene manejarla a mano:
+
+```js
+document.getAnimations().forEach(a => { a.pause(); a.currentTime = 400; });
+```
+
 ## Video del hero
 
 `video/hero.mp4` — 1 MB, 1280x720, mudo, en loop. Sale de la **historia destacada "Gym"**

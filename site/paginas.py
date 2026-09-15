@@ -15,7 +15,9 @@ def bloque(marca, cierre):
     if not m: raise SystemExit('no encontré <%s> en index.html' % marca)
     return m.group(1)
 
-preloader = re.search(r'(<div class="preloader".*?</div>\s*</div>)', home, re.S).group(1)
+m_wipe = re.search(r'(<div class="wipe" id="wipe"></div>\s*<div class="wipe-logo".*?</div>)', home, re.S)
+if not m_wipe: raise SystemExit('no encontré la cortina de entrada en index.html')
+preloader = m_wipe.group(1)
 header    = bloque('header', 'header')
 menu      = bloque('nav', 'nav')          # el primero es el menu overlay
 footer    = bloque('footer', 'footer')
