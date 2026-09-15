@@ -74,7 +74,6 @@ interfaz `#347BE4` (`--accent`) es ese mismo tono aclarado para que se lea sobre
 ## Falta completar
 
 Buscar `[COMPLETAR` en `index.html`:
-- teléfono y email
 - número de WhatsApp
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
@@ -132,11 +131,14 @@ Las fotos `hero-2`, `hero-3`, `hero-4` e `historias` quedaron **sin uso** pero s
 ## Botón de WhatsApp
 
 Flotante abajo a la derecha, fijo en todas las páginas. Se ensancha al pasar el mouse.
-**Falta el número**: buscá `wa.me/54[COMPLETAR]` en `index.html` (y en las internas, que se
-regeneran con `paginas.py`).
+El número es **3548 59-2487** (La Falda). En los links va como `wa.me/5493548592487`:
+`54` + `9` (obligatorio para celulares argentinos en WhatsApp) + característica sin el 0 +
+número sin el 15. Para `tel:` en cambio va **sin** el 9: `tel:+543548592487`.
 
-El formato es `https://wa.me/549XXXXXXXXXX`, sin espacios ni guiones, con el 9 después del 54
-para celulares argentinos.
+Todos los links llevan un mensaje ya escrito (`?text=Hola! Quiero probar una clase...`)
+para que la persona no tenga que arrancar de cero.
+
+Está en tres lugares: el botón flotante, el CTA final de la home y el footer.
 
 ## Se sacó la sección "Historias"
 

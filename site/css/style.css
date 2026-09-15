@@ -697,3 +697,10 @@ img,svg{display:block;max-width:100%}
   .shot figcaption{opacity:1;transform:none}
   .donde__acciones .pill{flex:1 1 100%;text-align:center}
 }
+
+/* Dos acciones en el CTA final */
+.panel__acciones{display:flex;gap:11px;flex-wrap:wrap;justify-content:center}
+@media (max-width:520px){
+  .panel__acciones{flex-direction:column;align-items:stretch}
+  .panel__acciones .pill{text-align:center}
+}

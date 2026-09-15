@@ -244,7 +244,7 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
       <p class="donde__dir">{DIRECCION}<br><span>{CIUDAD}</span></p>
       <dl class="donde__dl">
         <dt>Horarios</dt><dd>Lunes a viernes, 7 a 12 y 14 a 22 h<br>Sábados, 9 a 12 h</dd>
-        <dt>Teléfono</dt><dd>[COMPLETAR teléfono]</dd>
+        <dt>Teléfono</dt><dd><a href="tel:+543548592487">3548 59-2487</a> · <a href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">WhatsApp</a></dd>
       </dl>
       <div class="donde__acciones">
         <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPA_Q}"
