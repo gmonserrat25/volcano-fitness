@@ -142,17 +142,32 @@ recortes anteriores.
 
 ### Cómo se captura (esto costó, no improvisar)
 
-Los videos de Instagram van por `blob:` y acá no hay ffmpeg. Se graban desde el `<video>` de
-la página con `MediaRecorder` sobre un `<canvas>`, tomando la franja central para pasarlos de
-vertical a horizontal. Tres cosas hacen falta:
+Los videos de Instagram van por `blob:` y no hay ffmpeg en esta máquina. El camino que
+funciona tiene **dos etapas separadas**, y la separación es el punto:
 
-1. **El visor de historias re-pausa el video**: hay que anular su `pause` (`v.pause = ()=>{}`).
-2. **La pestaña corre en segundo plano**, y ahí Chrome congela `requestAnimationFrame` y
-   `requestVideoFrameCallback`: el canvas graba negro. Hacer clic no alcanza.
-3. Lo que funciona: **`canvas.captureStream(0)` + `track.requestFrame()`**, mandando los
-   cuadros a mano mientras se hace *seek* (el *seek* sí anda en segundo plano), y
-   **espaciando cada cuadro en tiempo real**. Sin ese espaciado el video sale acelerado:
-   121 cuadros se graban en 1,2 s en lugar de 8.
+**Etapa 1 — juntar los cuadros, en la página de Instagram.** Se hace *seek* cuadro por cuadro
+(`currentTime = t`) y se dibuja cada uno en un `<canvas>`, tomando la franja central para
+pasar de vertical a horizontal. Acá **el tiempo no importa**: se puede tardar lo que sea.
+El *seek* funciona aunque la pestaña esté en segundo plano.
+
+**Etapa 2 — armar el mp4, fuera del navegador.** Con `herramientas-armar-video.swift`
+(AVFoundation), que arma el video desde los JPEG con el ritmo exacto que se le pida:
+
+```
+swiftc -O herramientas-armar-video.swift -o armar
+BR=1500000 ./armar <carpeta-con-jpgs> hero.mp4 25
+```
+
+**Por qué no se graba directo en el navegador:** la pestaña corre en segundo plano, y ahí
+Chrome congela `requestAnimationFrame`, estrangula `setTimeout` a uno por segundo y ni
+siquiera un Worker recibe ticks. Grabar con `MediaRecorder` en esas condiciones da un video
+**tildado**, porque cada cuadro queda con el sello de tiempo de cuando el navegador se dignó
+a ejecutar: se midieron desvíos de hasta un segundo. Ese fue exactamente el problema.
+
+Para pasar los cuadros de Instagram al disco, el CSP de Instagram bloquea `fetch` a
+localhost, los iframes y las ventanas abiertas por script. Lo que sí pasa: inyectar un botón
+en la página y **hacerle clic de verdad** (un clic real sí permite abrir ventana), y desde
+ahí mandar los cuadros por `postMessage` a una página local que los sube al puente.
 
 ## Botón de WhatsApp
 
