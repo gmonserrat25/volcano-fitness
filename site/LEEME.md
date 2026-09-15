@@ -123,18 +123,29 @@ Instagram que las muestra: no volver a agregarlas por eso.
 
 ## Video del hero
 
-`video/hero.mp4` — 532 KB, 16:9, sin sonido, en loop. Es un recorte del reel `DRzpTLAkSfe`,
-la parte donde se recorre la sala y se ve el logo VOLCANO en la pared, sin gente de frente.
+`video/hero.mp4` — 326 KB, 16:9, mudo, en loop. Sale de una **historia destacada** de
+Instagram ("Gym"): un paneo por la sala con gente entrenando. Reemplazó a un recorte de reel
+que se veía desenfocado (quedó como `video/hero-anterior.mp4`).
 
-Se grabó con `MediaRecorder` sobre un `<canvas>`, tomando la franja central del reel (que es
-vertical) para que quede horizontal. `img/hero-1.jpg` queda de `poster`, y también es lo que
-se ve si alguien tiene activado "reducir movimiento".
+`img/hero-1.jpg` es el `poster`, y también lo que se ve con "reducir movimiento" activado.
+El `object-position` está en `center 68%` para que no domine el techo.
 
-**Si la pestaña se abre en segundo plano, Chrome no arranca el autoplay.** Por eso `main.js`
-reintenta el `play()` cuando la pestaña se vuelve visible.
+### Cómo se captura (esto costó)
 
-Las fotos `hero-2`, `hero-3`, `hero-4` e `historias` quedaron **sin uso** pero siguen en
-`img/`: sirven como banco si hace falta cambiar alguna.
+Los videos de Instagram van por `blob:`, no se pueden descargar, y acá no hay ffmpeg. Se
+graban desde el `<video>` de la página con `MediaRecorder` sobre un `<canvas>`, tomando la
+franja central para pasarlos de vertical a horizontal. Tres cosas que hacen falta:
+
+1. **El visor de historias re-pausa el video.** Hay que anular su `pause` (`v.pause = ()=>{}`)
+   antes de reproducirlo.
+2. **La pestaña del navegador está en segundo plano**, y ahí Chrome congela
+   `requestAnimationFrame` y `requestVideoFrameCallback`: el canvas graba negro. Hacer clic
+   para darle foco no alcanza, vuelve a segundo plano enseguida.
+3. Lo que sí funciona: **`canvas.captureStream(0)` + `track.requestFrame()`**, mandando los
+   cuadros a mano mientras se hace *seek* en el video (el *seek* sí anda en segundo plano).
+   Hay que **espaciar cada cuadro en tiempo real** (1/12 s) o el video sale acelerado: sin
+   eso, 79 cuadros se graban en 1,2 s en lugar de 6,6.
+
 
 ## Botón de WhatsApp
 
