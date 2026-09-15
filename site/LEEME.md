@@ -333,6 +333,11 @@ cd ~/Proyectos/volcano-fitness/site
 python3 servidor.py        # http://localhost:8899
 ```
 
+`servidor.py` atiende **varias peticiones a la vez** (`ThreadingTCPServer`). Esto importa:
+con el servidor de un solo hilo, un celular que pide diez imágenes y el video en paralelo lo
+satura, las conexiones se cortan a mitad y la página **no abre**. Pasó exactamente eso al
+compartir el link.
+
 Usá `servidor.py`, no `python3 -m http.server`: manda `Cache-Control: no-store`, así el
 navegador no te muestra versiones viejas del HTML o del CSS después de editarlos. Si igual
 ves algo desactualizado, un **Cmd+Shift+R** lo destraba.
