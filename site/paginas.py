@@ -174,10 +174,10 @@ CONTENIDO['profes'] = f"""  <header class="cabecera">
 # ──────────────────────────────── El gym ─────────────────────────────────
 fotos = [
     ("hero-1.jpg",        "Los racks, con la luz cálida detrás", "ancha"),
-    ("gym.jpg",           "Las cintas, contra el ventanal", "alta"),
     ("hero-3.jpg",        "La sala principal", "alta"),
+    ("hero-2.jpg",        "Barras y discos", "alta"),
+    ("gym.jpg",           "Las cintas, contra el ventanal", ""),
     ("entrenamientos.jpg","Las máquinas de tren inferior", ""),
-    ("hero-2.jpg",        "Barras y discos", ""),
     ("hero-4.jpg",        "La jaula y el cruce de poleas", ""),
     ("historias.jpg",     "Las poleas, contra la pared negra", ""),
 ]
@@ -243,7 +243,7 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
       <h2 class="seccion__tit">Dónde estamos</h2>
       <p class="donde__dir">{DIRECCION}<br><span>{CIUDAD}</span></p>
       <dl class="donde__dl">
-        <dt>Horarios</dt><dd>[COMPLETAR horarios]</dd>
+        <dt>Horarios</dt><dd>Lunes a viernes, 7 a 12 y 14 a 22 h<br>Sábados, 9 a 12 h</dd>
         <dt>Teléfono</dt><dd>[COMPLETAR teléfono]</dd>
       </dl>
       <div class="donde__acciones">

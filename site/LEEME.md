@@ -74,7 +74,7 @@ interfaz `#347BE4` (`--accent`) es ese mismo tono aclarado para que se lea sobre
 ## Falta completar
 
 Buscar `[COMPLETAR` en `index.html`:
-- dirección, horarios, teléfono, email
+- teléfono y email
 - número de WhatsApp
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
@@ -143,6 +143,24 @@ para celulares argentinos.
 Prometía testimonios que no existían, y las reseñas de Google que están abajo cumplen esa
 función. El panel, su punto de navegación y su ítem del menú se quitaron; la home quedó con
 cinco paneles.
+
+## Fotos ampliadas con IA (de vertical a horizontal)
+
+Todo el material de Instagram es vertical, y los paneles del sitio son horizontales a
+pantalla completa: se recortaba tanto que se veía un primer plano gigante en lugar del
+gimnasio. Cinco fotos se **expandieron a 16:9 con outpainting** (higgsfield, 2 créditos
+cada una, 10 en total): `hero-1`, `gym`, `profes`, `contacto` y `entrenamientos`.
+
+La IA **no inventa el gimnasio**: parte de la foto real y sólo completa hacia los costados
+(más pared, el techo, el piso, alguna máquina de contexto). Lo que está en el centro de cada
+imagen sigue siendo la foto original.
+
+Las verticales originales quedaron guardadas en **`img-verticales-originales/`** por si hay
+que volver atrás.
+
+Como ahora son 16:9 nativas, su `background-position` pasó a `center`, sin recorte forzado.
+En la galería de `gym.html` las celdas altas se reservan para las fotos que siguen siendo
+verticales (`hero-2`, `hero-3`).
 
 ## Frames sacados de los reels
 
