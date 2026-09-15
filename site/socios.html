@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área de socios — Volcano Fitness</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/socios.css">
+</head>
+<body class="socios">
+
+<p class="demo-aviso" role="status">
+  <strong>Demostración.</strong> Todavía no está conectada al sistema del gimnasio:
+  los datos son de ejemplo y lo que cargues queda guardado solo en este navegador.
+</p>
+
+<!-- ░░ ACCESO ░░ -->
+<section class="acceso" id="acceso">
+  <div class="acceso__caja">
+    <img class="logo logo--lg" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+    <h1 class="acceso__titulo">Área de socios</h1>
+    <p class="acceso__bajada">Acá vas a ver tu rutina del día, cargar los kilos que
+    levantaste y reservar tus clases.</p>
+
+    <label class="campo" for="nombre">
+      <span>¿Cómo te llamás?</span>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="given-name">
+    </label>
+
+    <button class="pill" id="entrar" type="button">Entrar a la demo</button>
+    <p class="acceso__nota">No te pedimos contraseña: esto es una muestra de cómo
+    funcionaría, no el sistema real.</p>
+    <a class="acceso__volver" href="index.html">← Volver al sitio</a>
+  </div>
+</section>
+
+<!-- ░░ PANEL ░░ -->
+<div class="panelsoc" id="panel" hidden>
+
+  <header class="soc-header">
+    <a href="index.html" aria-label="Volcano Fitness — inicio">
+      <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+    </a>
+    <div class="soc-header__der">
+      <span class="soc-header__hola">Hola, <b id="saludo">—</b></span>
+      <button class="soc-salir" id="salir" type="button">Salir</button>
+    </div>
+  </header>
+
+  <main class="soc-main">
+
+    <!-- Resumen -->
+    <section class="resumen" aria-label="Tu semana">
+      <div class="tile">
+        <span class="tile__lbl">Esta semana</span>
+        <strong class="tile__num"><span id="hechos">2</span><small>/4</small></strong>
+        <span class="tile__pie">entrenamientos</span>
+      </div>
+      <div class="tile">
+        <span class="tile__lbl">Racha</span>
+        <strong class="tile__num">5<small> sem</small></strong>
+        <span class="tile__pie">sin faltar</span>
+      </div>
+      <div class="tile">
+        <span class="tile__lbl">Sentadilla</span>
+        <strong class="tile__num">40<small> kg</small></strong>
+        <span class="tile__pie tile__pie--sube">+8 kg en 6 semanas</span>
+      </div>
+      <div class="tile tile--prox">
+        <span class="tile__lbl">Próxima clase</span>
+        <strong class="tile__prox">Funcional</strong>
+        <span class="tile__pie">Miércoles, 19:00</span>
+      </div>
+    </section>
+
+    <!-- Rutina del día -->
+    <section class="bloque">
+      <div class="bloque__head">
+        <div>
+          <span class="lbl">Hoy · Día 2 de 4</span>
+          <h2 class="bloque__tit">Tren inferior</h2>
+        </div>
+        <span class="progreso-pill"><b id="listos">0</b> de 7 hechos</span>
+      </div>
+
+      <ul class="ejs" id="ejs"></ul>
+
+      <div class="bloque__pie">
+        <button class="pill" id="terminar" type="button">Terminar entrenamiento</button>
+        <button class="soc-link" id="reiniciar" type="button">Empezar de nuevo</button>
+      </div>
+    </section>
+
+    <!-- Progreso -->
+    <section class="bloque">
+      <div class="bloque__head">
+        <div>
+          <span class="lbl">Tu progreso</span>
+          <h2 class="bloque__tit">Sentadilla con barra</h2>
+        </div>
+        <span class="progreso-pill progreso-pill--ok">+8 kg</span>
+      </div>
+      <figure class="gráfico">
+        <div class="graf" id="graf" role="img"
+             aria-label="Peso en sentadilla por semana: 32, 34, 36, 38, 38 y 40 kilos."></div>
+        <figcaption>Kilos por semana, últimas seis.</figcaption>
+      </figure>
+      <details class="tabla-alt">
+        <summary>Ver los datos en una tabla</summary>
+        <table class="rt">
+          <thead><tr><th scope="col">Semana</th><th scope="col">Kilos</th></tr></thead>
+          <tbody id="tablaProg"></tbody>
+        </table>
+      </details>
+    </section>
+
+    <!-- Clases -->
+    <section class="bloque">
+      <div class="bloque__head">
+        <div>
+          <span class="lbl">Reservas</span>
+          <h2 class="bloque__tit">Próximas clases</h2>
+        </div>
+      </div>
+      <ul class="clases" id="clases"></ul>
+    </section>
+
+  </main>
+
+  <footer class="soc-pie">
+    <p>¿Algo no cierra? <a href="https://wa.me/5493548592487?text=Hola%21%20Tengo%20una%20consulta%20sobre%20mi%20rutina."
+       target="_blank" rel="noopener">Escribile a tu entrenador</a></p>
+  </footer>
+</div>
+
+<script src="js/socios.js"></script>
+</body>
+</html>

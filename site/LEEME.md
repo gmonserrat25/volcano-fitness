@@ -252,3 +252,29 @@ comando corriendo. El link cambia cada vez que se levanta.
 
 Si hace falta una dirección fija que ande siempre, la opción es GitHub Pages
 (la cuenta `gmonserrat25` ya está configurada), pero eso deja el sitio público.
+
+## Área de socios (socios.html)
+
+Es una **demostración navegable**, no el sistema real: no hay servidor detrás.
+
+- **No pide contraseña.** Sólo el nombre, y un aviso arriba de todo aclara que es una muestra.
+  Esto es a propósito: un formulario de login falso invita a escribir una contraseña real.
+- Lo que se carga (ejercicios marcados, kilos, reservas) queda en el **localStorage** de ese
+  navegador. Se pierde al limpiar los datos del sitio, y no lo ve nadie más.
+- Tiene su propio `css/socios.css` y `js/socios.js`, y **no usa el menú del sitio público**:
+  es un entorno aparte, con su propio encabezado y un botón de salir.
+
+### El gráfico de progreso
+
+Barras de los kilos por semana. Una sola serie, así que no lleva leyenda: el título la nombra.
+El valor aparece sólo en la última barra y al pasar el mouse, no en todas. Abajo hay un
+`<details>` con **la misma información en una tabla**, para quien no pueda leer el gráfico.
+
+La base de las barras arranca unos kilos por debajo del mínimo, no en cero, para que se note
+la progresión. Está declarado acá para que nadie lo lea como una escala desde cero.
+
+### Para conectarlo de verdad
+
+Hace falta un backend con usuarios, rutinas y reservas. Los datos de ejemplo están al
+principio de `js/socios.js` (`EJERCICIOS`, `PROGRESO`, `CLASES`): ahí es donde van las
+llamadas a la API cuando exista. **Sacar el cartel de demostración recién cuando eso pase.**
