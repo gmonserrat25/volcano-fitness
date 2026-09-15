@@ -121,6 +121,15 @@ Aparecían en el submenú y en la descripción. **El gimnasio no las ofrece** (c
 2026-09-14), así que se quitaron de todos lados. Estaban porque hay un destacado viejo de
 Instagram que las muestra: no volver a agregarlas por eso.
 
+## Ninguna imagen del sitio sale de un video
+
+Se llegó a usar frames de reels para tapar agujeros, y **se nota**: son más blandos y las
+poses quedan a mitad de movimiento. Se sacaron todos. Hoy cada imagen del sitio es una
+**foto de una publicación** de Instagram.
+
+Si en algún momento hace falta volver a sacar un frame, que sea a sabiendas y por poco
+tiempo: dejarlo marcado acá.
+
 ## El hero: fotos que van pasando
 
 Se probó con video y **no daba la calidad**: los videos de Instagram vienen a 720 px y en una

@@ -208,12 +208,11 @@ CONTENIDO['profes'] = f"""  <header class="cabecera">
 # ──────────────────────────────── El gym ─────────────────────────────────
 fotos = [
     ("hero-1.jpg",        "Los racks, con la luz cálida detrás", "ancha"),
-    ("hero-3.jpg",        "La sala principal", "alta"),
-    ("hero-2.jpg",        "Barras y discos", "alta"),
-    ("gym.jpg",           "Las cintas, contra el ventanal", ""),
+    ("gym.jpg",           "Las cintas, contra el ventanal", "ancha"),
+    ("hero-2.jpg",        "Barras y discos", ""),
     ("entrenamientos.jpg","Las máquinas de tren inferior", ""),
     ("hero-4.jpg",        "La jaula y el cruce de poleas", ""),
-    ("historias.jpg",     "Las poleas, contra la pared negra", ""),
+    ("contacto.jpg",      "La sala, bajo los arcos de luz", ""),
 ]
 galeria = '\n'.join(
     f'      <figure class="shot {c}"><img src="img/{f}" alt="{a}" loading="lazy">'
@@ -292,7 +291,7 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
       <figure style="background-image:url('img/hero-2.jpg')"></figure>
       <figure style="background-image:url('img/entrenamientos.jpg')"></figure>
       <figure style="background-image:url('img/hero-4.jpg')"></figure>
-      <figure style="background-image:url('img/contacto.jpg')"></figure>
+      <figure style="background-image:url('img/profes.jpg')"></figure>
     </div>
   </section>
 
