@@ -78,6 +78,27 @@ Buscar `[COMPLETAR` en `index.html`:
 - puntaje y cantidad de reseñas de Google, y el link para calificar
 - el titular del hero ("Despertá el volcán") es una propuesta, no está confirmado
 
+## La página Entrenamientos
+
+`entrenamientos.html` lista las cuatro formas de entrenar: musculación, funcional,
+personalizado y acondicionamiento. Las tarjetas alternan foto a izquierda y derecha.
+
+**Cada una tiene su desvío propio**: un botón que abre WhatsApp con un mensaje ya escrito
+específico de esa disciplina ("Quiero consultar los horarios de funcional", etc.), así llega
+la consulta con contexto. Si más adelante cada disciplina tiene su página, ahí se cambian
+esos links.
+
+Abajo hay un bloque con el teléfono y la rutina, que lleva a `rutina.html`.
+
+## El teléfono con la rutina
+
+`TELEFONO`, en `paginas.py`, es un teléfono **dibujado con CSS** (no es una captura ni una
+imagen): marco, barra superior y adentro la rutina del día con los kilos de la última vez.
+Se usa en dos lugares: `entrenamientos.html` y `rutina.html`.
+
+Al ser HTML, el contenido se edita como texto y se ve nítido en cualquier pantalla. Si cambia
+la rutina de ejemplo, conviene que coincida con la tabla de `rutina.html`.
+
 ## La página El gym
 
 `gym.html` (generada por `paginas.py`, como las otras) tiene tres partes:
@@ -164,19 +185,13 @@ Si aparecen fotos de verdad, reemplazarlas.
 
 ## Legibilidad de los paneles
 
-Los títulos sobre las fotos se perdían. Se probaron sombras y halos y no alcanzó; lo que
-funcionó fue cambiar el planteo: **la foto pasa a ser fondo y el texto es lo que manda.**
+Costó tres intentos. Sombras y halos no alcanzaban, y oscurecer toda la foto la mataba.
+Lo que funciona: **el texto vive adentro de una placa**.
 
-Tres capas, todas en `.panel__scrim` y `.panel__body::before`:
-
-1. Un **velo parejo** sobre toda la foto (56% de negro). Esto es lo que más cambió.
-2. Algo más de peso detrás del bloque de texto, y un degradado suave arriba y abajo para
-   que el panel cierre.
-3. Un **desenfoque** (`backdrop-filter: blur(7px)`) justo detrás del texto, con los bordes
-   difuminados por una máscara. Separa sin oscurecer más.
-
-Con el fondo ya oscuro, **las sombras del texto volvieron a ser discretas**: cuatro sombras
-apiladas se veían sucias. Ahora alcanza con una.
+- `.panel__body` es una tarjeta con `backdrop-filter: blur(16px)` y fondo semitransparente.
+  El contraste es local: la foto se sigue viendo nítida alrededor.
+- El velo general sobre la foto bajó al 20%, lo justo para que el logo y el menú se lean.
+- Con la placa, **las sombras del texto son mínimas**: apilar sombras se veía sucio.
 
 Si se cambia una foto, mirar que el título siga leyéndose.
 

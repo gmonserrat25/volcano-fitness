@@ -62,6 +62,30 @@ PLANTILLA = """<!DOCTYPE html>
 
 CONTENIDO = {}
 
+# ── Teléfono dibujado con CSS, con la rutina del día adentro ──
+TELEFONO = """<div class="tel">
+        <div class="tel__marco">
+          <div class="tel__barra"><span></span></div>
+          <div class="tel__cuerpo">
+            <div class="tel__top">
+              <span class="tel__lbl">Hoy &middot; D&iacute;a 2 de 4</span>
+              <h3 class="tel__titulo">Tren inferior</h3>
+            </div>
+            <ul class="tel__lista">
+              <li><span class="tel__ej">Sentadilla con barra</span><b>4 &times; 8</b><em>40 kg</em></li>
+              <li><span class="tel__ej">Prensa 45&deg;</span><b>3 &times; 12</b><em>100 kg</em></li>
+              <li><span class="tel__ej">Peso muerto rumano</span><b>3 &times; 10</b><em>35 kg</em></li>
+              <li><span class="tel__ej">B&uacute;lgaras</span><b>3 &times; 10</b><em>10 kg</em></li>
+              <li class="tel__mas"><span>y 3 ejercicios m&aacute;s</span></li>
+            </ul>
+            <div class="tel__pie">
+              <span class="tel__check">&#10003;</span> Carg&aacute; tus kilos al terminar
+            </div>
+          </div>
+        </div>
+      </div>"""
+
+
 # ─────────────────────────────── Tu rutina ───────────────────────────────
 ejercicios = [
     ("Sentadilla con barra",        "4", "8",        "90 s", "40 kg"),
@@ -108,6 +132,16 @@ CONTENIDO['rutina'] = f"""  <header class="cabecera">
         </tbody>
       </table>
     </div>
+
+    <aside class="vista-movil">
+      <div class="vista-movil__txt">
+        <span class="lbl">As&iacute; se ve en el celular</span>
+        <h2 class="seccion__tit">La rutina, donde entren&aacute;s</h2>
+        <p>No hace falta acordarse de nada: abr&iacute;s y lo primero que ves es el trabajo
+        del d&iacute;a, con los kilos de la &uacute;ltima vez al lado de cada ejercicio.</p>
+      </div>
+      {TELEFONO}
+    </aside>
 
     <aside class="nota">
       <h2>Antes de empezar</h2>
@@ -238,6 +272,30 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
     el equipamiento se sigue sumando.</p>
   </section>
 
+  <section class="ig">
+    <div class="ig__txt">
+      <span class="lbl">D&iacute;a a d&iacute;a</span>
+      <h2 class="seccion__tit">Mir&aacute; c&oacute;mo es entrenar ac&aacute;</h2>
+      <p>En Instagram subimos las clases, las rutinas y c&oacute;mo va quedando el lugar.
+      Es la forma m&aacute;s honesta de ver el gimnasio antes de venir.</p>
+      <a class="pill" href="https://instagram.com/volcano_fitnesslafalda"
+         target="_blank" rel="noopener">
+        <svg class="ig__ico" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.4"/>
+          <circle cx="12" cy="12" r="4.6"/>
+          <circle class="ig__pto" cx="17.6" cy="6.4" r="1.3"/>
+        </svg>
+        @volcano_fitnesslafalda
+      </a>
+    </div>
+    <div class="ig__tira">
+      <figure style="background-image:url('img/hero-2.jpg')"></figure>
+      <figure style="background-image:url('img/entrenamientos.jpg')"></figure>
+      <figure style="background-image:url('img/hero-4.jpg')"></figure>
+      <figure style="background-image:url('img/contacto.jpg')"></figure>
+    </div>
+  </section>
+
   <section class="donde">
     <div class="donde__datos">
       <h2 class="seccion__tit">Dónde estamos</h2>
@@ -260,7 +318,84 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
   </section>
 """
 
+
+
+
+# ─────────────────────────── Entrenamientos ──────────────────────────────
+import urllib.parse as _up
+WA = "5493548592487"
+def _wa(t): return f"https://wa.me/{WA}?text={_up.quote(t)}"
+
+disciplinas = [
+    ("Musculación", "hero-2.jpg",
+     "Sala completa con jaula, multipower, bancos, mancuernas y peso libre. Entrenás con "
+     "tu rutina, corregida y actualizada por tu entrenador.",
+     ["Todos los niveles", "Rutina propia", "Sin turno"],
+     "Quiero saber más de musculación", _wa("Hola! Quiero saber más sobre musculación en Volcano.")),
+
+    ("Funcional", "hero-4.jpg",
+     "Clases en grupo, circuitos que cambian todas las semanas y trabajo de fuerza, "
+     "resistencia y movilidad. La clase que más se llena.",
+     ["En grupo", "Con reserva", "45 minutos"],
+     "Consultar horarios de funcional", _wa("Hola! Quiero consultar los horarios de funcional.")),
+
+    ("Entrenamiento personalizado", "profes.jpg",
+     "Uno a uno con tu entrenador. Para arrancar de cero, volver después de una lesión "
+     "o romper un techo que no se mueve hace meses.",
+     ["Uno a uno", "Con turno", "Plan a medida"],
+     "Pedir una evaluación", _wa("Hola! Quiero pedir una evaluación para entrenamiento personalizado.")),
+
+    ("Acondicionamiento", "gym.jpg",
+     "Cintas y bicicletas frente a los ventanales. Plan de cardio que se ajusta a tu "
+     "estado actual y va subiendo con vos.",
+     ["Por tu cuenta", "Sin turno", "Con seguimiento"],
+     "Consultar por acondicionamiento", _wa("Hola! Quiero consultar por acondicionamiento en Volcano.")),
+]
+
+tarjetas = "\n".join(
+    f"""      <article class="disc">
+        <div class="disc__foto"><img src="img/{img}" alt="{nom}" loading="lazy"></div>
+        <div class="disc__txt">
+          <h2 class="disc__nom">{nom}</h2>
+          <p class="disc__desc">{desc}</p>
+          <ul class="disc__tags">{''.join(f'<li>{t}</li>' for t in tags)}</ul>
+          <a class="pill pill--sm" href="{href}" target="_blank" rel="noopener">{cta}</a>
+        </div>
+      </article>""" for nom, img, desc, tags, cta, href in disciplinas)
+
+CONTENIDO['entrenamientos'] = f"""  <header class="cabecera">
+    <span class="lbl">Qué hacemos</span>
+    <h1 class="cabecera__titulo">Entrenamientos</h1>
+    <p class="cabecera__bajada">Vengas de donde vengas, hay una forma de entrenar para vos.
+    Todas incluyen el seguimiento de un entrenador.</p>
+  </header>
+
+  <section class="discs">
+{tarjetas}
+  </section>
+
+  <section class="destacado">
+    <div class="destacado__txt">
+      <span class="lbl">Incluido en todos los planes</span>
+      <h2 class="seccion__tit">Tu rutina, siempre a mano</h2>
+      <p>Entrás con tu usuario y ahí está el trabajo del día: los ejercicios, las series y
+      los kilos que levantaste la última vez. Tu entrenador la actualiza y te llega al toque.</p>
+      <a class="pill" href="rutina.html">Ver cómo funciona</a>
+    </div>
+    <div class="destacado__tel">{TELEFONO}</div>
+  </section>
+
+  <section class="cierre">
+    <p class="cierre__aviso">¿No sabés por dónde empezar? Escribinos y lo vemos juntos.</p>
+    <a class="pill pill--ghost" href="{_wa('Hola! No sé por dónde empezar, me orientan?')}"
+       target="_blank" rel="noopener">Escribinos</a>
+  </section>
+"""
+
 PAGINAS = {
+  'entrenamientos.html': ('Entrenamientos — Volcano Fitness',
+                  'Musculación, funcional, entrenamiento personalizado y acondicionamiento en Volcano Fitness, La Falda.',
+                  CONTENIDO['entrenamientos']),
   'gym.html':    ('El gimnasio — Volcano Fitness',
                   'El gimnasio de Volcano Fitness en Sarmiento 518, La Falda: equipamiento, fotos y cómo llegar.',
                   CONTENIDO['gym']),
