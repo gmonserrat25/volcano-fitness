@@ -1018,3 +1018,164 @@ img,svg{display:block;max-width:100%}
     background-size:cover;background-position:center;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SOMOS · PRECIOS · CONTACTO
+   ═══════════════════════════════════════════════════════════ */
+
+.cabecera-sec{margin-bottom:clamp(20px,2.6vw,32px)}
+
+/* Bloque de dos columnas con foto */
+.intro-dos{
+  display:grid;gap:clamp(24px,3.4vw,52px);
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:center;margin-bottom:clamp(48px,6.5vw,90px);
+}
+.intro-dos__txt p{
+  margin:0 0 1.1em;max-width:54ch;
+  font-size:clamp(15px,1.3vw,16.5px);font-weight:500;line-height:1.75;color:var(--muted);
+}
+.intro-dos__foto{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.intro-dos__foto img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Misión */
+.mision{
+  display:grid;gap:clamp(24px,3.4vw,52px);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  padding:clamp(26px,3.4vw,46px);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(21,77,160,.18),rgba(6,11,21,0) 65%),var(--bg-deep);
+  border:1px solid var(--line);
+  margin-bottom:clamp(48px,6.5vw,90px);
+}
+.mision__txt p{
+  margin:0;max-width:48ch;
+  font-size:clamp(15px,1.3vw,16.5px);font-weight:500;line-height:1.75;color:var(--muted);
+}
+.mision__lista{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.mision__lista li{
+  position:relative;padding-left:26px;
+  font-size:clamp(14.5px,1.25vw,16px);font-weight:600;color:var(--fg);
+}
+.mision__lista li::before{
+  content:"";position:absolute;left:0;top:.45em;
+  width:9px;height:9px;border-radius:50%;background:var(--accent);
+}
+
+/* Pilares */
+.pilares-sec{margin-bottom:clamp(48px,6.5vw,90px)}
+.pilares{display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.pilar{
+  padding:clamp(20px,2.4vw,30px);
+  border-radius:14px;background:var(--bg-deep);border:1px solid var(--line);
+}
+.pilar__n{
+  display:block;margin-bottom:12px;
+  font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.pilar__tit{margin:0 0 .5em;font-size:clamp(17px,1.8vw,21px);font-weight:700;letter-spacing:-.015em;color:#fff}
+.pilar p{margin:0;font-size:14.5px;font-weight:500;line-height:1.7;color:var(--muted)}
+
+/* Preguntas frecuentes */
+.faqs{margin-bottom:clamp(40px,5vw,72px)}
+.faqs__lista{display:grid;gap:9px}
+.faq{
+  border-radius:12px;background:var(--bg-deep);border:1px solid var(--line);
+  overflow:hidden;
+}
+.faq summary{
+  padding:clamp(15px,1.8vw,20px) clamp(16px,2vw,24px);
+  font-size:clamp(15px,1.35vw,17px);font-weight:600;color:var(--fg);
+  cursor:pointer;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  transition:color .2s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";flex:none;
+  font-size:21px;font-weight:400;color:var(--accent);line-height:1;
+  transition:transform .3s var(--ease);
+}
+.faq[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover{color:#fff}
+.faq p{
+  margin:0;padding:0 clamp(16px,2vw,24px) clamp(16px,2vw,22px);
+  max-width:66ch;
+  font-size:14.5px;font-weight:500;line-height:1.75;color:var(--muted);
+}
+
+/* Planes */
+.planes{
+  display:grid;gap:clamp(14px,1.8vw,20px);
+  grid-template-columns:repeat(auto-fit,minmax(262px,1fr));
+  margin-bottom:clamp(20px,2.4vw,28px);
+}
+.plan{
+  position:relative;
+  padding:clamp(22px,2.6vw,32px);
+  border-radius:16px;background:var(--bg-deep);border:1px solid var(--line);
+  display:flex;flex-direction:column;
+}
+.plan--destacado{
+  background:linear-gradient(150deg,rgba(21,77,160,.24),rgba(6,11,21,0) 62%),var(--bg-deep);
+  border-color:rgba(52,123,228,.4);
+}
+.plan__tag{
+  position:absolute;top:-1px;right:16px;
+  padding:5px 12px;border-radius:0 0 8px 8px;
+  background:var(--accent);color:#fff;
+  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+}
+.plan__nom{margin:0 0 .35em;font-size:clamp(19px,2vw,24px);font-weight:700;color:#fff}
+.plan__desc{margin:0 0 20px;font-size:14px;font-weight:500;line-height:1.6;color:var(--muted)}
+.plan__precio{
+  margin:0 0 20px;display:flex;align-items:baseline;gap:3px;
+  font-variant-numeric:tabular-nums;
+}
+.plan__signo{font-size:19px;font-weight:600;color:var(--muted)}
+.plan__precio em{font-style:normal;font-size:clamp(32px,3.6vw,42px);font-weight:800;color:#fff;letter-spacing:-.03em}
+.plan__precio small{font-size:14px;font-weight:600;color:var(--muted)}
+.plan__lista{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:9px;flex:1}
+.plan__lista li{
+  position:relative;padding-left:21px;
+  font-size:14px;font-weight:500;line-height:1.5;color:var(--fg);
+}
+.plan__lista li::before{
+  content:"";position:absolute;left:0;top:.42em;
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+}
+.plan .pill{text-align:center}
+.planes__nota{
+  margin:0 0 clamp(40px,5vw,68px);max-width:60ch;
+  font-size:14px;font-weight:500;line-height:1.7;color:var(--muted);
+}
+.planes__nota strong{color:var(--fg)}
+
+/* Contacto */
+.contacto-grid{
+  display:grid;gap:clamp(22px,3vw,44px);
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  align-items:start;margin-bottom:clamp(40px,5vw,72px);
+}
+.contacto-vias{display:grid;gap:9px}
+.via{
+  display:grid;gap:3px;
+  padding:clamp(15px,1.8vw,20px);
+  border-radius:12px;background:var(--bg-deep);border:1px solid var(--line);
+  transition:border-color .2s, background .2s;
+}
+a.via:hover{border-color:var(--accent);background:var(--bg)}
+.via__lbl{font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.via__dato{font-size:clamp(16px,1.6vw,19px);font-weight:700;color:#fff;letter-spacing:-.01em}
+.via__pie{font-size:12.5px;font-weight:500;color:var(--muted)}
+.via--info{background:transparent}
+
+@media (max-width:860px){
+  .intro-dos,.mision,.contacto-grid{grid-template-columns:1fr}
+  .intro-dos__foto{order:-1}
+}
+@media (max-width:520px){
+  .plan .pill,.cierre .pill{display:block;text-align:center}
+}

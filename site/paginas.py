@@ -327,6 +327,8 @@ import urllib.parse as _up
 WA = "5493548592487"
 def _wa(t): return f"https://wa.me/{WA}?text={_up.quote(t)}"
 
+anclas = ["musculacion","funcional","personalizado","acondicionamiento"]
+
 disciplinas = [
     ("Musculación", "hero-2.jpg",
      "Sala completa con jaula, multipower, bancos, mancuernas y peso libre. Entrenás con "
@@ -354,7 +356,7 @@ disciplinas = [
 ]
 
 tarjetas = "\n".join(
-    f"""      <article class="disc">
+    f"""      <article class="disc" id="{anclas[i]}">
         <div class="disc__foto"><img src="img/{img}" alt="{nom}" loading="lazy"></div>
         <div class="disc__txt">
           <h2 class="disc__nom">{nom}</h2>
@@ -362,7 +364,7 @@ tarjetas = "\n".join(
           <ul class="disc__tags">{''.join(f'<li>{t}</li>' for t in tags)}</ul>
           <a class="pill pill--sm" href="{href}" target="_blank" rel="noopener">{cta}</a>
         </div>
-      </article>""" for nom, img, desc, tags, cta, href in disciplinas)
+      </article>""" for i,(nom, img, desc, tags, cta, href) in enumerate(disciplinas))
 
 CONTENIDO['entrenamientos'] = f"""  <header class="cabecera">
     <span class="lbl">Qué hacemos</span>
@@ -393,7 +395,220 @@ CONTENIDO['entrenamientos'] = f"""  <header class="cabecera">
   </section>
 """
 
+
+# ─────────────────────────── Somos Volcano ───────────────────────────────
+pilares = [
+    ("Tu rutina", "Nadie entrena a ciegas. Tu entrenador te arma el plan según de dónde "
+     "venís y a dónde querés llegar, y lo va corrigiendo. Lo tenés siempre a mano, con los "
+     "kilos de la última vez al lado de cada ejercicio."),
+    ("El acompañamiento", "No te dejamos solo frente a la máquina. Te miramos la técnica, "
+     "ajustamos las cargas y te damos una mano el día que no tenés ganas. Esa es la parte "
+     "que hace la diferencia entre entrenar y sólo ir al gimnasio."),
+    ("El lugar", "Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno. "
+     "Paredes oscuras, luz cálida y música: un lugar al que dan ganas de volver."),
+    ("El ritmo", "La constancia le gana a la intensidad. Preferimos que vengas tres veces "
+     "por semana durante un año antes que cinco veces durante un mes. Por eso medimos el "
+     "progreso: para que lo veas y no aflojes."),
+]
+pilares_html = "\n".join(
+    f"""      <article class="pilar">
+        <span class="pilar__n">{i:02d}</span>
+        <h3 class="pilar__tit">{t}</h3>
+        <p>{d}</p>
+      </article>""" for i,(t,d) in enumerate(pilares, 1))
+
+faq = [
+    ("¿Sirve si nunca entrené?",
+     "Sí, y es el caso más común. Se arranca con una evaluación para ver de dónde partís, "
+     "y el plan se arma desde ahí. Nadie te va a tirar a la sala a ver cómo te las arreglás."),
+    ("¿Hace falta reservar?",
+     "Para la sala no: venís en el horario que te quede bien. Para las clases de funcional y "
+     "para los turnos uno a uno sí, porque los cupos son limitados."),
+    ("¿Qué llevo la primera vez?",
+     "Ropa cómoda, calzado deportivo, una toalla y agua. Nada más."),
+    ("¿Puedo probar antes de asociarme?",
+     "Sí. La primera clase es de prueba y no tiene costo. Escribinos por WhatsApp y "
+     "arreglamos el día."),
+    ("¿Dónde están y en qué horarios?",
+     "En Sarmiento 518, La Falda. Lunes a viernes de 7 a 12 y de 14 a 22, sábados de 9 a 12."),
+]
+faq_html = "\n".join(
+    f"""      <details class="faq">
+        <summary>{q}</summary>
+        <p>{r}</p>
+      </details>""" for q,r in faq)
+
+CONTENIDO['somos'] = f"""  <header class="cabecera">
+    <span class="lbl">Somos Volcano</span>
+    <h1 class="cabecera__titulo">Un gimnasio donde se entrena en serio y se pasa bien</h1>
+    <p class="cabecera__bajada">Música fuerte, buenas vibras y entrenos que te hacen sudar
+    pero también reír. Eso lo dijimos nosotros y lo sostenemos: se puede entrenar con
+    seriedad sin que el lugar sea solemne.</p>
+  </header>
+
+  <section class="intro-dos">
+    <div class="intro-dos__txt">
+      <h2 class="seccion__tit">Cómo empezó</h2>
+      <p>[COMPLETAR: en qué año abrió Volcano, quién lo fundó y por qué. Dos o tres párrafos
+      contando la historia real del gimnasio: de dónde salió la idea, cómo era el primer
+      local y cómo se llegó al de ahora.]</p>
+      <p>Hoy estamos en Sarmiento 518, en La Falda, con equipamiento nuevo y un equipo que
+      conoce a cada uno de los que entrena acá.</p>
+    </div>
+    <figure class="intro-dos__foto">
+      <img src="img/contacto.jpg" alt="El equipo de Volcano Fitness" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="mision">
+    <div class="mision__txt">
+      <span class="lbl">Qué buscamos</span>
+      <h2 class="seccion__tit">Que entrenar te dure toda la vida</h2>
+      <p>No creemos en los planes de tres semanas ni en los resultados de un verano. Nos
+      interesa que aprendas a entrenar, que entiendas por qué hacés cada ejercicio y que
+      sigas viniendo cuando se te pase el envión del principio.</p>
+    </div>
+    <ul class="mision__lista">
+      <li>Entrenadores que corrigen y explican</li>
+      <li>Un plan armado para vos, no uno genérico</li>
+      <li>Progreso medido, para que lo veas</li>
+      <li>Equipamiento nuevo y sin esperas</li>
+      <li>Un lugar donde nadie te mira raro</li>
+    </ul>
+  </section>
+
+  <section class="pilares-sec">
+    <div class="cabecera-sec">
+      <span class="lbl">Cómo trabajamos</span>
+      <h2 class="seccion__tit">Cuatro cosas que no negociamos</h2>
+    </div>
+    <div class="pilares">
+{pilares_html}
+    </div>
+  </section>
+
+  <section class="faqs">
+    <div class="cabecera-sec">
+      <span class="lbl">Preguntas</span>
+      <h2 class="seccion__tit">Lo que más nos preguntan</h2>
+    </div>
+    <div class="faqs__lista">
+{faq_html}
+    </div>
+  </section>
+
+  <section class="cierre">
+    <p class="cierre__aviso">La primera clase es de prueba y no tiene costo.</p>
+    <a class="pill" href="{_wa('Hola! Quiero probar una clase en Volcano.')}"
+       target="_blank" rel="noopener">Probá una clase</a>
+  </section>
+"""
+
+
+# ────────────────────────────── Precios ──────────────────────────────────
+planes = [
+    ("Libre", "Para quien ya sabe lo que hace y quiere entrenar por su cuenta.",
+     ["Sala y cardio sin límite", "Tu rutina en el área de socios", "Seguimiento del entrenador"], False),
+    ("Full", "El más elegido: sumás las clases en grupo y el seguimiento completo.",
+     ["Todo lo del plan Libre", "Clases de funcional", "Evaluación cada 3 meses", "Reserva de clases"], True),
+    ("Personalizado", "Uno a uno con tu entrenador, con turnos reservados para vos.",
+     ["Todo lo del plan Full", "Turnos uno a uno", "Plan ajustado semana a semana"], False),
+]
+planes_html = "\n".join(
+    '      <article class="plan{}">\n{}        <h3 class="plan__nom">{}</h3>\n'
+    '        <p class="plan__desc">{}</p>\n'
+    '        <p class="plan__precio"><span class="plan__signo">$</span><em>[—]</em><small>/mes</small></p>\n'
+    '        <ul class="plan__lista">{}</ul>\n'
+    '        <a class="pill{}" href="{}" target="_blank" rel="noopener">Consultar</a>\n'
+    '      </article>'.format(
+        ' plan--destacado' if dest else '',
+        '        <span class="plan__tag">El más elegido</span>\n' if dest else '',
+        n, d, ''.join('<li>{}</li>'.format(x) for x in items),
+        '' if dest else ' pill--ghost',
+        _wa('Hola! Quiero consultar el plan ' + n + '.'))
+    for n, d, items, dest in planes)
+
+CONTENIDO['precios'] = (
+    '  <header class="cabecera">\n'
+    '    <span class="lbl">Planes</span>\n'
+    '    <h1 class="cabecera__titulo">Precios</h1>\n'
+    '    <p class="cabecera__bajada">Sin matr&iacute;cula y sin permanencia. La primera clase es\n'
+    '    de prueba y no tiene costo.</p>\n'
+    '  </header>\n\n'
+    '  <section class="planes">\n' + planes_html + '\n  </section>\n\n'
+    '  <p class="planes__nota"><strong>Los valores est&aacute;n por confirmar.</strong> '
+    'Escribinos y te pasamos el precio actualizado.</p>\n\n'
+    '  <section class="faqs">\n'
+    '    <div class="cabecera-sec"><span class="lbl">Sobre los planes</span>\n'
+    '      <h2 class="seccion__tit">Antes de decidir</h2></div>\n'
+    '    <div class="faqs__lista">\n'
+    '      <details class="faq"><summary>&iquest;Hay que firmar permanencia?</summary>\n'
+    '        <p>No. Los planes son mes a mes y pod&eacute;s cambiar o dar de baja cuando quieras.</p></details>\n'
+    '      <details class="faq"><summary>&iquest;C&oacute;mo se paga?</summary>\n'
+    '        <p>[COMPLETAR: efectivo, transferencia, d&eacute;bito o tarjeta. Aclarar si hay\n'
+    '        descuento por pago adelantado.]</p></details>\n'
+    '      <details class="faq"><summary>&iquest;Tienen plan para estudiantes o familias?</summary>\n'
+    '        <p>[COMPLETAR si existe. Si no, se saca esta pregunta.]</p></details>\n'
+    '      <details class="faq"><summary>&iquest;Puedo congelar el plan si viajo?</summary>\n'
+    '        <p>[COMPLETAR las condiciones.]</p></details>\n'
+    '    </div>\n  </section>\n\n'
+    '  <section class="cierre">\n'
+    '    <p class="cierre__aviso">&iquest;No sab&eacute;s qu&eacute; plan te conviene? Contanos c&oacute;mo\n'
+    '    entren&aacute;s y lo vemos.</p>\n'
+    '    <a class="pill" href="' + _wa('Hola! Quiero que me ayuden a elegir un plan.') + '"\n'
+    '       target="_blank" rel="noopener">Escribinos</a>\n'
+    '  </section>\n')
+
+# ────────────────────────────── Contacto ─────────────────────────────────
+def _via(href, lbl, dato, pie, ext=True):
+    if href:
+        tgt = ' target="_blank" rel="noopener"' if ext else ''
+        ini = '      <a class="via" href="{}"{}>'.format(href, tgt); fin = '      </a>'
+    else:
+        ini = '      <div class="via via--info">'; fin = '      </div>'
+    return (ini + '\n        <span class="via__lbl">{}</span>\n'
+            '        <span class="via__dato">{}</span>\n'
+            '        <span class="via__pie">{}</span>\n'.format(lbl, dato, pie) + fin)
+
+_vias = "\n".join([
+    _via(_wa('Hola! Quiero hacer una consulta.'), 'WhatsApp', '3548 59-2487', 'Lo m&aacute;s r&aacute;pido'),
+    _via('tel:+543548592487', 'Tel&eacute;fono', '3548 59-2487', 'En horario de atenci&oacute;n', False),
+    _via('https://instagram.com/volcano_fitnesslafalda', 'Instagram', '@volcano_fitnesslafalda', 'Ah&iacute; subimos el d&iacute;a a d&iacute;a'),
+    _via(None, 'D&oacute;nde estamos', 'Sarmiento 518', 'La Falda, C&oacute;rdoba'),
+    _via(None, 'Horarios', '7 a 12 y 14 a 22', 'Lunes a viernes &middot; S&aacute;bados 9 a 12'),
+])
+
+CONTENIDO['contacto'] = (
+    '  <header class="cabecera">\n'
+    '    <span class="lbl">Hablemos</span>\n'
+    '    <h1 class="cabecera__titulo">Contacto</h1>\n'
+    '    <p class="cabecera__bajada">La forma m&aacute;s r&aacute;pida es WhatsApp: contestamos en el\n'
+    '    d&iacute;a. Tambi&eacute;n pod&eacute;s pasar por el gimnasio.</p>\n'
+    '  </header>\n\n'
+    '  <section class="contacto-grid">\n'
+    '    <div class="contacto-vias">\n' + _vias + '\n    </div>\n'
+    '    <div class="donde__mapa">\n'
+    '      <iframe title="Mapa: Sarmiento 518, La Falda" loading="lazy"\n'
+    '        referrerpolicy="no-referrer-when-downgrade"\n'
+    '        src="https://maps.google.com/maps?q=Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina&amp;z=16&amp;output=embed"></iframe>\n'
+    '    </div>\n  </section>\n\n'
+    '  <section class="cierre">\n'
+    '    <p class="cierre__aviso">&iquest;Quer&eacute;s probar una clase? Decinos qu&eacute; d&iacute;a te queda bien.</p>\n'
+    '    <a class="pill" href="' + _wa('Hola! Quiero probar una clase. Que dias tienen lugar?') + '"\n'
+    '       target="_blank" rel="noopener">Coordinar una clase</a>\n'
+    '  </section>\n')
+
+
 PAGINAS = {
+  'somos.html': ('Somos Volcano — Volcano Fitness',
+                  'Quiénes somos, cómo trabajamos y qué podés esperar de Volcano Fitness, el gimnasio de La Falda.',
+                  CONTENIDO['somos']),
+  'precios.html': ('Precios — Volcano Fitness',
+                  'Planes y precios de Volcano Fitness, el gimnasio de La Falda.',
+                  CONTENIDO['precios']),
+  'contacto.html': ('Contacto — Volcano Fitness',
+                  'Cómo contactarnos y dónde estamos: Sarmiento 518, La Falda, Córdoba.',
+                  CONTENIDO['contacto']),
   'entrenamientos.html': ('Entrenamientos — Volcano Fitness',
                   'Musculación, funcional, entrenamiento personalizado y acondicionamiento en Volcano Fitness, La Falda.',
                   CONTENIDO['entrenamientos']),
