@@ -40,6 +40,7 @@
     setTimeout(function () { document.body.classList.add('is-abierto'); }, 2200);
   }
 
+  // En las páginas internas el título también entra letra por letra
   // Esperamos a que carguen las imágenes del hero, con un tope por si tardan
   var abierto = false;
   function abrirUnaVez() { if (!abierto) { abierto = true; abrir(); } }

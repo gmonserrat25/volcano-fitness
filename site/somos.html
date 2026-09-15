@@ -54,13 +54,14 @@
 </nav>
 
 <main class="pagina">
-  <header class="cabecera">
-    <span class="lbl">Somos Volcano</span>
-    <h1 class="cabecera__titulo">Un gimnasio donde se entrena en serio y se pasa bien</h1>
-    <p class="cabecera__bajada">Música fuerte, buenas vibras y entrenos que te hacen sudar
-    pero también reír. Eso lo dijimos nosotros y lo sostenemos: se puede entrenar con
-    seriedad sin que el lugar sea solemne.</p>
-  </header>
+  <section class="panel panel--interior">
+    <div class="panel__media" style="background-image:url('img/contacto.jpg');background-position:center"></div>
+    <div class="panel__scrim"></div>
+    <div class="panel__body">
+      <h1 class="panel__title" data-letras>Somos Volcano</h1>
+      <p class="panel__lead" data-sube>Un gimnasio donde se entrena en serio y se pasa bien. Música fuerte, buenas vibras y entrenos que te hacen sudar pero también reír.</p>
+    </div>
+  </section>
 
   <section class="intro-dos">
     <div class="intro-dos__txt">
@@ -99,26 +100,7 @@
       <h2 class="seccion__tit">Cuatro cosas que no negociamos</h2>
     </div>
     <div class="pilares">
-      <article class="pilar">
-        <span class="pilar__n">01</span>
-        <h3 class="pilar__tit">Tu rutina</h3>
-        <p>Nadie entrena a ciegas. Tu entrenador te arma el plan según de dónde venís y a dónde querés llegar, y lo va corrigiendo. Lo tenés siempre a mano, con los kilos de la última vez al lado de cada ejercicio.</p>
-      </article>
-      <article class="pilar">
-        <span class="pilar__n">02</span>
-        <h3 class="pilar__tit">El acompañamiento</h3>
-        <p>No te dejamos solo frente a la máquina. Te miramos la técnica, ajustamos las cargas y te damos una mano el día que no tenés ganas. Esa es la parte que hace la diferencia entre entrenar y sólo ir al gimnasio.</p>
-      </article>
-      <article class="pilar">
-        <span class="pilar__n">03</span>
-        <h3 class="pilar__tit">El lugar</h3>
-        <p>Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno. Paredes oscuras, luz cálida y música: un lugar al que dan ganas de volver.</p>
-      </article>
-      <article class="pilar">
-        <span class="pilar__n">04</span>
-        <h3 class="pilar__tit">El ritmo</h3>
-        <p>La constancia le gana a la intensidad. Preferimos que vengas tres veces por semana durante un año antes que cinco veces durante un mes. Por eso medimos el progreso: para que lo veas y no aflojes.</p>
-      </article>
+{pilares_html}
     </div>
   </section>
 
@@ -128,32 +110,13 @@
       <h2 class="seccion__tit">Lo que más nos preguntan</h2>
     </div>
     <div class="faqs__lista">
-      <details class="faq">
-        <summary>¿Sirve si nunca entrené?</summary>
-        <p>Sí, y es el caso más común. Se arranca con una evaluación para ver de dónde partís, y el plan se arma desde ahí. Nadie te va a tirar a la sala a ver cómo te las arreglás.</p>
-      </details>
-      <details class="faq">
-        <summary>¿Hace falta reservar?</summary>
-        <p>Para la sala no: venís en el horario que te quede bien. Para las clases de funcional y para los turnos uno a uno sí, porque los cupos son limitados.</p>
-      </details>
-      <details class="faq">
-        <summary>¿Qué llevo la primera vez?</summary>
-        <p>Ropa cómoda, calzado deportivo, una toalla y agua. Nada más.</p>
-      </details>
-      <details class="faq">
-        <summary>¿Puedo probar antes de asociarme?</summary>
-        <p>Sí. La primera clase es de prueba y no tiene costo. Escribinos por WhatsApp y arreglamos el día.</p>
-      </details>
-      <details class="faq">
-        <summary>¿Dónde están y en qué horarios?</summary>
-        <p>En Sarmiento 518, La Falda. Lunes a viernes de 7 a 12 y de 14 a 22, sábados de 9 a 12.</p>
-      </details>
+{faq_html}
     </div>
   </section>
 
   <section class="cierre">
     <p class="cierre__aviso">La primera clase es de prueba y no tiene costo.</p>
-    <a class="pill" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano."
+    <a class="pill" href="{_wa('Hola! Quiero probar una clase en Volcano.')}"
        target="_blank" rel="noopener">Probá una clase</a>
   </section>
 

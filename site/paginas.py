@@ -64,6 +64,21 @@ PLANTILLA = """<!DOCTYPE html>
 
 CONTENIDO = {}
 
+def _panel(titulo, bajada, foto, pos="center"):
+    """Panel a pantalla completa, el mismo componente que usa la home."""
+    return (
+        '  <section class="panel panel--interior">\n'
+        '    <div class="panel__media" style="background-image:url(\'img/{}\');background-position:{}"></div>\n'
+        '    <div class="panel__scrim"></div>\n'
+        '    <div class="panel__body">\n'
+        '      <h1 class="panel__title" data-letras>{}</h1>\n'
+        '      <p class="panel__lead" data-sube>{}</p>\n'
+        '    </div>\n'
+        '  </section>\n'
+    ).format(foto, pos, titulo, bajada)
+
+
+
 # ── Teléfono dibujado con CSS, con la rutina del día adentro ──
 TELEFONO = """<div class="tel">
         <div class="tel__marco">
@@ -210,10 +225,9 @@ CONTENIDO['profes'] = f"""  <header class="cabecera">
 # ──────────────────────────────── El gym ─────────────────────────────────
 fotos = [
     ("hero-1.jpg",        "Los racks, con la luz cálida detrás", "ancha"),
-    ("gym.jpg",           "Las cintas, contra el ventanal", "ancha"),
+    ("gym.jpg",           "Las cintas, contra el ventanal", ""),
     ("hero-2.jpg",        "Barras y discos", ""),
     ("entrenamientos.jpg","Las máquinas de tren inferior", ""),
-    ("hero-4.jpg",        "La jaula y el cruce de poleas", ""),
     ("contacto.jpg",      "La sala, bajo los arcos de luz", ""),
 ]
 galeria = '\n'.join(
@@ -292,7 +306,7 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
     <div class="ig__tira">
       <figure style="background-image:url('img/hero-2.jpg')"></figure>
       <figure style="background-image:url('img/entrenamientos.jpg')"></figure>
-      <figure style="background-image:url('img/hero-4.jpg')"></figure>
+      <figure style="background-image:url('img/gym.jpg')"></figure>
       <figure style="background-image:url('img/profes.jpg')"></figure>
     </div>
   </section>
@@ -336,7 +350,7 @@ disciplinas = [
      ["Todos los niveles", "Rutina propia", "Sin turno"],
      "Quiero saber más de musculación", _wa("Hola! Quiero saber más sobre musculación en Volcano.")),
 
-    ("Funcional", "hero-4.jpg",
+    ("Funcional", "contacto.jpg",
      "Clases en grupo, circuitos que cambian todas las semanas y trabajo de fuerza, "
      "resistencia y movilidad. La clase que más se llena.",
      ["En grupo", "Con reserva", "45 minutos"],
@@ -438,14 +452,7 @@ faq_html = "\n".join(
         <p>{r}</p>
       </details>""" for q,r in faq)
 
-CONTENIDO['somos'] = f"""  <header class="cabecera">
-    <span class="lbl">Somos Volcano</span>
-    <h1 class="cabecera__titulo">Un gimnasio donde se entrena en serio y se pasa bien</h1>
-    <p class="cabecera__bajada">Música fuerte, buenas vibras y entrenos que te hacen sudar
-    pero también reír. Eso lo dijimos nosotros y lo sostenemos: se puede entrenar con
-    seriedad sin que el lugar sea solemne.</p>
-  </header>
-
+CONTENIDO['somos'] = f"""""" + _panel("Somos Volcano", "Un gimnasio donde se entrena en serio y se pasa bien. Música fuerte, buenas vibras y entrenos que te hacen sudar pero también reír.", "contacto.jpg") + """
   <section class="intro-dos">
     <div class="intro-dos__txt">
       <h2 class="seccion__tit">Cómo empezó</h2>

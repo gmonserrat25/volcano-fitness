@@ -1179,3 +1179,15 @@ a.via:hover{border-color:var(--accent);background:var(--bg)}
 @media (max-width:520px){
   .plan .pill,.cierre .pill{display:block;text-align:center}
 }
+
+/* ═══ Panel de apertura en las páginas internas ════════════
+   Mismo componente que la home. Va fuera del ancho del
+   documento, así ocupa toda la pantalla. */
+.panel--interior{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-top:calc(var(--header-h) * -1 - clamp(30px,5vw,64px));
+  margin-bottom:clamp(48px,6.5vw,92px);
+  scroll-snap-align:none;
+}
+.panel--interior .panel__title{margin-bottom:.3em}
