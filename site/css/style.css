@@ -236,7 +236,20 @@ img,svg{display:block;max-width:100%}
 .slide{
   position:absolute;inset:0;
   background-position:center;background-size:cover;background-repeat:no-repeat;
-  opacity:0;transition:opacity 1.25s ease;
+  opacity:0;
+  transition:opacity 1.6s ease-in-out;
+  transform:scale(1.06);
+}
+/* La que está a la vista se acerca de a poco: de ahí viene la sensación de movimiento */
+.slide.is-activa{
+  opacity:1;
+  animation:acercar 9s linear forwards;
+}
+@keyframes acercar{from{transform:scale(1.04)}to{transform:scale(1.13)}}
+
+@media (prefers-reduced-motion:reduce){
+  .slide.is-activa{animation:none;transform:none}
+  .slide{transition:none}
 }
 .slide.is-active{opacity:1}
 
@@ -651,22 +664,6 @@ img,svg{display:block;max-width:100%}
 @media (max-width:520px){
   .app__botones{width:100%}
   .tienda{flex:1 1 100%;justify-content:center}
-}
-
-/* ═══ Video del hero ═══════════════════════════════════════ */
-.hero-video{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;object-position:center 68%;   /* baja el encuadre: menos techo, más sala */
-  display:block;
-}
-/* Si alguien prefiere menos movimiento, se queda el poster */
-@media (prefers-reduced-motion:reduce){
-  .hero-video{display:none}
-  .panel--hero .panel__media{
-    background-image:url('../img/hero-1.jpg');
-    background-size:cover;background-position:center 32%;
-  }
 }
 
 /* ═══ WhatsApp flotante ════════════════════════════════════ */

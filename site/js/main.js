@@ -88,33 +88,24 @@
   window.addEventListener('resize', syncDots, { passive: true });
   syncDots();
 
-  /* ── 3 · Slideshow del hero ── */
+  /* ── 3 · Slideshow del hero ──
+     Cruce suave entre imágenes. Cada una se acerca de a poco mientras está
+     a la vista: eso es lo que da la sensación de movimiento. */
   var show = document.querySelector('[data-slideshow]');
   if (show) {
     var slides = show.querySelectorAll('.slide');
     if (slides.length > 1) {
       var i = 0;
       setInterval(function () {
-        slides[i].classList.remove('is-active');
+        slides[i].classList.remove('is-activa');
         i = (i + 1) % slides.length;
-        slides[i].classList.add('is-active');
-      }, 4200);
+        var s = slides[i];
+        s.style.animation = 'none';
+        void s.offsetWidth;          // fuerza el reinicio de la animación
+        s.style.animation = '';
+        s.classList.add('is-activa');
+      }, 6500);
     }
-  }
-
-  /* ── 4 · Video del hero ──
-     Si la pestaña se abrió en segundo plano, Chrome no arranca el autoplay.
-     Se reintenta cuando la pestaña se vuelve visible. */
-  var hv = document.querySelector('.hero-video');
-  if (hv) {
-    var arrancar = function () {
-      if (hv.paused) { var p = hv.play(); if (p && p.catch) p.catch(function () {}); }
-    };
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) arrancar();
-    });
-    window.addEventListener('pageshow', arrancar);
-    arrancar();
   }
 
   /* ── 4 · Año del footer ── */

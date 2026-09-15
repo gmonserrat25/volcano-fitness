@@ -121,31 +121,22 @@ Aparecían en el submenú y en la descripción. **El gimnasio no las ofrece** (c
 2026-09-14), así que se quitaron de todos lados. Estaban porque hay un destacado viejo de
 Instagram que las muestra: no volver a agregarlas por eso.
 
-## Video del hero
+## El hero: fotos que van pasando
 
-`video/hero.mp4` — 326 KB, 16:9, mudo, en loop. Sale de una **historia destacada** de
-Instagram ("Gym"): un paneo por la sala con gente entrenando. Reemplazó a un recorte de reel
-que se veía desenfocado (quedó como `video/hero-anterior.mp4`).
+Se probó con video y **no daba la calidad**: los videos de Instagram vienen a 720 px y en una
+pantalla grande se ven blandos, por más que se recorten bien. Las fotos, ampliadas a 16:9,
+están a **1920 px** y se ven nítidas.
 
-`img/hero-1.jpg` es el `poster`, y también lo que se ve con "reducir movimiento" activado.
-El `object-position` está en `center 68%` para que no domine el techo.
+Así que el hero son **cuatro fotos que se cruzan** cada 6,5 segundos (`hero-1` a `hero-4`,
+todas 1920x1071). El movimiento lo da un **zoom lento** sobre la que está a la vista
+(`@keyframes acercar`, de 1.04 a 1.13 en 9 s): se siente vivo como un video, pero con la
+nitidez de una foto. Con "reducir movimiento" activado, el zoom y el cruce se apagan.
 
-### Cómo se captura (esto costó)
+En `main.js`, al cambiar de imagen hay que **reiniciar la animación a mano**
+(`style.animation='none'`, forzar un reflow leyendo `offsetWidth`, y devolverla): si no, el
+zoom sólo corre la primera vuelta.
 
-Los videos de Instagram van por `blob:`, no se pueden descargar, y acá no hay ffmpeg. Se
-graban desde el `<video>` de la página con `MediaRecorder` sobre un `<canvas>`, tomando la
-franja central para pasarlos de vertical a horizontal. Tres cosas que hacen falta:
-
-1. **El visor de historias re-pausa el video.** Hay que anular su `pause` (`v.pause = ()=>{}`)
-   antes de reproducirlo.
-2. **La pestaña del navegador está en segundo plano**, y ahí Chrome congela
-   `requestAnimationFrame` y `requestVideoFrameCallback`: el canvas graba negro. Hacer clic
-   para darle foco no alcanza, vuelve a segundo plano enseguida.
-3. Lo que sí funciona: **`canvas.captureStream(0)` + `track.requestFrame()`**, mandando los
-   cuadros a mano mientras se hace *seek* en el video (el *seek* sí anda en segundo plano).
-   Hay que **espaciar cada cuadro en tiempo real** (1/12 s) o el video sale acelerado: sin
-   eso, 79 cuadros se graban en 1,2 s en lugar de 6,6.
-
+Los archivos de video se eliminaron.
 
 ## Botón de WhatsApp
 
