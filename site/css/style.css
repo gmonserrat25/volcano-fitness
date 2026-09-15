@@ -23,7 +23,11 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  /* El scroll tiende a encajar en cada panel, así no se quedan dos a medias */
+  scroll-snap-type:y proximity;
+}
 body{
   margin:0;
   background:var(--bg);
@@ -55,7 +59,7 @@ img,svg{display:block;max-width:100%}
 .wipe{
   position:fixed;
   width:200vw;height:200vw;
-  top:100svh;left:0;
+  top:100dvh;left:0;
   background:var(--bg);
   z-index:9999;
   transform-origin:0 0;
@@ -203,7 +207,9 @@ img,svg{display:block;max-width:100%}
 .stack{position:relative}
 .panel{
   position:relative;
-  min-height:100svh;
+  min-height:100dvh;
+  scroll-snap-align:start;
+  scroll-snap-stop:normal;
   display:grid;place-items:center;
   overflow:clip;
   isolation:isolate;

@@ -130,6 +130,21 @@ poses quedan a mitad de movimiento. Se sacaron todos. Hoy cada imagen del sitio 
 Si en algún momento hace falta volver a sacar un frame, que sea a sabiendas y por poco
 tiempo: dejarlo marcado acá.
 
+## Los paneles y la altura del celular
+
+Usan **`100dvh`**, no `svh` ni `vh`, y esto importa:
+
+- `svh` es la altura **mínima** del viewport, con las barras del navegador visibles. Cuando en
+  el celular la barra se retrae, la pantalla crece y el panel queda corto: **se ve el borde
+  del panel siguiente junto al actual**. Fue exactamente el problema que apareció en el
+  celular, con dos títulos a la vez.
+- `dvh` sigue el viewport real en cada momento, así que el panel siempre lo llena.
+
+Además los paneles llevan `scroll-snap-align:start` y el documento
+`scroll-snap-type:y proximity`, para que el scroll tienda a encajar en cada panel y no queden
+dos a medias. Es `proximity` y no `mandatory` a propósito: `mandatory` secuestra el scroll y
+molesta en las secciones largas de abajo.
+
 ## Valores tomados del original
 
 La tipografía y el botón no están a ojo: se midieron sobre go180.nl a 1280 px de ancho.

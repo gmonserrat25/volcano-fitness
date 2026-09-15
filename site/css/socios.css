@@ -18,7 +18,7 @@
 
 /* ── Pantalla de acceso ──────────────────────────────────── */
 .acceso{
-  min-height:calc(100svh - 46px);
+  min-height:calc(100dvh - 46px);
   display:grid;place-items:center;
   padding:clamp(26px,5vw,60px) var(--gut);
 }
