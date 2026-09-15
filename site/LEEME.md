@@ -100,19 +100,6 @@ Aparecían en el submenú y en la descripción. **El gimnasio no las ofrece** (c
 2026-09-14), así que se quitaron de todos lados. Estaban porque hay un destacado viejo de
 Instagram que las muestra: no volver a agregarlas por eso.
 
-## La sección de la app
-
-Va en `index.html`, entre el último panel y las reseñas (`id="app"`), y también está en el
-menú. Muestra de qué sirve la app y tiene un teléfono dibujado con CSS que repite la misma
-rutina de `rutina.html`, para que lo que se ve prometido sea lo que hay.
-
-**Faltan los dos links de las tiendas**: buscá `[COMPLETAR link App Store]` y
-`[COMPLETAR link Google Play]` en `index.html`. Si el gimnasio no tiene app propia sino que
-usa una de terceros, ahí van los links de esa.
-
-Los botones son propios, no los badges oficiales de Apple y Google. Si hace falta usar los
-oficiales hay que bajarlos de sus sitios de marca y respetar sus reglas de uso.
-
 ## Video del hero
 
 `video/hero.mp4` — 532 KB, 16:9, sin sonido, en loop. Es un recorte del reel `DRzpTLAkSfe`,
@@ -177,17 +164,33 @@ Si aparecen fotos de verdad, reemplazarlas.
 
 ## Legibilidad de los paneles
 
-Los títulos sobre las fotos se perdían, sobre todo en las claras. Tres cosas lo arreglan,
-todas en `.panel__scrim` y `.panel__title` / `.panel__lead`:
+Los títulos sobre las fotos se perdían. Se probaron sombras y halos y no alcanzó; lo que
+funcionó fue cambiar el planteo: **la foto pasa a ser fondo y el texto es lo que manda.**
 
-1. Un **halo radial** en el scrim, centrado donde va el texto, que lo despega de la foto sin
-   ensuciar toda la imagen.
-2. **Doble sombra** en el texto: una corta y cerrada que le da borde, y una amplia y difusa
-   que le da fondo.
-3. El **parallax** del contenido bajó de 46% a 24% de recorrido, así el texto no se va tanto
-   del centro mientras scrolleás.
+Tres capas, todas en `.panel__scrim` y `.panel__body::before`:
 
-Si se cambia una foto por una muy clara, revisá que el título siga leyéndose.
+1. Un **velo parejo** sobre toda la foto (56% de negro). Esto es lo que más cambió.
+2. Algo más de peso detrás del bloque de texto, y un degradado suave arriba y abajo para
+   que el panel cierre.
+3. Un **desenfoque** (`backdrop-filter: blur(7px)`) justo detrás del texto, con los bordes
+   difuminados por una máscara. Separa sin oscurecer más.
+
+Con el fondo ya oscuro, **las sombras del texto volvieron a ser discretas**: cuatro sombras
+apiladas se veían sucias. Ahora alcanza con una.
+
+Si se cambia una foto, mirar que el título siga leyéndose.
+
+## Tono
+
+El copy pasó a un registro más profesional: **"El gym" → "El gimnasio"**, **"Profes" →
+"Entrenadores"**, "Nuestro gym" → "Conocé las instalaciones", "Profe Ludmi Porrino" →
+"Ludmi Porrino", y se sacaron giros como "te bancan el día que no tenés ganas".
+
+Los `id` internos y los nombres de archivo (`gym.html`, `profes.html`, `#profes`) **se
+dejaron como están**: no se leen y cambiarlos rompería los links.
+
+La bajada del hero ("Música fuerte, buenas vibras...") **es la bio textual de su Instagram**,
+por eso conserva ese tono. Si se quiere subir el registro también ahí, hay que reescribirla.
 
 ## Páginas internas
 

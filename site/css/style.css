@@ -162,11 +162,14 @@ img,svg{display:block;max-width:100%}
 .panel__scrim{
   position:absolute;inset:0;z-index:-1;
   background:
-    /* halo detrás del bloque de texto: lo despega de la foto sin tapar la imagen */
-    radial-gradient(ellipse 72% 58% at 50% 47%,
-      rgba(4,7,14,.88) 0%, rgba(4,7,14,.74) 34%, rgba(4,7,14,.40) 66%, rgba(4,7,14,0) 100%),
+    /* 1 · velo parejo: la foto pasa a ser fondo, el texto es lo que manda */
+    linear-gradient(rgba(4,7,14,.56), rgba(4,7,14,.56)),
+    /* 2 · algo más de peso justo detrás del bloque de texto */
+    radial-gradient(ellipse 74% 60% at 50% 47%,
+      rgba(4,7,14,.62) 0%, rgba(4,7,14,.44) 45%, rgba(4,7,14,0) 100%),
+    /* 3 · bordes, para que el panel cierre arriba y abajo */
     linear-gradient(180deg,
-      rgba(4,7,14,.78) 0%, rgba(4,7,14,.50) 26%, rgba(4,7,14,.54) 60%, rgba(4,7,14,.86) 100%);
+      rgba(4,7,14,.50) 0%, rgba(4,7,14,0) 22%, rgba(4,7,14,0) 74%, rgba(4,7,14,.62) 100%);
 }
 .panel__body{
   position:relative;z-index:1;
@@ -180,11 +183,7 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(40px,5.5vw,104px);
   font-weight:700;letter-spacing:-.025em;line-height:1.02;
   color:#fff;
-  text-shadow:
-    0 1px 1px rgba(2,4,9,.92),
-    0 2px 6px rgba(2,4,9,.85),
-    0 8px 26px rgba(2,4,9,.80),
-    0 16px 60px rgba(2,4,9,.65);
+  text-shadow:0 2px 14px rgba(2,4,9,.75), 0 1px 2px rgba(2,4,9,.6);
 }
 .panel__lead{
   margin:0 auto 1.9em;
@@ -192,10 +191,7 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(15px,1.34vw,18px);
   font-weight:500;line-height:1.95;
   color:rgba(255,255,255,.93);
-  text-shadow:
-    0 1px 1px rgba(2,4,9,.95),
-    0 2px 5px rgba(2,4,9,.88),
-    0 6px 22px rgba(2,4,9,.78);
+  text-shadow:0 1px 10px rgba(2,4,9,.7);
 }
 
 /* Pill — blanco hueso con texto oscuro, igual que el original */
@@ -446,6 +442,114 @@ img,svg{display:block;max-width:100%}
 }
 
 /* ═══════════════════════════════════════════════════════════
+   PÁGINAS INTERNAS (rutina.html · profes.html)
+   ═══════════════════════════════════════════════════════════ */
+
+.interior{background:var(--bg)}
+.pagina{
+  width:min(1080px, calc(100% - var(--gut)*2));
+  margin:0 auto;
+  padding:calc(var(--header-h) + clamp(30px,5vw,64px)) 0 clamp(48px,7vw,96px);
+}
+
+/* Cabecera de página */
+.cabecera{margin-bottom:clamp(30px,4.5vw,56px)}
+.cabecera__titulo{
+  margin:.28em 0 .3em;
+  font-size:clamp(36px,5.4vw,80px);
+  font-weight:700;letter-spacing:-.025em;line-height:1.02;
+  color:#fff;text-wrap:balance;
+}
+.cabecera__bajada{
+  margin:0;max-width:60ch;
+  font-size:clamp(15px,1.34vw,18px);font-weight:500;line-height:1.75;
+  color:var(--muted);
+}
+
+/* ── La rutina ───────────────────────────────────────────── */
+.tabla-scroll{overflow-x:auto}
+.rt{
+  width:100%;border-collapse:collapse;
+  font-variant-numeric:tabular-nums;
+}
+.rt thead th{
+  padding:0 14px 12px;
+  text-align:left;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.rt tbody tr{border-top:1px solid var(--line)}
+.rt tbody tr:last-child{border-bottom:1px solid var(--line)}
+.rt td{padding:clamp(14px,1.6vw,20px) 14px;font-size:clamp(15px,1.3vw,17px)}
+.rt__n{
+  width:1%;padding-right:0!important;
+  font-size:13px!important;font-weight:700;color:var(--muted);
+}
+.rt__ej{font-weight:600;color:#fff}
+.rt__num{white-space:nowrap;font-weight:500;color:var(--fg)}
+.rt__desc{color:var(--muted)}
+.rt__peso{font-weight:700;color:var(--accent)}
+
+/* Nota previa: aviso, no tarjeta más */
+.nota{
+  margin-top:clamp(28px,3.6vw,44px);
+  padding-left:clamp(14px,1.6vw,20px);
+  border-left:3px solid var(--brand);
+}
+.nota h2{
+  margin:0 0 .45em;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+}
+.nota p{margin:0;max-width:58ch;font-size:15px;font-weight:500;line-height:1.75;color:var(--muted)}
+
+.cierre{
+  margin-top:clamp(34px,4.4vw,56px);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+.cierre__aviso{margin:0;max-width:46ch;font-size:14px;font-weight:500;line-height:1.7;color:var(--muted)}
+
+/* ── Los profes ──────────────────────────────────────────── */
+.equipo{
+  display:grid;gap:clamp(16px,2.2vw,28px);
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+}
+.profe__foto{
+  position:relative;
+  aspect-ratio:3/4;max-width:100%;
+  border-radius:12px;overflow:hidden;
+  background:var(--bg-deep);
+}
+.profe__foto img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
+.profe__nombre{
+  margin:16px 0 0;
+  font-size:clamp(16px,1.45vw,19px);font-weight:700;letter-spacing:-.01em;color:#fff;
+}
+
+/* Los que faltan: solo la silueta, sin datos inventados */
+.profe--vacio .profe__foto{border:1px dashed var(--line)}
+.profe__ph{display:grid;place-items:center;width:100%;height:100%}
+.silueta{
+  width:38%;height:auto;
+  fill:none;stroke:var(--muted);stroke-width:3.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  opacity:.42;
+}
+.silueta circle{fill:none}
+
+.visualmente-oculto{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+@media (max-width:520px){
+  .cabecera__titulo{font-size:clamp(30px,8.4vw,40px)}
+  .cierre{flex-direction:column;align-items:flex-start}
+}
+
+/* ═══════════════════════════════════════════════════════════
    LA APP
    ═══════════════════════════════════════════════════════════ */
 
@@ -550,8 +654,12 @@ img,svg{display:block;max-width:100%}
   inset:-14% -10%;
   z-index:-1;
   pointer-events:none;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
   background:radial-gradient(ellipse 58% 50% at 50% 50%,
-    rgba(3,6,13,.78) 0%, rgba(3,6,13,.58) 45%, rgba(3,6,13,0) 100%);
+    rgba(3,6,13,.34) 0%, rgba(3,6,13,.20) 50%, rgba(3,6,13,0) 100%);
+  -webkit-mask-image:radial-gradient(ellipse 62% 56% at 50% 50%, #000 38%, transparent 78%);
+  mask-image:radial-gradient(ellipse 62% 56% at 50% 50%, #000 38%, transparent 78%);
 }
 
 /* ═══ Video del hero ═══════════════════════════════════════ */

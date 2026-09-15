@@ -85,7 +85,7 @@ filas = '\n'.join(
 CONTENIDO['rutina'] = f"""  <header class="cabecera">
     <span class="lbl">Tu rutina · Día 2 de 4</span>
     <h1 class="cabecera__titulo">Tren inferior completo</h1>
-    <p class="cabecera__bajada">Entrás, mirás qué te toca hoy y arrancás. Los kilos que ves
+    <p class="cabecera__bajada">Mirá el trabajo del día y empezá. Los kilos que ves
     al final son los de la última vez que lo hiciste.</p>
   </header>
 
@@ -112,12 +112,12 @@ CONTENIDO['rutina'] = f"""  <header class="cabecera">
     <aside class="nota">
       <h2>Antes de empezar</h2>
       <p>Diez minutos de bici o cinta suave y movilidad de cadera. Si algo te molesta,
-      pará y avisale a tu profe: se cambia el ejercicio, no se aguanta.</p>
+      pará y avisale a tu entrenador: se cambia el ejercicio, no se soporta.</p>
     </aside>
 
     <div class="cierre">
       <p class="cierre__aviso">Esta es una rutina de ejemplo, para mostrar cómo se ve.
-      La tuya te la arma tu profe.</p>
+      La tuya la arma tu entrenador.</p>
       <a class="pill" href="index.html#contacto">Pedí la tuya</a>
     </div>
   </section>
@@ -130,10 +130,10 @@ silueta = """<svg class="silueta" viewBox="0 0 64 64" aria-hidden="true">
           </svg>"""
 
 CONTENIDO['profes'] = f"""  <header class="cabecera">
-    <span class="lbl">El equipo</span>
-    <h1 class="cabecera__titulo">Los profes</h1>
-    <p class="cabecera__bajada">No te dejan solo con la máquina: te miran, te corrigen y te
-    bancan el día que no tenés ganas.</p>
+    <span class="lbl">Nuestro equipo</span>
+    <h1 class="cabecera__titulo">Entrenadores</h1>
+    <p class="cabecera__bajada">No te dejan solo frente a la máquina: corrigen tu técnica, ajustan las cargas
+    y te acompañan en cada etapa.</p>
   </header>
 
   <section class="equipo">
@@ -142,7 +142,7 @@ CONTENIDO['profes'] = f"""  <header class="cabecera">
         <img src="img/profe-ludmi.jpg" alt="Ludmi Porrino" width="900" height="1200" loading="lazy">
       </div>
       <div class="profe__datos">
-        <h2 class="profe__nombre">Profe Ludmi Porrino</h2>
+        <h2 class="profe__nombre">Ludmi Porrino</h2>
       </div>
     </article>
 
@@ -219,10 +219,10 @@ CIUDAD = "La Falda, Córdoba"
 MAPA_Q = "Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina"
 
 CONTENIDO['gym'] = f"""  <header class="cabecera">
-    <span class="lbl">La casa</span>
-    <h1 class="cabecera__titulo">El gym</h1>
+    <span class="lbl">Las instalaciones</span>
+    <h1 class="cabecera__titulo">El gimnasio</h1>
     <p class="cabecera__bajada">Paredes negras, luz cálida detrás de los racks y ventanales
-    a la calle. Máquinas nuevas y todo lo que hace falta, sin tener que esperar turno.</p>
+    a la calle. Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno.</p>
   </header>
 
   <section class="galeria">
@@ -261,14 +261,14 @@ CONTENIDO['gym'] = f"""  <header class="cabecera">
 """
 
 PAGINAS = {
-  'gym.html':    ('El gym — Volcano Fitness',
+  'gym.html':    ('El gimnasio — Volcano Fitness',
                   'El gimnasio de Volcano Fitness en Sarmiento 518, La Falda: equipamiento, fotos y cómo llegar.',
                   CONTENIDO['gym']),
   'rutina.html': ('Tu rutina — Volcano Fitness',
                   'La rutina del día para los socios de Volcano Fitness: ejercicios, series, repeticiones y los kilos de la última vez.',
                   CONTENIDO['rutina']),
-  'profes.html': ('Los profes — Volcano Fitness',
-                  'El equipo de profes de Volcano Fitness, el gimnasio de La Falda.',
+  'profes.html': ('Entrenadores — Volcano Fitness',
+                  'El equipo de entrenadores de Volcano Fitness, el gimnasio de La Falda.',
                   CONTENIDO['profes']),
 }
 
