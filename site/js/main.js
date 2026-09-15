@@ -108,6 +108,18 @@
     }
   }
 
+  /* ── 4 · Video del hero ──
+     Si la pestaña abrió en segundo plano, Chrome no arranca el autoplay. */
+  var hv = document.querySelector('.hero-video');
+  if (hv) {
+    var arrancar = function () {
+      if (hv.paused) { var p = hv.play(); if (p && p.catch) p.catch(function () {}); }
+    };
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) arrancar(); });
+    window.addEventListener('pageshow', arrancar);
+    arrancar();
+  }
+
   /* ── 4 · Año del footer ── */
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
