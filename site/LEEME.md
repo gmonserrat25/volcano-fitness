@@ -185,15 +185,27 @@ Si aparecen fotos de verdad, reemplazarlas.
 
 ## Legibilidad de los paneles
 
-Costó tres intentos. Sombras y halos no alcanzaban, y oscurecer toda la foto la mataba.
-Lo que funciona: **el texto vive adentro de una placa**.
+Costó cuatro intentos. Lo que **no** funcionó, para no repetirlo:
 
-- `.panel__body` es una tarjeta con `backdrop-filter: blur(16px)` y fondo semitransparente.
-  El contraste es local: la foto se sigue viendo nítida alrededor.
-- El velo general sobre la foto bajó al 20%, lo justo para que el logo y el menú se lean.
-- Con la placa, **las sombras del texto son mínimas**: apilar sombras se veía sucio.
+1. Sombras y halos flojos: no alcanzaban.
+2. Oscurecer toda la foto: legible, pero mataba la imagen.
+3. Una placa detrás del texto: se leía bien pero el recuadro hacía ruido, incluso
+   difuminado con máscara. Ocupaba espacio y competía con la foto.
 
-Si se cambia una foto, mirar que el título siga leyéndose.
+**Lo que funciona:** el bloque de texto **no dibuja nada** — sin fondo, sin blur, sin
+máscara — y el contraste sale de las propias letras. `.panel__title` y `.panel__lead`
+llevan un `text-shadow` de varias capas:
+
+- dos sombras iguales de 2-3px sin desplazamiento, **repetidas a propósito** (repetir una
+  sombra acumula su opacidad): forman un halo pegado al contorno de la letra, que es lo
+  que la recorta del fondo;
+- dos o tres sombras más abiertas, que la despegan.
+
+Como sigue la forma de la letra y no la caja, no ocupa espacio ni tapa la foto. Encima del
+velo general de la foto (20%), aguanta hasta el peor caso, que es el panel del gimnasio con
+la pared blanca y el ventanal.
+
+Si se cambia una foto por una muy clara, mirar ahí primero.
 
 ## Tono
 

@@ -171,14 +171,8 @@ img,svg{display:block;max-width:100%}
   position:relative;z-index:1;
   width:min(720px,calc(100% - var(--gut)*2));
   text-align:center;
-  padding:clamp(22px,2.6vw,36px) clamp(20px,2.8vw,44px);
-  /* Sin caja: un velo difuminado que se funde con la foto.
-     La máscara come los bordes, así no aparece el rectángulo. */
-  background:rgba(5,9,18,.30);
-  backdrop-filter:blur(18px) saturate(.95);
-  -webkit-backdrop-filter:blur(18px) saturate(.95);
-  -webkit-mask-image:radial-gradient(ellipse 78% 74% at 50% 50%, #000 42%, transparent 100%);
-  mask-image:radial-gradient(ellipse 78% 74% at 50% 50%, #000 42%, transparent 100%);
+  padding:var(--header-h) 0;
+  /* Sin fondo ni recuadro: el contraste lo dan las propias letras (ver más abajo) */
   will-change:transform;
 }
 .panel__title{
@@ -186,7 +180,12 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(40px,5.5vw,104px);
   font-weight:700;letter-spacing:-.025em;line-height:1.02;
   color:#fff;
-  text-shadow:0 2px 18px rgba(2,4,9,.8), 0 1px 3px rgba(2,4,9,.65);
+  text-shadow:
+    0 0 3px rgba(2,4,9,.92),
+    0 0 3px rgba(2,4,9,.92),
+    0 0 9px rgba(2,4,9,.78),
+    0 3px 20px rgba(2,4,9,.72),
+    0 6px 42px rgba(2,4,9,.55);
 }
 .panel__lead{
   margin:0 auto 1.9em;
@@ -194,7 +193,12 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(15px,1.34vw,18px);
   font-weight:500;line-height:1.95;
   color:rgba(255,255,255,.93);
-  text-shadow:0 1px 10px rgba(2,4,9,.7);
+  text-shadow:
+    0 0 2px rgba(2,4,9,.96),
+    0 0 2px rgba(2,4,9,.96),
+    0 0 5px rgba(2,4,9,.9),
+    0 0 11px rgba(2,4,9,.8),
+    0 2px 16px rgba(2,4,9,.7);
 }
 
 /* Pill — blanco hueso con texto oscuro, igual que el original */
