@@ -130,6 +130,25 @@ poses quedan a mitad de movimiento. Se sacaron todos. Hoy cada imagen del sitio 
 Si en algún momento hace falta volver a sacar un frame, que sea a sabiendas y por poco
 tiempo: dejarlo marcado acá.
 
+## Valores tomados del original
+
+La tipografía y el botón no están a ojo: se midieron sobre go180.nl a 1280 px de ancho.
+
+| | go180 | acá |
+|---|---|---|
+| Título | 70 px, peso 700, tracking normal, interlínea 1.0 | igual (`5.5vw`) |
+| Bajada | 19 px, peso 600, interlínea 1.8, ancho 700 px | igual |
+| Botón | alto 56, radio 50, 18 px, peso 700 | igual |
+| Texto | `#E1E1E1` | `--fg` (`#E8E8E6`) |
+
+**La única diferencia a propósito:** go180 **no usa sombra** en el texto del hero, porque sus
+videos son parejos y oscuros. Acá las fotos son más claras y sin sombra no se lee, así que
+los títulos llevan una sombra suave — mucho más liviana que la que tenían antes.
+
+Lo demás que **no** viene de go180, porque se pidió expresamente: el botón flotante de
+WhatsApp, el área de socios y la paleta, que sigue el azul del logo de Volcano en lugar del
+petróleo del original.
+
 ## La animación de entrada
 
 Es la de go180, copiada de su timeline de GSAP (está en el `main.js` de su tema). Acá se hizo

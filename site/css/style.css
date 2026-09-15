@@ -217,7 +217,7 @@ img,svg{display:block;max-width:100%}
   position:absolute;inset:0;z-index:-1;
   background:
     /* apenas un velo, lo justo para que la foto no compita con el logo ni el menú */
-    linear-gradient(rgba(4,7,14,.20), rgba(4,7,14,.20)),
+    linear-gradient(rgba(4,7,14,.26), rgba(4,7,14,.26)),
     linear-gradient(180deg,
       rgba(4,7,14,.55) 0%, rgba(4,7,14,0) 24%, rgba(4,7,14,0) 72%, rgba(4,7,14,.58) 100%);
 }
@@ -231,36 +231,26 @@ img,svg{display:block;max-width:100%}
 }
 .panel__title{
   margin:0 0 .28em;
-  font-size:clamp(40px,5.5vw,104px);
-  font-weight:700;letter-spacing:-.025em;line-height:1.02;
-  color:#fff;
-  text-shadow:
-    0 0 3px rgba(2,4,9,.92),
-    0 0 3px rgba(2,4,9,.92),
-    0 0 9px rgba(2,4,9,.78),
-    0 3px 20px rgba(2,4,9,.72),
-    0 6px 42px rgba(2,4,9,.55);
+  font-size:clamp(38px,5.5vw,104px);
+  font-weight:700;letter-spacing:normal;line-height:1;
+  color:var(--fg);
+  text-shadow:0 0 5px rgba(2,4,9,.55), 0 2px 26px rgba(2,4,9,.5);
 }
 .panel__lead{
   margin:0 auto 1.9em;
   max-width:700px;
-  font-size:clamp(15px,1.34vw,18px);
-  font-weight:500;line-height:1.95;
-  color:rgba(255,255,255,.93);
-  text-shadow:
-    0 0 2px rgba(2,4,9,.96),
-    0 0 2px rgba(2,4,9,.96),
-    0 0 5px rgba(2,4,9,.9),
-    0 0 11px rgba(2,4,9,.8),
-    0 2px 16px rgba(2,4,9,.7);
+  font-size:clamp(15px,1.49vw,19px);
+  font-weight:600;line-height:1.8;
+  color:var(--fg);
+  text-shadow:0 0 5px rgba(2,4,9,.6), 0 1px 16px rgba(2,4,9,.5);
 }
 
 /* Pill — blanco hueso con texto oscuro, igual que el original */
 .pill{
   display:inline-block;
-  padding:14px 30px;border-radius:999px;
+  height:56px;line-height:56px;padding:0 26px;border-radius:50px;
   background:var(--pill);color:var(--pill-fg);
-  font-size:clamp(15px,1.3vw,17px);font-weight:600;letter-spacing:-.01em;
+  font-size:clamp(15px,1.41vw,18px);font-weight:700;letter-spacing:normal;
   transition:background .3s ease,color .3s ease,transform .3s var(--ease);
 }
 .pill:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
