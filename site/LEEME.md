@@ -446,3 +446,27 @@ queda menos tapada que antes, no más.
 
 El `.80` del centro del radial es el valor mínimo que cumple AA sin tocar la imagen. Si
 se cambian las fotos conviene volver a medir antes de bajarlo.
+
+### El desenfoque detrás del texto
+
+El velo radial arregló los números pero seguía sin notarse a simple vista: subía el
+contraste sin cambiar la *sensación*. El paso que sí se ve es desenfocar el fondo.
+
+`.panel__body::before` lleva `backdrop-filter: blur(16px) saturate(.88) brightness(.78)`
+con una **máscara radial que se desvanece a transparente**. Al no tener borde duro, no
+hay recuadro que ocupe lugar: el efecto sigue a las letras y se corta solo.
+
+La idea es que el texto no se separa solo por ser más claro, sino porque lo que tiene
+detrás pierde el foco. Las letras quedan como lo único nítido del cuadro, que es como
+lo resuelven los vidrios de iOS.
+
+Medido sobre el render real del hero, escondiendo el texto para medir solo el fondo:
+
+| | peor píxel | promedio |
+|---|---|---|
+| velo plano original | 1,66:1 | 4,44:1 |
+| velo radial | 5,41:1 | 12,01:1 |
+| velo radial + desenfoque | **7,56:1** | **13,28:1** |
+
+Si el navegador no soporta `backdrop-filter`, un `@supports not` apaga la capa: el velo
+radial de abajo ya deja el contraste en regla, así que no hace falta reemplazo.

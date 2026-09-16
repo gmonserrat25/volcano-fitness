@@ -266,6 +266,32 @@ img,svg{display:block;max-width:100%}
   /* Sin fondo ni recuadro: el contraste lo dan las propias letras (ver más abajo) */
   will-change:transform;
 }
+/* El texto no se separa del fondo solo por ser más claro, sino porque lo que
+   tiene detrás pierde el foco. Las letras quedan como lo único nítido del
+   cuadro. La máscara radial hace que el efecto se desvanezca a la nada, así
+   que no hay borde ni recuadro que ocupe lugar: sigue a las letras y se corta.
+   Detrás de esto está la misma idea de los vidrios de iOS. */
+.panel__body::before{
+  content:"";
+  position:absolute;
+  inset:-14% -10%;
+  z-index:-1;
+  pointer-events:none;
+  backdrop-filter:blur(16px) saturate(.88) brightness(.78);
+  -webkit-backdrop-filter:blur(16px) saturate(.88) brightness(.78);
+  -webkit-mask-image:radial-gradient(64% 56% at 50% 50%,
+    #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.34) 70%,
+    rgba(0,0,0,.10) 84%, transparent 100%);
+  mask-image:radial-gradient(64% 56% at 50% 50%,
+    #000 0%, #000 34%, rgba(0,0,0,.72) 54%, rgba(0,0,0,.34) 70%,
+    rgba(0,0,0,.10) 84%, transparent 100%);
+}
+/* Si el navegador no sabe desenfocar el fondo, el velo radial de abajo ya
+   deja el contraste en regla: no hace falta ningún reemplazo. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .panel__body::before{display:none}
+}
+
 .panel__title{
   margin:0 0 .28em;
   font-size:clamp(38px,5.5vw,104px);
