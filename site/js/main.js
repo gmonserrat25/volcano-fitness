@@ -12,14 +12,30 @@
     var texto = titulo.textContent;
     titulo.setAttribute('aria-label', texto);
     titulo.textContent = '';
-    for (var k = 0; k < texto.length; k++) {
-      var ch = texto[k];
-      var sp = document.createElement('span');
-      sp.setAttribute('aria-hidden', 'true');
-      if (ch === ' ') { sp.className = 'letra letra--hueco'; sp.innerHTML = '&nbsp;'; }
-      else { sp.className = 'letra'; sp.textContent = ch; }
-      titulo.appendChild(sp);
-    }
+    // Las letras van agrupadas por palabra. Si se cuelgan sueltas del título,
+    // el navegador corta el renglón entre dos de ellas —son inline-block— y
+    // parte la palabra al medio. Se notó al pasar los títulos a mayúscula,
+    // que ocupan más ancho: en el celular quedaba "EMPEZÁ DO / NDE ESTÉS".
+    var palabras = texto.split(' ');
+    palabras.forEach(function (palabra, i) {
+      var cont = document.createElement('span');
+      cont.className = 'palabra';
+      cont.setAttribute('aria-hidden', 'true');
+      for (var k = 0; k < palabra.length; k++) {
+        var sp = document.createElement('span');
+        sp.className = 'letra';
+        sp.textContent = palabra[k];
+        cont.appendChild(sp);
+      }
+      titulo.appendChild(cont);
+      if (i < palabras.length - 1) {
+        var hueco = document.createElement('span');
+        hueco.className = 'letra letra--hueco';
+        hueco.setAttribute('aria-hidden', 'true');
+        hueco.innerHTML = '&nbsp;';
+        titulo.appendChild(hueco);
+      }
+    });
   }
 
   function repartirTiempos() {

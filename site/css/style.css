@@ -105,6 +105,9 @@ img,svg{display:block;max-width:100%}
 .is-abierto .wipe,.is-abierto .wipe-logo{display:none}
 
 /* El título entra letra por letra, como en el original */
+/* Cada palabra es una caja que no se parte: adentro las letras siguen
+   siendo inline-block para poder animarlas una por una. */
+.palabra{display:inline-block;white-space:nowrap}
 .letra{
   display:inline-block;
   transform:translateY(100%) rotate(20deg);
@@ -318,8 +321,12 @@ img,svg{display:block;max-width:100%}
 
 .panel__title{
   margin:0 0 .28em;
-  font-size:clamp(38px,5.5vw,104px);
-  font-weight:700;letter-spacing:normal;line-height:1;
+  /* En caja alta el mismo cuerpo ocupa mucho más ancho, así que baja de 104
+     a 88 px. Y las mayúsculas necesitan aire: sin tracking se apelmazan,
+     porque no hay ascendentes ni descendentes que separen las formas. */
+  font-size:clamp(32px,4.7vw,88px);
+  font-weight:700;letter-spacing:.012em;line-height:1.04;
+  text-transform:uppercase;
   color:var(--fg);
   /* Sombra corta y de bajo contraste: define el filo de la letra sin
      rodearla de un halo gris, que es lo que la ensuciaba. */
@@ -506,8 +513,9 @@ img,svg{display:block;max-width:100%}
 .cabecera{margin-bottom:clamp(30px,4.5vw,56px)}
 .cabecera__titulo{
   margin:.28em 0 .3em;
-  font-size:clamp(36px,5.4vw,80px);
-  font-weight:700;letter-spacing:-.025em;line-height:1.02;
+  font-size:clamp(34px,5vw,74px);
+  font-weight:700;line-height:1.04;
+  letter-spacing:.012em;text-transform:uppercase;
   color:#fff;text-wrap:balance;
 }
 .cabecera__bajada{
@@ -614,8 +622,9 @@ img,svg{display:block;max-width:100%}
 .cabecera{margin-bottom:clamp(30px,4.5vw,56px)}
 .cabecera__titulo{
   margin:.28em 0 .3em;
-  font-size:clamp(36px,5.4vw,80px);
-  font-weight:700;letter-spacing:-.025em;line-height:1.02;
+  font-size:clamp(34px,5vw,74px);
+  font-weight:700;line-height:1.04;
+  letter-spacing:.012em;text-transform:uppercase;
   color:#fff;text-wrap:balance;
 }
 .cabecera__bajada{

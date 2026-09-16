@@ -497,3 +497,38 @@ El color es `--accent-txt: #4C8DEC`, no `--accent`. A 11 px el `--accent` (#347B
 queda en 4,27:1 sobre el fondo velado y AA pide 4,5:1 para texto chico; el levantado
 llega a 5,3:1. Es el mismo azul, un escalón más claro, que es lo normal para texto
 chico sobre oscuro.
+
+## Títulos en mayúscula
+
+`.panel__title` y `.cabecera__titulo` van en caja alta. Dos ajustes que no son opcionales:
+
+- **El cuerpo baja** de 104 a 88 px. En mayúsculas el mismo tamaño ocupa mucho más ancho.
+- **Entra tracking positivo** (`.012em`). Las mayúsculas se apelmazan sin aire, porque no
+  hay ascendentes ni descendentes que separen las formas.
+
+Los acentos se mantienen: `text-transform:uppercase` respeta EMPEZÁ y ESTÉS, que es lo
+correcto en español.
+
+De paso apareció que `.cabecera__titulo` estaba **declarado dos veces**, y la segunda
+copia pisaba a la primera. Si se edita una sola, el cambio no llega. Quedaron unificadas.
+
+### Las letras se agrupan por palabra
+
+El título del hero se parte en un `<span>` por letra para escalonar la animación. Si esos
+spans cuelgan sueltos del título, **el navegador corta el renglón entre dos letras** —son
+`inline-block`— y parte la palabra al medio. Se vio al pasar a mayúsculas, que ocupan más:
+quedaba "EMPEZÁ DO / NDE ESTÉS".
+
+Ahora cada palabra va dentro de un `.palabra` con `white-space:nowrap`, y las letras viven
+adentro. La animación no cambia: `repartirTiempos()` sigue tomando todos los `.letra` en
+orden.
+
+## Ojo al medir en el celular
+
+**Chrome headless tiene un ancho mínimo de ventana.** Con `--window-size=390,844` la página
+se maqueta a **500 px** y recién después recorta la imagen a 390. El resultado parece
+cortado y corrido, y no lo está.
+
+Para mirar de verdad un ancho de celular hay que usar un `<iframe width="390">` dentro de
+una página normal: ahí `innerWidth` da 390 y las media queries responden bien. Se perdió
+un buen rato persiguiendo un bug de maquetación que era del instrumento.
