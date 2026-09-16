@@ -532,3 +532,12 @@ cortado y corrido, y no lo está.
 Para mirar de verdad un ancho de celular hay que usar un `<iframe width="390">` dentro de
 una página normal: ahí `innerWidth` da 390 y las media queries responden bien. Se perdió
 un buen rato persiguiendo un bug de maquetación que era del instrumento.
+
+## El botón de las tarjetas de Entrenamientos
+
+Pegado a la izquierda quedaba colgando abajo, desprendido del bloque de texto. Ahora va
+centrado en su columna: `display:block` + `width:fit-content` + `margin-inline:auto`.
+
+En el celular tiene que seguir ocupando **todo el ancho**, que es lo que conviene para
+tocar con el pulgar, así que la media query le devuelve `width:auto`. Sin esa línea el
+`fit-content` se colaba también en móvil y el botón se achicaba.

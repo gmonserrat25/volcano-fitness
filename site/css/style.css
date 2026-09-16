@@ -977,6 +977,11 @@ img,svg{display:block;max-width:100%}
   margin:0 0 18px;max-width:52ch;
   font-size:clamp(14px,1.25vw,16px);font-weight:500;line-height:1.7;color:var(--muted);
 }
+/* El botón, centrado en su columna. Pegado a la izquierda quedaba colgando
+   abajo, desprendido del bloque de texto; en el celular ya salía centrado
+   porque ahí es display:block a todo el ancho. */
+.disc__txt .pill{display:block;width:fit-content;margin-inline:auto}
+
 .disc__tags{
   list-style:none;margin:0 0 22px;padding:0;
   display:flex;gap:7px;flex-wrap:wrap;
@@ -1071,7 +1076,9 @@ img,svg{display:block;max-width:100%}
   .tel{width:100%;justify-content:flex-start}
 }
 @media (max-width:520px){
-  .discs .pill{display:block;text-align:center}
+  /* En una sola columna el botón vuelve a ocupar todo el ancho, que es lo
+     que conviene para tocar con el pulgar. */
+  .discs .pill{display:block;width:auto;text-align:center}
 }
 
 /* ═══ Instagram, en la página del gimnasio ═════════════════ */
