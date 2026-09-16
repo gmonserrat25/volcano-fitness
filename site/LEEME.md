@@ -470,3 +470,30 @@ Medido sobre el render real del hero, escondiendo el texto para medir solo el fo
 
 Si el navegador no soporta `backdrop-filter`, un `@supports not` apaga la capa: el velo
 radial de abajo ya deja el contraste en regla, así que no hace falta reemplazo.
+
+## La volanta azul
+
+El velo y el desenfoque arreglaron el contraste donde faltaba, pero **en el hero no
+cambiaban nada visible**, y con razón: el título cae sobre una pared negra, que sin
+ningún velo ya da 5,20:1 de promedio cuando AA pide 3:1 para texto grande. No había
+problema de contraste ahí. Lo que faltaba era presencia.
+
+La volanta (`.panel__vol`) es una línea corta en mayúsculas sobre cada título, con un
+filete adelante, en el azul del logo. Es **lo único con color en toda la pantalla**: el
+contraste deja de depender de la sombra y pasa a darlo el color de marca.
+
+Los textos no son inventados: son los mismos rótulos que ya usaban las páginas internas
+en su `.lbl`, así que la home y las internas hablan igual.
+
+| panel | volanta | viene de |
+|---|---|---|
+| hero | Entrená en La Falda | el `<title>` del sitio |
+| Entrenamientos | Qué hacemos | entrenamientos.html |
+| Entrenadores | Nuestro equipo | profes.html |
+| El gimnasio | Las instalaciones | gym.html |
+| ¿Volcano? | Hablemos | contacto.html |
+
+El color es `--accent-txt: #4C8DEC`, no `--accent`. A 11 px el `--accent` (#347BE4) se
+queda en 4,27:1 sobre el fondo velado y AA pide 4,5:1 para texto chico; el levantado
+llega a 5,3:1. Es el mismo azul, un escalón más claro, que es lo normal para texto
+chico sobre oscuro.

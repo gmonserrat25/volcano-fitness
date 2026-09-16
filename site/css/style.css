@@ -13,6 +13,9 @@
   --brand:     #154DA0;   /* azul exacto del volcán del logo */
   --accent:    #347BE4;   /* mismo tono, aclarado para UI sobre fondo oscuro */
   --accent-dim:#245FBF;
+  /* El mismo azul, levantado para texto chico sobre oscuro: el --accent a
+     11 px se queda en 4,27:1 y AA pide 4,5:1. Este llega a 5,3:1. */
+  --accent-txt:#4C8DEC;
   --pill:      #E8E8E6;   /* pill blanco hueso, igual que el original */
   --pill-fg:   #14202E;
   --line:      rgba(232,232,230,.14);
@@ -290,6 +293,27 @@ img,svg{display:block;max-width:100%}
    deja el contraste en regla: no hace falta ningún reemplazo. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .panel__body::before{display:none}
+}
+
+/* Volanta: lo único con color en toda la pantalla. El contraste deja de
+   depender de la sombra del título y pasa a darlo este azul, que es el del
+   logo. Misma familia que la .lbl de las páginas internas, con un filete
+   adelante para anclarla. */
+.panel__vol{
+  display:flex;align-items:center;justify-content:center;gap:13px;
+  margin:0 0 17px;
+  font-size:clamp(11px,.95vw,13px);font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent-txt);
+  text-shadow:0 1px 3px rgba(2,4,9,.55);
+}
+.panel__vol::before{
+  content:"";flex:none;
+  width:clamp(26px,3vw,44px);height:2px;border-radius:2px;
+  background:currentColor;
+}
+@media (max-width:640px){
+  .panel__vol{gap:10px;margin-bottom:13px}
 }
 
 .panel__title{
