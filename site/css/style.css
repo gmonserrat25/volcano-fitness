@@ -386,7 +386,10 @@ img,svg{display:block;max-width:100%}
   padding:12px 14px;color:var(--fg);font:inherit;font-size:15px;font-weight:500;
 }
 .news input::placeholder{color:var(--muted)}
-.news input:focus{outline:none;border-color:var(--accent)}
+.news input:focus-visible{
+  /* el cambio de borde solo no alcanza como señal de foco: va también un aro */
+  outline:2px solid var(--accent);outline-offset:2px;border-color:var(--accent);
+}
 .news button{
   background:var(--accent);color:#fff;border-radius:8px;
   padding:0 18px;font-size:19px;font-weight:700;
