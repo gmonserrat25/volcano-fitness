@@ -410,3 +410,39 @@ Tres cosas que hay que hacer en el iframe antes de la foto, y que están en el s
   video sale en negro
 - el del área de socios se scrollea 86 px, porque si no la isla del notch cae justo
   encima del cartel de "Demostración" y se come el texto
+
+## El contraste de los textos sobre las fotos
+
+Tres cosas estaban mal planteadas y se cambiaron juntas.
+
+**El velo era plano.** Había un `rgba(4,7,14,.26)` cubriendo la foto entera. Eso apaga
+la imagen completa y a cambio da poquísimo contraste: es el peor canje posible, se
+pierde la foto y igual no se lee. Ahora el velo es un **radial centrado en el bloque de
+texto**: oscurece donde están las letras y llega a **0 % en las esquinas**, así la foto
+conserva sus negros y su color.
+
+**Los degradados tenían dos paradas.** Un `linear-gradient` de dos paradas deja una
+banda visible, porque el ojo no lee la luminancia de forma lineal. Los degradados de
+ahora tienen entre 11 y 16 paradas que aproximan una curva suavizada. Es más verboso y
+es la razón por la que se ve parejo.
+
+**La sombra del texto era un halo.** `0 0 5px` + `0 2px 26px` rodea cada letra de gris y
+la ensucia; a tamaño grande se nota como un manchón. Quedó una sombra corta,
+`0 1px 2px rgba(2,4,9,.42)`, que define el filo del glifo y nada más.
+
+### Los números
+
+El ajuste no se eligió a ojo. Componiendo el velo sobre las siete fotos reales y midiendo
+contraste WCAG contra `--fg` (#E8E8E6), en la banda donde cae cada texto:
+
+| | antes | después |
+|---|---|---|
+| peor píxel bajo el título | 1,51:1 | **4,20:1** |
+| peor píxel bajo la bajada | 1,51:1 | **4,91:1** |
+| velo sobre las esquinas | 26 % | **0 %** |
+
+WCAG AA pide 4,5:1 para texto normal y 3:1 para texto grande. Los dos pasan, y la foto
+queda menos tapada que antes, no más.
+
+El `.80` del centro del radial es el valor mínimo que cumple AA sin tocar la imagen. Si
+se cambian las fotos conviene volver a medir antes de bajarlo.

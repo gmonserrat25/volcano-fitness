@@ -219,13 +219,44 @@ img,svg{display:block;max-width:100%}
   background-color:var(--bg-deep);background-position:center;background-size:cover;background-repeat:no-repeat;
   will-change:transform;
 }
+/* El velo va donde están las letras, no sobre toda la foto.
+   Un radial centrado en el bloque de texto oscurece el centro y se va a cero
+   contra los bordes, así la imagen conserva sus negros y su color.
+   Los tramos son muchos a propósito: un degradado de dos paradas deja una
+   banda visible, porque el ojo no lee la luminancia de forma lineal. */
 .panel__scrim{
   position:absolute;inset:0;z-index:-1;
   background:
-    /* apenas un velo, lo justo para que la foto no compita con el logo ni el menú */
-    linear-gradient(rgba(4,7,14,.26), rgba(4,7,14,.26)),
+    radial-gradient(74% 58% at 50% 50%,
+      rgba(4,7,14,.80) 0%,
+      rgba(4,7,14,.79) 12%,
+      rgba(4,7,14,.75) 24%,
+      rgba(4,7,14,.67) 35%,
+      rgba(4,7,14,.56) 46%,
+      rgba(4,7,14,.43) 57%,
+      rgba(4,7,14,.30) 68%,
+      rgba(4,7,14,.18) 78%,
+      rgba(4,7,14,.09) 88%,
+      rgba(4,7,14,.02) 95%,
+      rgba(4,7,14,0)  100%),
+    /* franjas para que el logo y el pie no queden sobre una zona clara */
     linear-gradient(180deg,
-      rgba(4,7,14,.55) 0%, rgba(4,7,14,0) 24%, rgba(4,7,14,0) 72%, rgba(4,7,14,.58) 100%);
+      rgba(4,7,14,.62) 0%,
+      rgba(4,7,14,.58) 3%,
+      rgba(4,7,14,.48) 7%,
+      rgba(4,7,14,.35) 11%,
+      rgba(4,7,14,.22) 15%,
+      rgba(4,7,14,.11) 19%,
+      rgba(4,7,14,.04) 23%,
+      rgba(4,7,14,0)  27%,
+      rgba(4,7,14,0)  73%,
+      rgba(4,7,14,.04) 77%,
+      rgba(4,7,14,.11) 81%,
+      rgba(4,7,14,.22) 85%,
+      rgba(4,7,14,.35) 89%,
+      rgba(4,7,14,.48) 93%,
+      rgba(4,7,14,.58) 97%,
+      rgba(4,7,14,.66) 100%);
 }
 .panel__body{
   position:relative;z-index:1;
@@ -240,7 +271,10 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(38px,5.5vw,104px);
   font-weight:700;letter-spacing:normal;line-height:1;
   color:var(--fg);
-  text-shadow:0 0 5px rgba(2,4,9,.55), 0 2px 26px rgba(2,4,9,.5);
+  /* Sombra corta y de bajo contraste: define el filo de la letra sin
+     rodearla de un halo gris, que es lo que la ensuciaba. */
+  text-shadow:0 1px 2px rgba(2,4,9,.42);
+  text-wrap:balance;
 }
 .panel__lead{
   margin:0 auto 1.9em;
@@ -248,7 +282,8 @@ img,svg{display:block;max-width:100%}
   font-size:clamp(15px,1.49vw,19px);
   font-weight:600;line-height:1.8;
   color:var(--fg);
-  text-shadow:0 0 5px rgba(2,4,9,.6), 0 1px 16px rgba(2,4,9,.5);
+  text-shadow:0 1px 2px rgba(2,4,9,.5);
+  text-wrap:pretty;
 }
 
 /* Pill — blanco hueso con texto oscuro, igual que el original */
