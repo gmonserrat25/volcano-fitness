@@ -65,6 +65,20 @@ PLANTILLA = """<!DOCTYPE html>
 
 CONTENIDO = {}
 
+# ── iPhone con el sitio real adentro (un iframe, no una captura) ──
+def _iphone(pagina, etiqueta="Volcano Fitness"):
+    return (
+        '<div class="iphone">\n'
+        '        <div class="iphone__marco">\n'
+        '          <div class="iphone__isla"></div>\n'
+        '          <iframe class="iphone__pantalla" src="{}" title="{} visto desde un celular"\n'
+        '                  loading="lazy" scrolling="yes"></iframe>\n'
+        '        </div>\n'
+        '      </div>'
+    ).format(pagina, etiqueta)
+
+
+
 def _panel(titulo, bajada, foto, pos="center"):
     """Panel a pantalla completa, el mismo componente que usa la home."""
     return (
@@ -157,8 +171,10 @@ CONTENIDO['rutina'] = f"""  <header class="cabecera">
         <h2 class="seccion__tit">La rutina, donde entren&aacute;s</h2>
         <p>No hace falta acordarse de nada: abr&iacute;s y lo primero que ves es el trabajo
         del d&iacute;a, con los kilos de la &uacute;ltima vez al lado de cada ejercicio.</p>
+        <p class="vista-movil__nota">Es la pantalla de verdad, no una foto: tocala y
+        prob&aacute;la.</p>
       </div>
-      {TELEFONO}
+      {_iphone("socios.html?demo=1")}
     </aside>
 
     <aside class="nota">

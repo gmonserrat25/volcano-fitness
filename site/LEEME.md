@@ -90,14 +90,20 @@ esos links.
 
 Abajo hay un bloque con el teléfono y la rutina, que lleva a `rutina.html`.
 
-## El teléfono con la rutina
+## El iPhone de la página "Tu rutina"
 
-`TELEFONO`, en `paginas.py`, es un teléfono **dibujado con CSS** (no es una captura ni una
-imagen): marco, barra superior y adentro la rutina del día con los kilos de la última vez.
-Se usa en dos lugares: `entrenamientos.html` y `rutina.html`.
+**No es una captura: es el sitio de verdad.** Dentro del marco hay un `<iframe>` que carga
+`socios.html?demo=1`, así que se puede tocar, tachar ejercicios y reservar clases desde ahí.
 
-Al ser HTML, el contenido se edita como texto y se ve nítido en cualquier pantalla. Si cambia
-la rutina de ejemplo, conviene que coincida con la tabla de `rutina.html`.
+El truco del tamaño: el iframe se dibuja a **390 px de ancho** (un celular real) y después se
+achica con `transform: scale()` para entrar en el marco. Si se le pone el ancho del marco
+directamente, el sitio se renderiza a 278 px y el contenido se desborda.
+
+La escala se calcula sola: `--escala: var(--ancho-marco) / var(--ancho-real)`. Para cambiar el
+tamaño del teléfono alcanza con tocar `--ancho-marco`.
+
+El `?demo=1` hace que el área de socios entre derecho al panel, sin pasar por la pantalla de
+acceso: está en `js/socios.js`.
 
 ## La página El gym
 

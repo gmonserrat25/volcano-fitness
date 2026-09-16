@@ -202,4 +202,9 @@
   pintarGrafico();
   pintarClases();
   if (estado.nombre) { input.value = estado.nombre; }
+
+  /* Con ?demo=1 entra derecho al panel: lo usa el iPhone de la página "Tu rutina" */
+  if (/[?&]demo=1/.test(location.search)) {
+    mostrarPanel(estado.nombre || 'Guada');
+  }
 })();
