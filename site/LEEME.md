@@ -389,3 +389,24 @@ la progresión. Está declarado acá para que nadie lo lea como una escala desde
 Hace falta un backend con usuarios, rutinas y reservas. Los datos de ejemplo están al
 principio de `js/socios.js` (`EJERCICIOS`, `PROGRESO`, `CLASES`): ahí es donde van las
 llamadas a la API cuando exista. **Sacar el cartel de demostración recién cuando eso pase.**
+
+## La lámina de teléfonos
+
+`mockup.html` arma la imagen con los cuatro celulares. No es parte del sitio: es la
+herramienta que la genera. Adentro de cada marco hay un `<iframe>` con la página de
+verdad, así que la lámina nunca queda desactualizada — se vuelve a sacar y listo.
+
+Para regenerarla, con el servidor levantado:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=2 \
+      --window-size=1460,900 --virtual-time-budget=9000 \
+      --screenshot=img/mockup-celular.jpg http://localhost:8899/mockup.html
+
+Tres cosas que hay que hacer en el iframe antes de la foto, y que están en el script:
+
+- ponerle `is-abriendo is-abierto` al body, para saltear la animación de entrada
+- cambiar el `<video>` por su `poster`: Chrome headless no trae el códec H.264 y el
+  video sale en negro
+- el del área de socios se scrollea 86 px, porque si no la isla del notch cae justo
+  encima del cartel de "Demostración" y se come el texto

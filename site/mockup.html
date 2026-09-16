@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Volcano Fitness en el celular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(120% 90% at 50% -10%, #17365f 0%, transparent 60%),
+      linear-gradient(180deg,#0B1220 0%,#060a12 100%);
+    font-family:Poppins,system-ui,sans-serif; color:#E8E8E6;
+    width:1460px; padding:74px 0 66px; }
+  .cab{text-align:center;margin-bottom:54px}
+  .cab h1{font-size:34px;font-weight:700;letter-spacing:-.4px}
+  .cab p{margin-top:10px;color:#93a3bd;font-size:15px}
+  .fila{display:flex;justify-content:center;gap:44px;align-items:flex-start}
+  .tel{width:274px}
+  .marco{
+    --real:390px; --ancho:250px; --k:calc(var(--ancho)/var(--real));
+    position:relative; margin:0 auto;
+    width:calc(var(--ancho) + 24px);
+    height:calc(844px * var(--k) + 24px);
+    padding:12px; border-radius:46px; overflow:hidden;
+    background:linear-gradient(160deg,#3d4756,#10151f 42%,#333c49);
+    box-shadow:0 2px 0 rgba(255,255,255,.12) inset,
+               0 34px 60px -18px rgba(0,0,0,.85),
+               0 0 0 1px rgba(255,255,255,.06); }
+  .isla{position:absolute;top:22px;left:50%;transform:translateX(-50%);
+    width:74px;height:20px;border-radius:12px;background:#05070c;z-index:3}
+  .pant{width:var(--real);height:844px;border:0;display:block;
+    transform:scale(var(--k));transform-origin:0 0;border-radius:34px}
+  .env{width:var(--ancho);height:calc(844px * var(--k));overflow:hidden;border-radius:34px;background:#0B1220}
+  .pie{text-align:center;margin-top:20px}
+  .pie b{display:block;font-size:14px;font-weight:600;letter-spacing:.2px}
+  .pie span{display:block;margin-top:4px;font-size:12px;color:#8494ae;line-height:1.45}
+</style></head><body>
+  <div class="cab">
+    <h1>Volcano Fitness desde el celular</h1>
+    <p>Capturas reales del sitio, no un dibujo.</p>
+  </div>
+  <div class="fila" id="fila"></div>
+<script>
+const TELS = [
+  {src:'index.html',           t:'Al entrar',        d:'Lo primero que se ve al abrir la página'},
+  {src:'index.html',           t:'El menú',          d:'Todas las secciones, a un toque', menu:true},
+  {src:'entrenamientos.html',  t:'Entrenamientos',   d:'Musculación, funcional y personalizado'},
+  {src:'socios.html?demo=1',   t:'Área de socios',   d:'La rutina del día y los kilos de la última vez', scroll:86},
+];
+const fila = document.getElementById('fila');
+TELS.forEach((c,i)=>{
+  fila.insertAdjacentHTML('beforeend',
+    `<div class="tel"><div class="marco"><div class="isla"></div>
+      <div class="env"><iframe class="pant" id="f${i}" src="${c.src}" scrolling="no"></iframe></div>
+     </div><div class="pie"><b>${c.t}</b><span>${c.d}</span></div></div>`);
+});
+window.listo = (async () => {
+  await new Promise(r=>setTimeout(r,2600));
+  for (let i=0;i<TELS.length;i++){
+    const d = document.getElementById('f'+i).contentDocument;
+    if (!d) continue;
+    // saltear la animación de entrada
+    d.body.classList.add('is-abriendo','is-abierto');
+    // el video no decodifica en headless: dejamos el poster, que es lo que se ve al abrir
+    d.querySelectorAll('video').forEach(v=>{
+      const img = d.createElement('img');
+      img.src = v.getAttribute('poster') || 'img/hero-1.jpg';
+      img.className = v.className;
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+      v.replaceWith(img);
+    });
+    d.documentElement.style.scrollbarWidth='none';
+    if (TELS[i].menu) { d.getElementById('burger').click(); }
+    if (TELS[i].scroll) { d.documentElement.scrollTop = d.body.scrollTop = TELS[i].scroll; }
+  }
+  await new Promise(r=>setTimeout(r,1400));
+  document.title = 'LISTO';
+  return true;
+})();
+</script></body></html>
