@@ -10,14 +10,13 @@
       radial-gradient(120% 90% at 50% -10%, #17365f 0%, transparent 60%),
       linear-gradient(180deg,#0B1220 0%,#060a12 100%);
     font-family:Poppins,system-ui,sans-serif; color:#E8E8E6;
-    width:1460px; padding:74px 0 66px; }
-  .cab{text-align:center;margin-bottom:54px}
-  .cab h1{font-size:34px;font-weight:700;letter-spacing:-.4px}
-  .cab p{margin-top:10px;color:#93a3bd;font-size:15px}
+    width:1460px; padding:70px 0 74px; }
+  .cab{text-align:center;margin-bottom:62px}
+  .cab img{width:132px;height:auto;display:inline-block}
   .fila{display:flex;justify-content:center;gap:44px;align-items:flex-start}
-  .tel{width:274px}
+  .tel{width:286px}
   .marco{
-    --real:390px; --ancho:250px; --k:calc(var(--ancho)/var(--real));
+    --real:390px; --ancho:262px; --k:calc(var(--ancho)/var(--real));
     position:relative; margin:0 auto;
     width:calc(var(--ancho) + 24px);
     height:calc(844px * var(--k) + 24px);
@@ -31,14 +30,8 @@
   .pant{width:var(--real);height:844px;border:0;display:block;
     transform:scale(var(--k));transform-origin:0 0;border-radius:34px}
   .env{width:var(--ancho);height:calc(844px * var(--k));overflow:hidden;border-radius:34px;background:#0B1220}
-  .pie{text-align:center;margin-top:20px}
-  .pie b{display:block;font-size:14px;font-weight:600;letter-spacing:.2px}
-  .pie span{display:block;margin-top:4px;font-size:12px;color:#8494ae;line-height:1.45}
 </style></head><body>
-  <div class="cab">
-    <h1>Volcano Fitness desde el celular</h1>
-    <p>Capturas reales del sitio, no un dibujo.</p>
-  </div>
+  <div class="cab"><img src="img/logo.png" alt="Volcano Fitness"></div>
   <div class="fila" id="fila"></div>
 <script>
 const TELS = [
@@ -52,7 +45,7 @@ TELS.forEach((c,i)=>{
   fila.insertAdjacentHTML('beforeend',
     `<div class="tel"><div class="marco"><div class="isla"></div>
       <div class="env"><iframe class="pant" id="f${i}" src="${c.src}" scrolling="no"></iframe></div>
-     </div><div class="pie"><b>${c.t}</b><span>${c.d}</span></div></div>`);
+     </div></div>`);
 });
 window.listo = (async () => {
   await new Promise(r=>setTimeout(r,2600));
