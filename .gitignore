@@ -1,1 +1,5 @@
 .DS_Store
+
+# Carpeta que arma site/armar-preview.py para publicar la home v2:
+# son copias de las fotos y el video, no hace falta versionarlas.
+site/_preview/
