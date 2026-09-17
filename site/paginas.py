@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
 """Genera las paginas internas (rutina.html, profes.html) reusando el
-preloader, el header, el menu y el footer de index.html, para que no se
-desincronicen. El contenido propio de cada pagina vive en CONTENIDO.
+preloader, el header, el menu y el footer de _plantilla-interna.html, para
+que no se desincronicen. El contenido propio de cada pagina vive en CONTENIDO.
 
-Se corre despues de tocar el header/menu/footer de index.html.
+_plantilla-interna.html era la home vieja, la calcada de go180. Se dio de baja
+como home (ahora index.html es la maquetacion del shot de Dribbble) pero se
+conserva porque las paginas internas siguen usando su header, su menu y su pie,
+que son los que combinan con css/style.css. No se sirve: no hay ningun enlace
+que lleve a ella.
+
+Se corre despues de tocar el header/menu/footer de _plantilla-interna.html.
 """
 import re, pathlib
 
 base = pathlib.Path(__file__).parent
-home = (base / 'index.html').read_text(encoding='utf-8')
+PLANTILLA_CHROME = '_plantilla-interna.html'
+home = (base / PLANTILLA_CHROME).read_text(encoding='utf-8')
 
 def bloque(marca, cierre):
     m = re.search(r'(<%s\b.*?</%s>)' % (marca, cierre), home, re.S)
-    if not m: raise SystemExit('no encontré <%s> en index.html' % marca)
+    if not m: raise SystemExit('no encontré <%s> en %s' % (marca, PLANTILLA_CHROME))
     return m.group(1)
 
 m_wipe = re.search(r'(<div class="wipe" id="wipe"></div>\s*<div class="wipe-logo".*?</div>)', home, re.S)
-if not m_wipe: raise SystemExit('no encontré la cortina de entrada en index.html')
+if not m_wipe: raise SystemExit('no encontré la cortina de entrada en ' + PLANTILLA_CHROME)
 preloader = m_wipe.group(1)
 header    = bloque('header', 'header')
 menu      = bloque('nav', 'nav')          # el primero es el menu overlay

@@ -4,193 +4,692 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Entrená en La Falda, musculación, funcional y personalizado | Volcano Fitness</title>
-<meta name="description" content="Con Volcano hacia una vida más sana. Musculación, funcional y entrenamiento personalizado en La Falda, Córdoba. Probá tu primera clase gratis.">
+<title>Gimnasio en La Falda · musculación, funcional y personalizado | Volcano Fitness</title>
+<meta name="description" content="Volcano Fitness, Sarmiento 518, La Falda. Musculación, funcional, entrenamiento personalizado y acondicionamiento. La primera clase es de prueba y no tiene costo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
 
-<!-- ░░ 0 · CORTINA DE ENTRADA ░░
-     Mismo planteo que go180: un cuadrado enorme anclado abajo a la izquierda
-     que rota y barre la pantalla como un abanico. -->
-<div class="wipe" id="wipe"></div>
-<div class="wipe-logo" id="wipeLogo">
-  <img class="logo logo--lg" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
-  <svg class="wipe-anillo" viewBox="0 0 100 100" aria-hidden="true">
-    <circle cx="50" cy="50" r="46"/>
-  </svg>
+<!-- ░░ 1 · BARRA SUPERIOR ░░
+     En la referencia van el mail, el horario y las redes. Acá lo mismo,
+     pero con los datos reales del gimnasio. -->
+<div class="barra">
+  <div class="env barra__in">
+    <span class="barra__dato">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      Sarmiento 518, La Falda
+    </span>
+    <span class="barra__dato barra__dato--horario">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+      Lun a vie 7 a 12 y 14 a 22 h · Sáb 9 a 12 h
+    </span>
+    <span class="barra__redes">
+      <span class="sr">Seguinos en</span>
+      <a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.55 1.55 0 1 1-1.55-1.55A1.55 1.55 0 0 1 18.9 5.2z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@volcano.fitness" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8a4.8 4.8 0 0 1-2.9-1.9V15a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.9a2.7 2.7 0 1 0 1.9 2.6V2h2.9a4.8 4.8 0 0 0 4.7 3.9v2.9a7.7 7.7 0 0 1-1.8-.2z"/></svg>
+      </a>
+      <a href="https://wa.me/5493548592487" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm5.5 12.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+      </a>
+    </span>
+  </div>
 </div>
 
-  <div class="preloader__curtain"></div>
-</div>
+<!-- ░░ 2 · CABECERA ░░ -->
+<header class="cab" id="cab">
+  <div class="env cab__in">
+    <a class="cab__logo" href="#" aria-label="Volcano Fitness — inicio">
+      <!-- El logo trae la palabra "VOLCANO" en blanco: sobre la cabecera clara no
+           se ve, así que se recorta el volcán y la palabra va como texto. -->
+      <span class="marca"><img src="img/logo.png" alt="" width="520" height="396"></span>
+      <b>Volcano<span>Fitness</span></b>
+    </a>
 
-<!-- ░░ 1 · HEADER FIJO (logo izq · hamburguesa der) ░░ -->
-<header class="header" id="header">
-  <a href="#hero" class="header__logo" aria-label="Volcano Fitness — inicio">
-    <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
-  </a>
-  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
-    <span></span><span></span>
-  </button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#" aria-current="page">Inicio</a>
+      <a href="somos.html">Somos</a>
+      <a href="#entrenamientos">Entrenamientos</a>
+      <a href="#equipo">Entrenadores</a>
+      <a href="#gimnasio">El gimnasio</a>
+      <a href="#precios">Precios</a>
+      <a href="contacto.html">Contacto</a>
+      <!-- Sólo en el celular: en la cabecera no entra junto a la hamburguesa -->
+      <a class="nav__cta btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">Probá una clase</a>
+    </nav>
+
+    <a class="cab__tel" href="tel:+543548592487">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span>
+      <span>
+        <span>Llamanos</span>
+        <b>3548 59-2487</b>
+      </span>
+    </a>
+
+    <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">Probá una clase</a>
+
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
-<!-- ░░ 2 · MENÚ OVERLAY FULL-SCREEN ░░ -->
-<nav class="menu" id="menu" aria-hidden="true">
-  <ul class="menu__list">
-    <li><a href="somos.html">Somos Volcano</a></li>
-    <li class="has-sub">
-      <a href="entrenamientos.html">Entrenamientos <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
-      <ul class="menu__sub">
-        <li><a href="entrenamientos.html#musculacion">Musculación</a></li>
-        <li><a href="entrenamientos.html#funcional">Funcional</a></li>
-        <li><a href="entrenamientos.html#personalizado">Personalizado</a></li>
-        <li><a href="entrenamientos.html#acondicionamiento">Acondicionamiento</a></li>
-        <li><a href="rutina.html">Tu rutina</a></li>
-      </ul>
-    </li>
-    <li><a href="profes.html">Entrenadores</a></li>
-    <li><a href="gym.html">El gimnasio</a></li>
-    <li><a href="precios.html">Precios</a></li>
-    <li><a href="socios.html">Área de socios</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
-  <a class="menu__cta pill pill--sm" href="socios.html">Entrar al área de socios</a>
-</nav>
+<main>
 
-<!-- ░░ 3 · DOTS DE SECCIÓN (derecha) ░░ -->
-<nav class="dots" id="dots" aria-label="Secciones">
-  <button data-go="hero" aria-label="Inicio"></button>
-  <button data-go="entrenamientos" aria-label="Entrenamientos"></button>
-  <button data-go="profes" aria-label="Entrenadores"></button>
-  <button data-go="gym" aria-label="El gimnasio"></button>
-  <button data-go="contacto" aria-label="Contacto"></button>
-</nav>
+<!-- ░░ 3 · HERO ░░
+     Foto de fondo a pantalla completa, velo oscuro en diagonal, la palabra
+     del medio del título en contorno y las pastillas prev/next a los costados. -->
+<section class="hero" id="hero">
+  <div class="hero__media">
+    <video autoplay muted loop playsinline preload="metadata" poster="img/hero-1.jpg" aria-hidden="true">
+      <source src="video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__velo"></div>
+  <span class="hero__marca" aria-hidden="true">VF</span>
 
-<!-- ░░ 4 · PANELES APILADOS ░░ -->
-<main class="stack">
+  <button class="flecha flecha--izq" type="button" aria-label="Anterior">Prev</button>
+  <button class="flecha flecha--der" type="button" aria-label="Siguiente">Next</button>
 
-  <!-- Panel 1 · Hero (slideshow de fondo) -->
-  <section class="panel panel--hero" id="hero">
-    <div class="panel__media">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-             poster="img/hero-1.jpg" aria-hidden="true">
-        <source src="video/hero.mp4" type="video/mp4">
-      </video>
+  <div class="env hero__in">
+    <span class="volanta volanta--plana" data-sube>Bienvenido a Volcano Fitness</span>
+    <h1 class="hero__titulo" data-sube>Empezá<br><span class="hueca">donde estés</span><br>en La Falda</h1>
+    <p class="hero__bajada" data-sube>Música fuerte, buenas vibras y entrenos que te hacen sudar pero también reír. La primera clase es de prueba y no tiene costo.</p>
+    <div class="hero__acciones" data-sube>
+      <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">Probá una clase</a>
+      <a class="btn btn--linea" style="color:#fff;border-color:rgba(255,255,255,.5)" href="#precios">Ver los planes</a>
     </div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <span class="panel__vol" data-sube>Entrená en La Falda</span>
-      <h1 class="panel__title" data-letras>Empezá donde estés</h1>
-      <p class="panel__lead" data-sube>Música fuerte, buenas vibras y entrenos que te hacen sudar pero también reír.</p>
-      <a class="pill" data-sube href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20empezar%20a%20entrenar%20en%20Volcano." target="_blank" rel="noopener">Empezá hoy</a>
-    </div>
-  </section>
+  </div>
 
-  <!-- Panel 2 · Entrenamientos -->
-  <section class="panel" id="entrenamientos">
-    <div class="panel__media" style="background-image:url('img/entrenamientos.jpg');background-position:center"></div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <span class="panel__vol">Qué hacemos</span>
-      <h2 class="panel__title">Entrenamientos</h2>
-      <p class="panel__lead">Nuestros entrenamientos están pensados para que lleves, y sigas llevando, una vida sana y en forma.</p>
-      <a class="pill" href="entrenamientos.html">Nuestros entrenamientos</a>
-    </div>
-  </section>
+  <svg class="filo filo--abajo" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-b"/></svg>
+</section>
 
-  <!-- Panel 3 · Entrenadores -->
-  <section class="panel" id="profes">
-    <div class="panel__media" style="background-image:url('img/profes.jpg');background-position:center"></div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <span class="panel__vol">Nuestro equipo</span>
-      <h2 class="panel__title">Entrenadores</h2>
-      <p class="panel__lead">Sea cual sea tu objetivo, nuestros entrenadores no solo te ponen en camino: te acompañan durante todo el proceso.</p>
-      <a class="pill" href="profes.html">Conocé al equipo</a>
-    </div>
-  </section>
+<!-- ░░ 4 · TRES TARJETAS QUE PISAN EL HERO ░░
+     Igual que el original: la del medio en negro y levantada. -->
+<section class="destacados">
+  <div class="env">
+    <div class="destacados__grid">
 
-  <!-- Panel 4 · El gimnasio -->
-  <section class="panel" id="gym">
-    <div class="panel__media" style="background-image:url('img/gym.jpg');background-position:center"></div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <span class="panel__vol">Las instalaciones</span>
-      <h2 class="panel__title">El gimnasio</h2>
-      <p class="panel__lead">En La Falda está nuestro gimnasio, con todo lo necesario para inspirarte y motivarte. Podés entrenar por tu cuenta o seguir nuestros programas.</p>
-      <a class="pill" href="gym.html">Conocé las instalaciones</a>
-    </div>
-  </section>
+      <article class="dest" data-sube>
+        <svg class="dest__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 20V10m6 10V4m6 16v-7"/><circle cx="12" cy="4" r="1.6"/></svg>
+        <span class="volanta volanta--plana">Vida más sana</span>
+        <h3>La primera clase es gratis</h3>
+        <p class="dest__txt">Venís, entrenás y ves si te gusta. No pagás nada ni dejás datos de tarjeta para probar.</p>
+        <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20coordinar%20la%20clase%20de%20prueba." target="_blank" rel="noopener">Coordinar la clase</a>
+      </article>
 
-  <!-- Panel 5 · CTA final -->
-  <section class="panel" id="contacto">
-    <div class="panel__media" style="background-image:url('img/contacto.jpg');background-position:center"></div>
-    <div class="panel__scrim"></div>
-    <div class="panel__body">
-      <span class="panel__vol">Hablemos</span>
-      <h2 class="panel__title">¿Volcano?</h2>
-      <p class="panel__lead">¿Qué es lo que te mueve a vos? Escribinos cuando quieras cambiar tu estilo de vida de una manera activa y saludable.</p>
-      <div class="panel__acciones">
-        <a class="pill" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">Escribinos por WhatsApp</a>
-        <a class="pill pill--ghost" href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </div>
-  </section>
+      <article class="dest dest--oscura" data-sube>
+        <svg class="dest__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M12 13v4m-3 3h6"/><path d="M17 5h2a2 2 0 0 1 0 4h-2M7 5H5a2 2 0 0 0 0 4h2"/></svg>
+        <span class="volanta volanta--plana">Vida más sana</span>
+        <h3>Sin matrícula ni permanencia</h3>
+        <p class="dest__txt">Los planes son mes a mes. Podés cambiar de plan o darte de baja cuando quieras.</p>
+        <a class="btn" href="#precios">Ver los planes</a>
+      </article>
 
-</main>
+      <article class="dest" data-sube>
+        <svg class="dest__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+        <span class="volanta volanta--plana">Vida más sana</span>
+        <h3>Abrimos de 7 a 22</h3>
+        <p class="dest__txt">Lunes a viernes de 7 a 12 y de 14 a 22 h. Sábados de 9 a 12 h. Entrenás cuando te queda cómodo.</p>
+        <a class="btn" href="contacto.html">Ver horarios</a>
+      </article>
 
-<!-- ░░ 5 · RESEÑAS ░░ -->
-<section class="reviews">
-  <h2 class="reviews__title">Lo que dicen nuestros socios</h2>
-  <div class="reviews__bar">
-    <div class="reviews__score">
-      <span class="reviews__g">Reseñas de Google</span>
-      <strong>[—]</strong>
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <small>([—])</small>
     </div>
-    <a class="reviews__btn" href="#" target="_blank" rel="noopener">Calificanos en Google</a>
   </div>
 </section>
 
-<!-- ░░ 6 · FOOTER ░░ -->
-<footer class="footer">
-  <div class="footer__top">
-    <img class="logo logo--lg" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
-    <div class="footer__news">
-      <h3>¡Sumate!</h3>
-      <p>Suscribite a nuestro newsletter.</p>
-      <form class="news" onsubmit="return false">
-        <input type="email" placeholder="Tu email" aria-label="Tu email" required>
-        <button type="submit" aria-label="Suscribirme">→</button>
-      </form>
+<!-- ░░ 5 · SOBRE NOSOTROS ░░
+     Dos fotos montadas a la izquierda; a la derecha el texto con pestañas. -->
+<section class="nosotros" id="somos">
+  <div class="env nosotros__grid">
+
+    <div class="fotos" data-sube>
+      <div class="fotos__grande"><img src="img/profes.jpg" alt="Un entrenador de Volcano corrigiendo la técnica de una socia" loading="lazy"></div>
+      <div class="fotos__chica"><img src="img/entrenamientos.jpg" alt="Entrenamiento de fuerza en la sala de Volcano" loading="lazy"></div>
+    </div>
+
+    <div class="nosotros__txt" data-sube>
+      <span class="volanta">Más sobre nosotros</span>
+      <h2 class="titulo-sec">Entrená en serio,<br>y que te siga gustando.</h2>
+      <p class="entrada">No creemos en los planes de tres semanas ni en los resultados de un verano. Nos interesa que aprendas a entrenar, que entiendas por qué hacés cada ejercicio y que sigas viniendo cuando se te pase el envión del principio.</p>
+
+      <div class="pest" role="tablist" aria-label="Sobre Volcano">
+        <button role="tab" id="pest-1" aria-controls="pan-1" aria-selected="true">Qué buscamos</button>
+        <button role="tab" id="pest-2" aria-controls="pan-2" aria-selected="false">Cómo trabajamos</button>
+        <button role="tab" id="pest-3" aria-controls="pan-3" aria-selected="false">Dónde estamos</button>
+      </div>
+
+      <div class="panel-pest is-activo" id="pan-1" role="tabpanel" aria-labelledby="pest-1">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c-1-4 1-9 5-11s8-2 10 0c1 2 0 6-3 9s-8 4-12 2z"/><circle cx="13" cy="10" r="2"/><path d="M6 18l-2 3"/></svg>
+        <p>Que entrenar te dure toda la vida. Un plan armado para vos y no uno genérico, progreso medido para que lo veas, y un lugar donde nadie te mira raro.</p>
+      </div>
+      <div class="panel-pest" id="pan-2" role="tabpanel" aria-labelledby="pest-2" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h13"/><circle cx="18.5" cy="12" r="2"/></svg>
+        <p>Entrenadores que corrigen y explican, equipamiento nuevo y sin esperas, y una rutina que se actualiza en el área de socios. Todos los planes incluyen seguimiento.</p>
+      </div>
+      <div class="panel-pest" id="pan-3" role="tabpanel" aria-labelledby="pest-3" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <p>En Sarmiento 518, La Falda, Córdoba. Paredes negras, luz cálida detrás de los racks y ventanales a la calle. Lunes a viernes de 7 a 12 y de 14 a 22 h; sábados de 9 a 12 h.</p>
+      </div>
+
+      <div class="nosotros__pie">
+        <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">Probá una clase</a>
+        <span class="ayuda">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span>
+          <span>
+            <span>¿Dudas?</span>
+            <b>3548 59-2487</b>
+          </span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░ 6 · BANDA OSCURA · ENTRENAMIENTOS + POR QUÉ ░░
+     Los filos de pincel de arriba y abajo son los del diseño original. -->
+<section class="banda" id="entrenamientos">
+  <svg class="filo filo--arriba" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-a"/></svg>
+  <div class="banda__fondo" style="background-image:url('img/gym.jpg')"></div>
+
+  <div class="env banda__in">
+    <div data-sube>
+      <span class="volanta">Lo que hacemos</span>
+      <h2 class="titulo-sec">Cómo se entrena acá</h2>
+      <p style="max-width:52ch;margin-top:16px">Vengas de donde vengas, hay una forma de entrenar para vos. Todas incluyen el seguimiento de un entrenador.</p>
+    </div>
+
+    <div class="entrenos" data-sube>
+      <article class="entreno">
+        <svg class="entreno__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg>
+        <h3>Musculación</h3>
+        <p>Sala completa con jaula, multipower, bancos, mancuernas y peso libre. Entrenás con tu rutina, corregida por tu entrenador.</p>
+        <a class="leer" href="entrenamientos.html#musculacion">Leer más <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+
+      <article class="entreno">
+        <svg class="entreno__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6m0 0-3 6m3-6 3 6M7 11l5-2 5 2"/></svg>
+        <h3>Funcional</h3>
+        <p>Clases en grupo de 45 minutos, con circuitos que cambian todas las semanas. La clase que más se llena.</p>
+        <a class="leer" href="entrenamientos.html#funcional">Leer más <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+
+      <article class="entreno">
+        <svg class="entreno__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8h4m-2-2v4"/></svg>
+        <h3>Personalizado</h3>
+        <p>Uno a uno con tu entrenador. Para arrancar de cero, volver después de una lesión o romper un techo que no se mueve.</p>
+        <a class="leer" href="entrenamientos.html#personalizado">Leer más <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+
+      <article class="entreno">
+        <svg class="entreno__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12a8.5 8.5 0 1 0-17 0"/><path d="M12 12l4-3"/><path d="M3.5 17h17"/></svg>
+        <h3>Acondicionamiento</h3>
+        <p>Cintas y bicicletas frente a los ventanales. Un plan de cardio que se ajusta a tu estado actual y sube con vos.</p>
+        <a class="leer" href="entrenamientos.html#acondicionamiento">Leer más <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+    </div>
+
+    <!-- Por qué Volcano: fotos montadas + acordeón, igual que "Why Choose Us" -->
+    <div class="porque">
+      <div class="porque__fotos" data-sube>
+        <div class="porque__grande"><img src="img/gym.jpg" alt="La sala de Volcano, con los racks bajo la luz cálida" loading="lazy"></div>
+        <div class="porque__chica"><img src="img/profe-ludmi.jpg" alt="Ludmi Porrino, entrenadora de Volcano" loading="lazy"></div>
+        <div class="sello">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+          <span>
+            <b>1ra</b>
+            <span>Clase sin costo</span>
+          </span>
+        </div>
+      </div>
+
+      <div data-sube>
+        <span class="volanta">¿Por qué Volcano?</span>
+        <h2 class="titulo-sec">Lo que más<br>nos preguntan</h2>
+        <p style="max-width:46ch;margin-top:16px">Si buscás algo puntual y no está acá, escribinos por WhatsApp: contestamos en el día.</p>
+
+        <div class="acordeon" id="acordeon">
+          <div class="acor is-abierto">
+            <button class="acor__cab" type="button" aria-expanded="true">
+              ¿Hay que firmar permanencia?
+              <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i>
+            </button>
+            <div class="acor__cuerpo"><div><p>No. Los planes son mes a mes y podés cambiar o dar de baja cuando quieras. Tampoco cobramos matrícula.</p></div></div>
+          </div>
+
+          <div class="acor">
+            <button class="acor__cab" type="button" aria-expanded="false">
+              ¿Qué horarios tienen?
+              <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i>
+            </button>
+            <div class="acor__cuerpo"><div><p>Lunes a viernes de 7 a 12 y de 14 a 22 h. Sábados de 9 a 12 h. Las clases de funcional van con reserva; el resto de la sala es sin turno.</p></div></div>
+          </div>
+
+          <div class="acor">
+            <button class="acor__cab" type="button" aria-expanded="false">
+              ¿Puedo entrenar si nunca pisé un gimnasio?
+              <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i>
+            </button>
+            <div class="acor__cuerpo"><div><p>Sí, es lo más común. Empezás con una evaluación, el entrenador te arma la rutina y te acompaña las primeras semanas hasta que le agarrés la mano.</p></div></div>
+          </div>
+
+          <div class="acor">
+            <button class="acor__cab" type="button" aria-expanded="false">
+              ¿Cómo se paga?
+              <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i>
+            </button>
+            <div class="acor__cuerpo"><div><p>[COMPLETAR: efectivo, transferencia, débito o tarjeta. Aclarar si hay descuento por pago adelantado.]</p></div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="footer__cols">
-    <div><span class="lbl">Dónde estamos</span><p>Sarmiento 518<br>La Falda, Córdoba</p></div>
-    <div><span class="lbl">Horarios</span><p>Lunes a viernes<br>7 a 12 y 14 a 22 h<br>Sábados 9 a 12 h</p></div>
-    <div><span class="lbl">Contacto</span><p><a href="tel:+543548592487">3548 59-2487</a><br><a href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">WhatsApp</a></p></div>
-    <div><span class="lbl">Seguinos</span><p><a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener">Instagram</a><br><a href="https://tiktok.com/@volcano.fitness" target="_blank" rel="noopener">TikTok</a></p></div>
+
+  <svg class="filo filo--abajo" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-b"/></svg>
+</section>
+
+<!-- ░░ 7 · LO QUE INCLUYE TU PLAN ░░ (las tres tarjetas blancas del original) -->
+<section class="incluye">
+  <div class="env">
+    <div class="centro" data-sube>
+      <span class="volanta">En todos los planes</span>
+      <h2 class="titulo-sec">Lo que viene incluido</h2>
+    </div>
+
+    <div class="incluye__grid" data-sube>
+      <article class="inc is-activa">
+        <span class="inc__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M9.5 6h5M9 10h6M9 13.5h4"/></svg></span>
+        <h3>Tu rutina en el área de socios</h3>
+        <p>Entrás con tu usuario y ahí está el trabajo del día: los ejercicios, las series y los kilos de la última vez.</p>
+        <a class="leer" href="socios.html">Ver cómo funciona <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+
+      <article class="inc">
+        <span class="inc__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7.5" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 11l2 2 4-4"/></svg></span>
+        <h3>Seguimiento del entrenador</h3>
+        <p>No te dejan solo frente a la máquina: corrigen la técnica, ajustan las cargas y te acompañan en cada etapa.</p>
+        <a class="leer" href="#equipo">Conocé al equipo <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+
+      <article class="inc">
+        <span class="inc__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg></span>
+        <h3>Sala y cardio sin límite</h3>
+        <p>Musculación, cintas y bicicletas todas las veces que quieras dentro del horario, sin turno y sin esperas.</p>
+        <a class="leer" href="#gimnasio">Ver el gimnasio <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></i></a>
+      </article>
+    </div>
   </div>
-  <div class="footer__legal">
-    <nav><a href="#">Términos y condiciones</a><a href="#">Aviso legal</a><a href="#">Privacidad</a></nav>
-    <small>© <span id="year"></span> Volcano Fitness</small>
+</section>
+
+<!-- ░░ 8 · BANDA DE NÚMEROS ░░ -->
+<section class="cifras">
+  <svg class="filo filo--arriba" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-c"/></svg>
+  <div class="banda__fondo" style="background-image:url('img/entrenamientos.jpg')"></div>
+
+  <div class="env cifras__in">
+    <div class="cifra" data-sube>
+      <span class="cifra__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg></span>
+      <span><b>4</b><span>Formas de entrenar</span></span>
+    </div>
+    <div class="cifra" data-sube>
+      <span class="cifra__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></span>
+      <span><b>7–22</b><span>Horario de sala</span></span>
+    </div>
+    <div class="cifra" data-sube>
+      <span class="cifra__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg></span>
+      <span><b>1ra</b><span>Clase sin costo</span></span>
+    </div>
+    <div class="cifra" data-sube>
+      <span class="cifra__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span><b>0</b><span>Meses de permanencia</span></span>
+    </div>
+  </div>
+
+  <svg class="filo filo--abajo" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-a"/></svg>
+</section>
+
+<!-- ░░ 9 · ENTRENADORES ░░ -->
+<section class="equipo" id="equipo">
+  <div class="env">
+    <div class="centro" data-sube>
+      <span class="volanta">Nuestro equipo</span>
+      <h2 class="titulo-sec">Conocé a los entrenadores</h2>
+    </div>
+
+    <div class="equipo__grid" data-sube>
+      <article class="profe">
+        <div class="profe__foto"><img src="img/profe-ludmi.jpg" alt="Ludmi Porrino" loading="lazy"></div>
+        <h3>Ludmi Porrino</h3>
+        <span>Entrenadora</span>
+        <div class="profe__redes">
+          <a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener" aria-label="Instagram de Ludmi">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.55 1.55 0 1 1-1.55-1.55A1.55 1.55 0 0 1 18.9 5.2z"/></svg>
+          </a>
+          <a href="https://wa.me/5493548592487" target="_blank" rel="noopener" aria-label="WhatsApp del gimnasio">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm5.5 12.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Faltan las fotos y los nombres del resto del equipo -->
+      <article class="profe">
+        <div class="profe__foto profe__foto--vacia"><img src="img/logo.png" alt="" width="520" height="396"></div>
+        <h3>[COMPLETAR: nombre]</h3>
+        <span>[COMPLETAR: especialidad]</span>
+        <div class="profe__redes"><a href="contacto.html" aria-label="Contacto">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 6 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+        </div>
+      </article>
+
+      <article class="profe">
+        <div class="profe__foto profe__foto--vacia"><img src="img/logo.png" alt="" width="520" height="396"></div>
+        <h3>[COMPLETAR: nombre]</h3>
+        <span>[COMPLETAR: especialidad]</span>
+        <div class="profe__redes"><a href="contacto.html" aria-label="Contacto">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 6 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+        </div>
+      </article>
+
+      <article class="profe">
+        <div class="profe__foto profe__foto--vacia"><img src="img/logo.png" alt="" width="520" height="396"></div>
+        <h3>[COMPLETAR: nombre]</h3>
+        <span>[COMPLETAR: especialidad]</span>
+        <div class="profe__redes"><a href="contacto.html" aria-label="Contacto">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3 6 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ 10 · TESTIMONIOS ░░
+     Foto a sangre por la izquierda y la tarjeta negra montada encima.
+     Los textos son de muestra hasta que estén los reales. -->
+<section class="testi">
+  <div class="testi__grid">
+    <div class="testi__foto" data-sube>
+      <img src="img/contacto.jpg" alt="Socias y entrenadoras en la sala de Volcano" loading="lazy">
+    </div>
+
+    <div class="testi__caja" data-sube>
+      <span class="volanta">Los socios</span>
+      <h2 class="titulo-sec">Lo que dicen<br>los que entrenan acá</h2>
+
+      <div class="testi__cara">
+        <img src="img/profe-ludmi.jpg" alt="" loading="lazy">
+        <i aria-hidden="true">”</i>
+      </div>
+
+      <p class="testi__txt" id="testi-txt">[COMPLETAR: pedirle a tres socios una reseña corta, de dos o tres renglones, contando con qué llegaron y cómo les fue.]</p>
+
+      <div class="estrellas" aria-label="5 de 5">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8z"/></svg>
+      </div>
+
+      <div class="testi__nombres" role="tablist" aria-label="Testimonios">
+        <button role="tab" aria-selected="true" data-cita="[COMPLETAR: reseña del socio 1.]"><b>[Nombre 1]</b><span>Socio</span></button>
+        <button role="tab" aria-selected="false" data-cita="[COMPLETAR: reseña del socio 2.]"><b>[Nombre 2]</b><span>Socia</span></button>
+        <button role="tab" aria-selected="false" data-cita="[COMPLETAR: reseña del socio 3.]"><b>[Nombre 3]</b><span>Socio</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ 11 · PRECIOS ░░ (el del medio, negro y más alto) -->
+<section class="precios" id="precios">
+  <div class="env">
+    <div class="centro" data-sube>
+      <span class="volanta">Planes</span>
+      <h2 class="titulo-sec">Elegí tu plan</h2>
+    </div>
+
+    <div class="precios__grid" data-sube>
+
+      <article class="plan">
+        <span class="plan__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg></span>
+        <h3>Libre</h3>
+        <!-- Cuando esten los valores: <span class="sig">$</span><span class="num">18000</span><span class="per">/mes</span> -->
+        <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
+        <p class="plan__nota">Para quien ya sabe lo que hace y quiere entrenar por su cuenta.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Sala y cardio sin límite</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Tu rutina en el área de socios</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Seguimiento del entrenador</li>
+        </ul>
+        <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20consultar%20por%20el%20plan%20Libre." target="_blank" rel="noopener">Consultar</a>
+      </article>
+
+      <article class="plan plan--destacado">
+        <span class="plan__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6m0 0-3 6m3-6 3 6M7 11l5-2 5 2"/></svg></span>
+        <h3>Full <span class="volanta" style="margin-left:8px;vertical-align:middle">El más elegido</span></h3>
+        <!-- Cuando esten los valores: <span class="sig">$</span><span class="num">18000</span><span class="per">/mes</span> -->
+        <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
+        <p class="plan__nota">Sumás las clases en grupo y el seguimiento completo.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Todo lo del plan Libre</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Clases de funcional</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Evaluación cada 3 meses</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Reserva de clases</li>
+        </ul>
+        <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20consultar%20por%20el%20plan%20Full." target="_blank" rel="noopener">Consultar</a>
+      </article>
+
+      <article class="plan">
+        <span class="plan__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8h4m-2-2v4"/></svg></span>
+        <h3>Personalizado</h3>
+        <!-- Cuando esten los valores: <span class="sig">$</span><span class="num">18000</span><span class="per">/mes</span> -->
+        <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
+        <p class="plan__nota">Uno a uno con tu entrenador, con turnos reservados para vos.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Todo lo del plan Full</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Turnos uno a uno</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Plan ajustado semana a semana</li>
+        </ul>
+        <a class="btn" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20consultar%20por%20el%20plan%20Personalizado." target="_blank" rel="noopener">Consultar</a>
+      </article>
+
+    </div>
+
+    <p class="precios__pie">Sin matrícula y sin permanencia. Los valores están por confirmar: escribinos y te pasamos el precio actualizado.</p>
+  </div>
+</section>
+
+<!-- ░░ 12 · TU RUTINA (el split "GymFit Goal" del original) ░░ -->
+<section class="meta">
+  <div class="env meta__grid">
+    <div data-sube>
+      <span class="volanta">Área de socios</span>
+      <h2 class="titulo-sec">Tu rutina,<br>siempre a mano.</h2>
+
+      <ul class="meta__lista">
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M9.5 6h5"/></svg></span>
+          <div><h3>El trabajo del día</h3><p>Los ejercicios, las series y los kilos que levantaste la última vez.</p></div>
+        </li>
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9m5 9V5m5 13v-7m5 7V7"/></svg></span>
+          <div><h3>Progreso medido</h3><p>Cargás tus kilos al terminar y vas viendo cómo suben mes a mes.</p></div>
+        </li>
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7.5" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 11l2 2 4-4"/></svg></span>
+          <div><h3>La actualiza tu entrenador</h3><p>Cuando la cambia, te llega al toque. No hace falta que la anotes en ningún lado.</p></div>
+        </li>
+      </ul>
+
+      <a class="btn btn--linea" href="socios.html">Ver cómo funciona</a>
+    </div>
+
+    <div class="meta__envase" data-sube>
+      <div class="meta__foto"><img src="img/mockup-celular.jpg" alt="El área de socios de Volcano en el celular" loading="lazy"></div>
+      <div class="meta__circulo">Entrás con tu usuario y ahí está la rutina del día</div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ 13 · EL GIMNASIO ░░ (la grilla de tres del blog, con las fotos del lugar) -->
+<section class="galeria" id="gimnasio">
+  <div class="env">
+    <div class="centro" data-sube>
+      <span class="volanta">El gimnasio</span>
+      <h2 class="titulo-sec">Así es entrenar acá</h2>
+    </div>
+
+    <div class="galeria__grid" data-sube>
+      <article class="tarjeta-foto">
+        <img src="img/hero-1.jpg" alt="Los racks del gimnasio con la luz cálida detrás" loading="lazy">
+        <div class="tarjeta-foto__txt">
+          <div class="tarjeta-foto__meta">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg> Fuerza</span>
+          </div>
+          <h3>Los racks, con la luz cálida detrás</h3>
+          <p>Jaula de sentadillas con barra olímpica, multipower, bancos regulables y mancuernas con su rack.</p>
+        </div>
+      </article>
+
+      <article class="tarjeta-foto">
+        <img src="img/entrenamientos.jpg" alt="Las máquinas y el peso libre de la sala" loading="lazy">
+        <div class="tarjeta-foto__txt">
+          <div class="tarjeta-foto__meta">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9m5 9V5m5 13v-7m5 7V7"/></svg> Máquinas</span>
+          </div>
+          <h3>Cruce de poleas y multiestación</h3>
+          <p>Extensión de cuádriceps, camilla femoral y espejos de pared entera para mirarte la técnica.</p>
+        </div>
+      </article>
+
+      <article class="tarjeta-foto">
+        <img src="img/gym.jpg" alt="Las cintas contra el ventanal" loading="lazy">
+        <div class="tarjeta-foto__txt">
+          <div class="tarjeta-foto__meta">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12a8.5 8.5 0 1 0-17 0"/><path d="M3.5 17h17"/></svg> Cardio</span>
+          </div>
+          <h3>Las cintas, contra el ventanal</h3>
+          <p>Cintas con pantalla y bicicletas fijas frente a los ventanales, con luz natural toda la mañana.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ░░ 14 · FRANJA DE CONTACTO + PIE ░░ -->
+<footer class="pie" id="contacto">
+  <div class="env contacto-fila">
+    <div>
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+      <span>
+        <span>Dónde estamos</span>
+        <b>Sarmiento 518, La Falda</b>
+      </span>
+    </div>
+    <div>
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></span>
+      <span>
+        <span>Horarios</span>
+        <b>Lun a vie 7–12 y 14–22 · Sáb 9–12</b>
+      </span>
+    </div>
+    <div>
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg></span>
+      <span>
+        <span>Teléfono</span>
+        <b><a href="tel:+543548592487">3548 59-2487</a></b>
+      </span>
+    </div>
+  </div>
+
+  <div class="env pie__cols">
+    <div>
+      <img class="logo" src="img/logo.png" alt="Volcano Fitness" width="520" height="396">
+      <p class="pie__sobre">Un gimnasio donde se entrena en serio y se pasa bien. Musculación, funcional, personalizado y acondicionamiento en La Falda, Córdoba.</p>
+      <div class="pie__redes">
+        <a href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.55 1.55 0 1 1-1.55-1.55A1.55 1.55 0 0 1 18.9 5.2z"/></svg>
+        </a>
+        <a href="https://tiktok.com/@volcano.fitness" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8a4.8 4.8 0 0 1-2.9-1.9V15a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v2.9a2.7 2.7 0 1 0 1.9 2.6V2h2.9a4.8 4.8 0 0 0 4.7 3.9v2.9a7.7 7.7 0 0 1-1.8-.2z"/></svg>
+        </a>
+        <a href="https://wa.me/5493548592487" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm5.5 12.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Enlaces</h4>
+      <ul class="pie__links">
+        <li><a href="somos.html">Somos Volcano</a></li>
+        <li><a href="entrenamientos.html">Entrenamientos</a></li>
+        <li><a href="profes.html">Entrenadores</a></li>
+        <li><a href="gym.html">El gimnasio</a></li>
+        <li><a href="precios.html">Precios</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>El lugar</h4>
+      <div class="pie__fotos">
+        <a href="gym.html"><img src="img/gym.jpg" alt="La sala de Volcano" loading="lazy"></a>
+        <a href="gym.html"><img src="img/entrenamientos.jpg" alt="Peso libre" loading="lazy"></a>
+        <a href="gym.html"><img src="img/profes.jpg" alt="Entrenamiento con seguimiento" loading="lazy"></a>
+        <a href="gym.html"><img src="img/hero-1.jpg" alt="Entrenando en la sala" loading="lazy"></a>
+        <a href="gym.html"><img src="img/hero-2.jpg" alt="Trabajo con mancuernas" loading="lazy"></a>
+        <a href="gym.html"><img src="img/contacto.jpg" alt="Las cintas contra el ventanal" loading="lazy"></a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Sumate</h4>
+      <p class="pie__sobre">Dejanos tu mail y te avisamos cuando abrimos horarios nuevos de funcional.</p>
+      <form class="news" onsubmit="return false">
+        <input type="email" placeholder="Tu email" aria-label="Tu email" required>
+        <button class="btn" type="submit">Suscribirme</button>
+      </form>
+      <p class="news__pie" style="font-size:13px;color:var(--texto-osc)">La primera clase es de prueba y no tiene costo.</p>
+    </div>
+  </div>
+
+  <div class="env pie__legal">
+    <nav>
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Aviso legal</a>
+      <a href="#">Privacidad</a>
+    </nav>
+    <small>© <span id="anio"></span> Volcano Fitness · Sarmiento 518, La Falda, Córdoba</small>
   </div>
 </footer>
 
 <!-- ░░ WHATSAPP FLOTANTE ░░ -->
-<a class="wpp" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener"
-   aria-label="Escribinos por WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/>
-    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3.1-.2-.3C4.1 15 3.7 13.5 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8.2-8.3 8.2z"/>
-  </svg>
-  <span class="wpp__txt">Escribinos</span>
+<a class="wpp" href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4C8.7 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm5.5 12.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+  <span>Escribinos</span>
 </a>
 
-<script src="js/main.js"></script>
+<!-- Filos de pincel del diseno original, generados una vez y reusados con <use> -->
+<svg class="sprite-rasgado" viewBox="0 0 1440 60" aria-hidden="true" focusable="false"><defs>
+<symbol id="filo-a" viewBox="0 0 1440 60" preserveAspectRatio="none">
+<path d="M0,0 L1440,0 L1440,24 L1431.4,28.6 L1426.3,18.9 L1414.4,19.1 L1403.4,29.6 L1396.5,18.9 L1384.5,18.3 L1371.7,20.7 L1356.2,21.4 L1340.8,21 L1328.2,22.4 L1314.8,22.8 L1302.5,23.3 L1286,26.5 L1272.1,26.9 L1260,26.1 L1245.1,26.9 L1230.1,34.8 L1223.9,28.2 L1209.2,28.2 L1201.3,29.2 L1185.2,28.9 L1172.9,29.1 L1156.9,28 L1143.5,27.6 L1134.4,26.7 L1118,27.2 L1105.3,27 L1092,24.9 L1077.8,24.6 L1061.7,25.4 L1047.2,25.8 L1033.2,25.5 L1024.4,38 L1019.5,25.5 L1007.8,27.1 L991.2,27.4 L977.9,36.6 L972.4,26.6 L963,26.5 L951.4,26.6 L936.5,27.9 L922.4,32.8 L916,26.5 L904.4,27.9 L894.3,27 L883.1,25.6 L871.6,25 L855.1,25.3 L839.8,22.4 L829.6,22.3 L813.8,22.1 L802.5,21 L792.2,19.8 L778.6,18.5 L769.6,18.4 L762.5,19.6 L749.3,18.7 L740,29 L734.6,18.7 L726.8,17.9 L714,18 L699.7,19.8 L686.3,19.3 L673.5,19.9 L660.7,20.9 L649.6,21.7 L635.7,22.4 L620.8,22.7 L604.8,22.8 L597,22.6 L582.7,34.9 L577.2,24.6 L563.2,22.4 L555.8,23.8 L541.9,24.7 L526,22.6 L513.3,22.5 L505.7,22.6 L498.5,24 L488.7,23.7 L476.1,21.7 L461.9,22.1 L448.9,22.1 L434.9,30.1 L428,22 L416.8,24.2 L400.3,24.9 L385.9,23.9 L370.8,24.6 L361.9,26.1 L350.1,26.6 L339.4,26.7 L326.6,27.1 L316.6,29.3 L307,30.3 L299,30.4 L288.1,30.8 L278,31.3 L268.3,30.1 L260.2,29.5 L245.8,30.2 L233.2,36.5 L227.1,28.9 L217.6,30.1 L201,27.7 L191.3,28.4 L183.5,28.8 L171.8,26.2 L164.8,27.5 L154,25.4 L139.3,24.2 L130,24.7 L114.6,24.6 L104.8,23.4 L92.8,22.6 L77.4,22.1 L70.1,21.3 L62.5,20.9 L53.9,22.4 L37.3,21 L23.3,21.3 L13.3,23.1 L0,21.9 Z"/><path d="M1329.7,33.6 l14.9,-0.3 l-12.5,1.9 Z M1296.8,37.1 l11.7,0.5 l-10.2,2.1 Z M186.4,42.2 l5.5,-1.1 l-4.3,2.1 Z M463.8,35.0 l18.0,0.9 l-10.7,1.9 Z M735.1,33.3 l9.2,-0.3 l-6.2,2.9 Z M595.3,38.0 l8.4,0.5 l-6.5,2.1 Z M762.7,43.5 l17.8,-1.1 l-14.4,3.7 Z M1167.1,44.3 l11.6,1.7 l-7.3,2.4 Z M1437.6,44.1 l7.8,0.9 l-5.0,2.2 Z M139.7,43.1 l13.9,-1.5 l-9.6,3.5 Z M986.7,29.3 l9.2,1.6 l-8.2,3.2 Z M166.2,37.6 l20.9,0.7 l-12.9,2.8 Z M101.6,30.8 l5.8,0.1 l-4.3,2.9 Z M211.0,32.1 l9.3,2.0 l-8.1,3.6 Z M137.2,30.1 l25.0,1.1 l-16.6,2.7 Z M672.4,37.8 l14.0,-1.9 l-11.2,3.0 Z M1215.7,32.1 l14.5,-0.4 l-9.0,3.4 Z M237.7,37.7 l5.3,1.2 l-4.2,3.7 Z M1239.5,39.7 l13.5,0.0 l-12.1,3.0 Z M1158.9,33.4 l24.1,1.1 l-20.2,3.4 Z M584.1,44.2 l23.5,1.1 l-19.2,3.3 Z M584.3,41.3 l6.5,-0.1 l-3.6,2.4 Z M512.1,39.9 l18.1,1.8 l-14.2,2.2 Z M486.5,40.2 l17.0,-0.4 l-15.3,2.9 Z M924.9,40.9 l21.0,-1.9 l-16.1,4.0 Z M1063.9,33.4 l13.4,-1.2 l-9.2,1.7 Z M141.8,33.3 l24.0,0.0 l-21.3,2.9 Z M817.9,45.9 l18.4,-1.7 l-14.0,3.5 Z M1093.3,29.8 l24.5,-0.1 l-14.9,2.0 Z M713.6,39.4 l6.2,-0.3 l-4.6,3.9 Z M860.9,35.2 l11.0,0.2 l-7.1,3.2 Z M1031.9,34.0 l5.3,-1.8 l-3.2,2.2 Z M1086.7,35.6 l23.8,-1.8 l-21.4,3.4 Z M1360.0,30.2 l24.0,-0.1 l-21.4,2.6 Z"/>
+</symbol>
+<symbol id="filo-b" viewBox="0 0 1440 60" preserveAspectRatio="none">
+<path d="M0,0 L1440,0 L1440,24 L1433.4,23.3 L1419.5,22.3 L1408.9,23.3 L1397.1,22.5 L1389.7,22.7 L1382.2,23.4 L1365.5,23.9 L1358.2,21.9 L1348.8,33.2 L1342.1,23.9 L1330.2,23.5 L1314.7,24.1 L1304.3,22.5 L1294.6,23.1 L1277.9,23 L1266.4,22.7 L1250,22.8 L1235.1,24.3 L1224.6,25.2 L1207.6,35.9 L1204.3,24.6 L1194.7,26.1 L1185.5,25.4 L1171.1,27.7 L1163.7,26.4 L1153.2,26.7 L1137,36.6 L1132.3,28.6 L1119.9,28.5 L1110.1,28.6 L1100.8,30.6 L1092.7,30.9 L1079.7,29.2 L1065.7,29 L1056.1,29.5 L1047,29.1 L1036.7,30.1 L1026.1,28.3 L1011.9,28.7 L996.2,27 L989.1,26.2 L975.6,26.7 L961.3,26 L953.2,25.3 L940.1,24.7 L926.1,24.4 L919.1,31.2 L914,23.7 L905.9,21.4 L895.7,22.4 L887,21.7 L878.9,20.2 L871.2,20.7 L857.8,21.2 L848.1,20.4 L832.1,21.1 L822.1,20.8 L812.7,21.3 L796.9,20.1 L781.2,20.6 L767.1,29.8 L760.7,21.6 L748.4,20.9 L739.3,22.3 L722.7,20.7 L713.9,22.9 L703.4,21.1 L687.4,22.4 L676.8,22.7 L662.7,20.9 L652.8,22.1 L642.1,22.5 L632.4,20.7 L617.8,22.4 L608.2,22.2 L593.6,21.3 L583.6,20.5 L574.1,20.2 L564.8,20.6 L557.7,20.3 L549.7,21.3 L535.6,20.9 L525.6,21.1 L514,22.1 L506.4,21.2 L497.8,23 L489,22.5 L479.8,24.6 L463.4,25.8 L449.9,25 L441.4,26.3 L425.5,26.6 L414.1,27 L398.3,37.9 L394,29.3 L380.1,29.3 L365.2,30.2 L349.4,29.3 L333.6,29.3 L318,28.7 L309.3,28.8 L297.3,28.2 L288,39 L284.3,28.9 L267.8,28.5 L260.7,28.4 L246.5,28.2 L230.3,25.4 L214.2,24.3 L197.5,23.9 L180.9,25 L166.9,23 L153.3,23 L139.7,22.5 L132,21.8 L123.6,23.6 L115.6,22.8 L104.7,22.7 L90.1,22.5 L75.2,21.9 L63.1,23 L54.2,23.4 L43.1,21.9 L31.6,22.6 L18.5,23.9 L8,22.6 L0,22.4 Z"/><path d="M1392.7,33.8 l19.7,0.0 l-12.7,3.4 Z M469.6,41.3 l25.3,-0.2 l-19.5,3.8 Z M667.6,33.4 l22.7,-0.7 l-13.6,3.1 Z M990.5,29.3 l21.3,1.5 l-12.2,1.7 Z M64.0,44.4 l18.9,-1.0 l-15.2,2.7 Z M221.0,44.7 l21.3,1.9 l-18.9,3.4 Z M1276.6,29.3 l12.4,-0.3 l-10.5,1.9 Z M1190.2,38.6 l11.8,0.7 l-7.8,1.7 Z M601.7,29.6 l22.4,-1.2 l-15.9,2.0 Z M184.3,35.6 l23.8,-1.9 l-17.4,2.8 Z M1018.1,44.5 l19.0,1.0 l-14.1,4.0 Z M1115.2,45.0 l23.8,1.7 l-17.6,2.1 Z M1088.3,40.8 l8.2,-1.9 l-6.0,2.9 Z M303.2,30.0 l16.3,-1.8 l-12.8,2.9 Z M1376.2,38.6 l11.8,-0.5 l-8.7,2.8 Z M1071.7,41.8 l10.3,1.9 l-7.2,3.9 Z M620.7,34.6 l5.7,0.8 l-3.9,3.3 Z M388.7,39.8 l5.8,-0.9 l-3.6,2.8 Z M1145.9,43.9 l12.1,-1.4 l-10.3,3.4 Z M829.1,44.1 l25.0,0.3 l-21.4,2.7 Z M859.5,41.6 l11.8,-0.3 l-7.7,2.5 Z M84.8,35.9 l6.5,-2.0 l-5.0,3.4 Z M153.2,34.3 l18.2,1.5 l-11.7,2.8 Z M115.7,39.5 l16.9,-1.1 l-11.4,1.8 Z M843.2,35.3 l9.3,0.5 l-7.2,3.2 Z M1058.8,33.4 l13.4,0.9 l-7.6,2.3 Z M709.6,31.5 l10.1,0.4 l-8.1,2.5 Z M894.7,33.5 l18.8,-1.2 l-16.4,1.7 Z M2.2,32.4 l5.0,0.4 l-4.4,2.7 Z M282.2,40.4 l5.9,-1.1 l-4.0,2.0 Z M959.1,35.1 l7.2,0.9 l-5.0,3.5 Z M341.0,40.5 l12.2,-1.2 l-7.7,3.1 Z M1248.3,29.7 l10.4,1.9 l-7.9,2.2 Z M391.3,36.2 l14.0,-0.0 l-8.8,2.2 Z"/>
+</symbol>
+<symbol id="filo-c" viewBox="0 0 1440 60" preserveAspectRatio="none">
+<path d="M0,0 L1440,0 L1440,24 L1438.3,27.2 L1428.3,27.6 L1420.6,27.5 L1404.4,26.2 L1395.4,26.4 L1381.5,28.3 L1369.8,28.2 L1355.2,25.9 L1340.8,25.6 L1328,27 L1311.6,31.9 L1304.8,25.4 L1291,23.9 L1278.8,23.8 L1264.3,22.2 L1247.8,22 L1232.5,20 L1224.1,18.9 L1214,19.1 L1200.2,18.4 L1183.6,18.2 L1175.3,18.9 L1163.2,19.1 L1153.8,17.2 L1145.7,18.4 L1132.4,30.4 L1126,19 L1116.5,30.6 L1110.7,20.2 L1097.6,20.3 L1083.5,20.6 L1074.2,21 L1066.9,22.1 L1055.1,21.9 L1043.2,21.1 L1027.7,23.6 L1016.4,22.7 L1001.1,23.3 L985.1,22.6 L969.2,24.4 L961.2,24.2 L947.9,23.4 L937,30.4 L933.4,23.8 L924.7,23.3 L916.9,23.7 L909.4,23.8 L896.9,23.5 L883.9,24.2 L868.4,23.5 L861.1,23.3 L849.1,23.4 L837.9,23.1 L827.9,24.1 L815.7,23.1 L803.9,25.1 L793.7,25 L777.2,26.7 L768.1,25.8 L754.7,27.9 L744.2,28.2 L728.7,27.4 L718.1,29.9 L708,30.3 L700.1,30.4 L686.3,30 L671.4,30.3 L657.3,30.7 L649.6,40.7 L645.6,30.3 L636.7,30.7 L622.7,28.8 L611.1,38.1 L607.7,27.9 L592.8,27.1 L580.9,28 L573.2,27 L561.9,26.9 L550.2,26.6 L541.8,25.8 L531.8,24.2 L515.3,23.6 L507.5,23.5 L492.9,22.7 L476.9,22.3 L469.3,21.1 L461.7,22.8 L446.1,22.8 L430.7,20.6 L418.1,22.6 L403.2,22 L394.4,27.6 L391.3,21.2 L384.3,22 L373.9,21.5 L365.6,21.7 L351.7,23.7 L341.2,21.4 L331.1,23.1 L319.4,22.5 L305.9,21.2 L289.7,22.7 L277.3,21.1 L269.5,21.6 L252.6,21.1 L235.8,20.3 L226.7,20.3 L211.7,19 L196.9,18.1 L184.6,19.2 L175.2,18.4 L161.5,19.6 L147,19.9 L130.7,19.8 L121.2,19.5 L110.6,19.1 L94.4,20.4 L79.8,22.1 L65.9,21.7 L49.4,24 L40.1,25.5 L23.9,25.5 L7.2,25.6 L0,25.8 Z"/><path d="M496.3,32.3 l9.5,-1.5 l-8.4,3.8 Z M887.3,42.5 l22.1,0.7 l-15.4,2.3 Z M608.6,36.1 l20.9,-1.8 l-15.6,3.9 Z M992.8,37.3 l10.7,-1.9 l-6.6,1.7 Z M600.9,37.8 l12.2,1.5 l-11.0,3.9 Z M903.7,36.5 l22.6,-1.7 l-16.1,4.0 Z M92.7,31.8 l9.8,1.2 l-6.4,2.6 Z M164.4,38.6 l5.2,0.1 l-3.8,2.9 Z M1387.0,34.7 l24.1,0.3 l-16.0,3.2 Z M1167.8,38.1 l23.8,-0.8 l-13.5,1.9 Z M314.9,43.0 l16.0,-1.9 l-11.9,3.1 Z M70.9,44.2 l14.7,-0.9 l-11.6,1.8 Z M915.6,35.7 l12.3,-0.8 l-9.8,3.7 Z M74.9,44.6 l14.7,-0.7 l-8.6,3.3 Z M1228.2,45.1 l12.8,-0.5 l-7.9,1.8 Z M42.9,38.8 l19.2,1.9 l-11.4,3.5 Z M320.8,29.1 l14.0,0.3 l-8.3,3.3 Z M1113.3,41.6 l20.6,0.6 l-18.5,2.5 Z M378.2,43.0 l8.1,-1.0 l-6.5,1.7 Z M184.7,44.4 l7.9,-1.5 l-6.7,2.8 Z M1361.0,38.7 l23.5,1.9 l-18.0,2.9 Z M836.6,29.4 l21.4,0.3 l-16.5,3.0 Z M210.0,32.9 l7.5,-0.9 l-5.4,3.8 Z M1162.0,37.3 l22.3,-0.4 l-19.5,3.1 Z M647.6,32.1 l14.0,1.5 l-10.1,3.5 Z M587.6,35.4 l11.3,-0.4 l-9.5,3.8 Z M51.2,42.0 l10.6,-1.6 l-9.1,2.7 Z M949.7,39.1 l12.7,1.6 l-10.0,3.1 Z M823.3,31.5 l10.5,1.4 l-8.7,2.0 Z M593.7,41.2 l8.1,-0.7 l-6.3,3.9 Z M295.9,45.5 l19.0,1.5 l-16.6,2.0 Z M956.6,33.2 l19.6,1.7 l-17.3,2.9 Z M519.8,44.2 l24.3,-1.1 l-20.6,3.0 Z M1128.2,43.1 l11.7,0.2 l-9.7,3.5 Z"/>
+</symbol>
+</defs></svg>
+
+<script src="js/home.js"></script>
 </body>
 </html>

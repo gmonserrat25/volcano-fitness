@@ -543,16 +543,35 @@ tocar con el pulgar, así que la media query le devuelve `width:auto`. Sin esa l
 `fit-content` se colaba también en móvil y el botón se achicaba.
 
 
-## Maquetación v2 (`site/v2/`) — la del shot de Dribbble
+## La home nueva — la del shot de Dribbble
 
-La home de `site/` sigue siendo la calcada de **go180.nl** (paneles apilados, fondo
-oscuro, cortina de entrada). Aparte de eso, en `site/v2/` hay una **segunda home**
-calcada de otro diseño: el shot *Gym Fitness Studio Website Design* (FITMAS) de
-Sowat Ahshan en Dribbble.
+La home (`index.html`) está calcada del shot *Gym Fitness Studio Website Design*
+(FITMAS) de Sowat Ahshan en Dribbble. **Reemplazó a la home vieja**, la que estaba
+calcada de go180.nl (paneles apilados, fondo oscuro, cortina de entrada).
 
-Se abre en `http://localhost:8000/v2/` con el mismo `servidor.py` de siempre. No pisa
-nada de lo anterior: son archivos propios (`v2/index.html`, `v2/css/estilo.css`,
-`v2/js/main.js`) y las fotos, el video y el logo se toman de `../img/` y `../video/`.
+### Dónde quedó la home vieja
+
+No se borró: pasó a ser **`_plantilla-interna.html`**, y no se sirve —no hay ningún
+enlace que lleve a ella—. Se conserva porque `paginas.py` le saca el preloader, el
+header, el menú y el pie para generar las páginas internas, que siguen usando
+`css/style.css` y por lo tanto siguen teniendo el look viejo.
+
+Dicho de otra forma: **la home es nueva y las páginas internas siguen siendo las de
+antes**. Si en algún momento hay que pasarlas también al estilo nuevo, el trabajo es
+rehacer `paginas.py` contra `css/estilo.css`; por ahora conviven.
+
+El guion arranca con `PLANTILLA_CHROME = '_plantilla-interna.html'`: si algún día se
+quiere mover el header o el pie, se toca ese archivo, no la home.
+
+### Los archivos
+
+| Archivo | Para qué |
+|---|---|
+| `index.html` | La home nueva |
+| `css/estilo.css` | Su hoja de estilos (la vieja, `css/style.css`, sigue para las internas) |
+| `js/home.js` | Su comportamiento (no pisa el `js/main.js` de las internas) |
+| `_plantilla-interna.html` | La home vieja, ahora sólo plantilla de `paginas.py` |
+| `armar-preview.py` | Arma `_preview/`, la home como página suelta para pasarla por link |
 
 ### Qué se mantuvo del original y qué se cambió
 
@@ -581,8 +600,13 @@ Lo que se cambió, para que siga siendo Volcano:
   único cambio de color de fondo: el resto del esquema (blanco, bandas negras, gris
   de las tarjetas) es el del shot.
 - La tipografía sigue siendo **Figtree**, la del resto del sitio.
-- Los textos salen de las páginas que ya existen (`somos`, `entrenamientos`, `gym`,
-  `precios`, `contacto`), no del *lorem ipsum* del shot.
+- Los textos salen de las páginas que ya existen, no del *lorem ipsum* del shot.
+
+### Los dos id que no se pueden tocar
+
+Las páginas internas vuelven a la home con `index.html#hero` (7 veces) y
+`index.html#contacto` (2). Por eso la home lleva `id="hero"` en el `<section>` del
+hero e `id="contacto"` en el `<footer>`. Si se sacan, esos enlaces quedan en la nada.
 
 ### El filo de pincel
 
@@ -592,13 +616,10 @@ frecuencia con cerdas sueltas y motas) y guardados como `<symbol>` al final del
 `index.html`. Cada banda los reusa con `<use href="#filo-a|b|c">`, así el archivo no
 se llena de coordenadas repetidas.
 
-Si alguna vez hay que regenerarlos, el guion está en el historial de git: es un script
-de Python con semilla fija, para que el trazo sea siempre el mismo.
-
 ### El logo en la cabecera clara
 
 `img/logo.png` trae el volcán arriba y la palabra **VOLCANO en blanco** abajo. Sobre la
-cabecera blanca de esta maquetación la palabra desaparece. Por eso en `v2` la cabecera
+cabecera blanca de esta maquetación la palabra desaparece. Por eso la cabecera
 **recorta el volcán** (un `<span class="marca">` con `overflow:hidden`) y escribe
 «Volcano / FITNESS» como texto. En el pie, que es oscuro, se usa el logo entero.
 
