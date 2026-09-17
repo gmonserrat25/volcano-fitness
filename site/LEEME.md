@@ -541,3 +541,74 @@ centrado en su columna: `display:block` + `width:fit-content` + `margin-inline:a
 En el celular tiene que seguir ocupando **todo el ancho**, que es lo que conviene para
 tocar con el pulgar, así que la media query le devuelve `width:auto`. Sin esa línea el
 `fit-content` se colaba también en móvil y el botón se achicaba.
+
+
+## Maquetación v2 (`site/v2/`) — la del shot de Dribbble
+
+La home de `site/` sigue siendo la calcada de **go180.nl** (paneles apilados, fondo
+oscuro, cortina de entrada). Aparte de eso, en `site/v2/` hay una **segunda home**
+calcada de otro diseño: el shot *Gym Fitness Studio Website Design* (FITMAS) de
+Sowat Ahshan en Dribbble.
+
+Se abre en `http://localhost:8000/v2/` con el mismo `servidor.py` de siempre. No pisa
+nada de lo anterior: son archivos propios (`v2/index.html`, `v2/css/estilo.css`,
+`v2/js/main.js`) y las fotos, el video y el logo se toman de `../img/` y `../video/`.
+
+### Qué se mantuvo del original y qué se cambió
+
+La **estructura va sección por sección igual** que el shot:
+
+| # | Sección del shot | Acá |
+|---|---|---|
+| 1 | Topbar + header con teléfono y CTA | Dirección, horarios y redes reales |
+| 2 | Hero con la palabra del medio en contorno | «Empezá / *donde estés* / en La Falda» |
+| 3 | Tres tarjetas, la del medio negra y más alta | Clase gratis · Sin permanencia · Horarios |
+| 4 | About con dos fotos montadas y pestañas | Qué buscamos / Cómo trabajamos / Dónde estamos |
+| 5 | Banda oscura: 4 tarjetas de servicios | Los 4 entrenamientos |
+| 6 | *Why Choose Us*: fotos + sello + acordeón | Las preguntas frecuentes reales |
+| 7 | Tres tarjetas blancas | Lo que incluye cualquier plan |
+| 8 | Banda de números | 4 · 7–22 · 1ra · 0 |
+| 9 | Grilla de entrenadores | Ludmi + los que faltan |
+| 10 | Testimonios: foto sangrada + caja negra | A la espera de las reseñas |
+| 11 | Tres planes, el del medio destacado | Libre / Full / Personalizado |
+| 12 | Split con lista de features | El área de socios |
+| 13 | Grilla de tres del blog | Las fotos del gimnasio |
+| 14 | Franja de contacto + pie con galería | Datos reales de Volcano |
+
+Lo que se cambió, para que siga siendo Volcano:
+
+- **El rojo del original pasa a ser el azul del volcán** (`--acento: #1F62CE`). Es el
+  único cambio de color de fondo: el resto del esquema (blanco, bandas negras, gris
+  de las tarjetas) es el del shot.
+- La tipografía sigue siendo **Figtree**, la del resto del sitio.
+- Los textos salen de las páginas que ya existen (`somos`, `entrenamientos`, `gym`,
+  `precios`, `contacto`), no del *lorem ipsum* del shot.
+
+### El filo de pincel
+
+Las bandas oscuras cortan con una **pincelada irregular**, que es la firma visual del
+diseño. No es una imagen: son tres paths SVG generados una vez (un camino de baja
+frecuencia con cerdas sueltas y motas) y guardados como `<symbol>` al final del
+`index.html`. Cada banda los reusa con `<use href="#filo-a|b|c">`, así el archivo no
+se llena de coordenadas repetidas.
+
+Si alguna vez hay que regenerarlos, el guion está en el historial de git: es un script
+de Python con semilla fija, para que el trazo sea siempre el mismo.
+
+### El logo en la cabecera clara
+
+`img/logo.png` trae el volcán arriba y la palabra **VOLCANO en blanco** abajo. Sobre la
+cabecera blanca de esta maquetación la palabra desaparece. Por eso en `v2` la cabecera
+**recorta el volcán** (un `<span class="marca">` con `overflow:hidden`) y escribe
+«Volcano / FITNESS» como texto. En el pie, que es oscuro, se usa el logo entero.
+
+### Lo que falta completar
+
+Están marcados con `[COMPLETAR]` dentro del HTML:
+
+- **Precios**: los tres planes dicen «A confirmar». Al lado de cada uno quedó un
+  comentario HTML con el marcado del precio real, para reemplazarlo cuando estén.
+- **Entrenadores**: sólo hay foto y nombre de Ludmi Porrino. Las otras tres tarjetas
+  muestran el volcán sobre fondo oscuro en lugar de una foto que no corresponda.
+- **Testimonios**: hacen falta tres reseñas cortas de socios, con nombre.
+- **Forma de pago**: la última pregunta del acordeón.
