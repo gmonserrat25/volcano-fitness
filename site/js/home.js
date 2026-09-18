@@ -99,16 +99,72 @@
     });
   }
 
-  /* ── Flechas del hero: por ahora sólo llevan a la sección siguiente ──
-     El original es un slider; hasta que haya varias fotos de portada,
-     hacen de atajo hacia arriba y hacia abajo. */
-  var flechaIzq = document.querySelector('.flecha--izq');
-  var flechaDer = document.querySelector('.flecha--der');
-  if (flechaIzq) flechaIzq.addEventListener('click', function () { window.scrollTo({ top: 0 }); });
-  if (flechaDer) flechaDer.addEventListener('click', function () {
-    var destino = document.querySelector('.destacados');
-    if (destino) destino.scrollIntoView({ block: 'start' });
-  });
+  /* ── Carrusel del hero ──
+     Las pastillas PREV/NEXT del diseño original cambian la portada. Las
+     diapositivas salen del HTML: para cambiarlas no hace falta tocar esto. */
+  var hero = document.querySelector('.hero');
+  var slides = hero ? [].slice.call(hero.querySelectorAll('.hero__slide')) : [];
+
+  if (hero && slides.length > 1) {
+    var actual = 0;
+    var solo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reloj = null;
+    var ESPERA = 7000;
+
+    function mostrar(i) {
+      actual = (i + slides.length) % slides.length;
+      slides.forEach(function (s, n) {
+        var activa = n === actual;
+        s.classList.toggle('is-activa', activa);
+        // la de atrás no debería quedar leyéndose ni consumiendo CPU
+        s.setAttribute('aria-hidden', activa ? 'false' : 'true');
+        var v = s.querySelector('video');
+        if (!v) return;
+        if (activa) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }
+
+    function arrancar() {
+      if (solo || reloj) return;
+      reloj = setInterval(function () { mostrar(actual + 1); }, ESPERA);
+    }
+    function frenar() {
+      if (!reloj) return;
+      clearInterval(reloj);
+      reloj = null;
+    }
+    function ir(paso) {
+      mostrar(actual + paso);
+      // si la tocás, el automático arranca de cero y no te corta la lectura
+      frenar();
+      arrancar();
+    }
+
+    var izq = hero.querySelector('.flecha--izq');
+    var der = hero.querySelector('.flecha--der');
+    if (izq) izq.addEventListener('click', function () { ir(-1); });
+    if (der) der.addEventListener('click', function () { ir(1); });
+
+    // con el teclado, estando dentro del hero
+    hero.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { ir(-1); }
+      else if (e.key === 'ArrowRight') { ir(1); }
+    });
+
+    // se frena mientras el mouse está encima o hay foco adentro
+    hero.addEventListener('mouseenter', frenar);
+    hero.addEventListener('mouseleave', arrancar);
+    hero.addEventListener('focusin', frenar);
+    hero.addEventListener('focusout', arrancar);
+    // y con la pestaña en segundo plano no tiene sentido que siga girando
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) frenar(); else arrancar();
+    });
+
+    mostrar(0);
+    arrancar();
+  }
 
   /* ── Entradas al scrollear ── */
   var animables = document.querySelectorAll('[data-sube]');

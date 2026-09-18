@@ -658,6 +658,40 @@ cabecera blanca de esta maquetación la palabra desaparece. Por eso la cabecera
 **recorta el volcán** (un `<span class="marca">` con `overflow:hidden`) y escribe
 «Volcano / FITNESS» como texto. En el pie, que es oscuro, se usa el logo entero.
 
+### El carrusel del hero
+
+Las pastillas **PREV / NEXT** son de verdad: cambian la portada. Antes estaban de
+adorno (una subía y la otra bajaba), que era lo único que se podía hacer con una sola
+foto.
+
+Hay tres portadas, y viven en el HTML, dentro de `.hero__media`:
+
+1. El video (`video/hero.mp4`), que es la que estaba.
+2. `img/hero-2.jpg`
+3. `img/gym.jpg`
+
+**Para cambiarlas se tocan ahí y nada más.** El guion no tiene la lista adentro: toma
+los `.hero__slide` que encuentre, así que se pueden agregar o sacar sin tocar el JS.
+Cuando lleguen las fotos del cliente, es cambiar esos tres `src`.
+
+Cómo se comporta:
+
+- Gira sola cada 7 segundos, y **se frena** mientras tenés el mouse encima, mientras
+  hay foco adentro, o si la pestaña pasa a segundo plano.
+- Las flechas dan la vuelta en los dos sentidos, y reinician el reloj para no cortarte
+  la lectura a mitad.
+- Andan también con las flechas del teclado, estando el foco dentro del hero.
+- El video se pausa cuando su diapositiva no está a la vista, para no gastar CPU al
+  pedo.
+- Con `prefers-reduced-motion` no gira sola, pero las flechas siguen andando.
+
+En el celular las flechas están ocultas —igual que en el diseño original— así que ahí
+sólo rota sola.
+
+**Ojo con el velo:** `.hero__velo` es un degradado pensado para que el texto se lea
+sobre la izquierda. Las fotos claras (como `gym.jpg`, con el ventanal) quedan al filo.
+Cuando estén las fotos definitivas hay que rever ese degradado.
+
 ### Lo que falta completar
 
 Están marcados con `[COMPLETAR]` dentro del HTML:
