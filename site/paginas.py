@@ -1,42 +1,64 @@
 #!/usr/bin/env python3
-"""Genera las paginas internas (rutina.html, profes.html) reusando el
-preloader, el header, el menu y el footer de _plantilla-interna.html, para
-que no se desincronicen. El contenido propio de cada pagina vive en CONTENIDO.
+"""Genera las paginas internas reusando la barra, la cabecera y el pie de
+index.html, para que no se desincronicen. El contenido propio de cada pagina
+vive en CONTENIDO.
 
-_plantilla-interna.html era la home vieja, la calcada de go180. Se dio de baja
-como home (ahora index.html es la maquetacion del shot de Dribbble) pero se
-conserva porque las paginas internas siguen usando su header, su menu y su pie,
-que son los que combinan con css/style.css. No se sirve: no hay ningun enlace
-que lleve a ella.
+Desde que la home paso a la maquetacion del shot de Dribbble, estas paginas
+usan las mismas piezas que ella: css/estilo.css, js/home.js, la volanta, los
+botones, las tarjetas, el acordeon y el filo de pincel. La home vieja quedo en
+_plantilla-interna.html y ya no interviene.
 
-Se corre despues de tocar el header/menu/footer de _plantilla-interna.html.
+Se corre despues de tocar la barra, la cabecera o el pie de index.html.
 """
-import re, pathlib
+import pathlib
+import re
+import urllib.parse as _up
 
 base = pathlib.Path(__file__).parent
-PLANTILLA_CHROME = '_plantilla-interna.html'
-home = (base / PLANTILLA_CHROME).read_text(encoding='utf-8')
+home = (base / 'index.html').read_text(encoding='utf-8')
 
-def bloque(marca, cierre):
-    m = re.search(r'(<%s\b.*?</%s>)' % (marca, cierre), home, re.S)
-    if not m: raise SystemExit('no encontré <%s> en %s' % (marca, PLANTILLA_CHROME))
+
+def bloque(patron, que):
+    m = re.search(patron, home, re.S)
+    if not m:
+        raise SystemExit('no encontré %s en index.html' % que)
     return m.group(1)
 
-m_wipe = re.search(r'(<div class="wipe" id="wipe"></div>\s*<div class="wipe-logo".*?</div>)', home, re.S)
-if not m_wipe: raise SystemExit('no encontré la cortina de entrada en ' + PLANTILLA_CHROME)
-preloader = m_wipe.group(1)
-header    = bloque('header', 'header')
-menu      = bloque('nav', 'nav')          # el primero es el menu overlay
-footer    = bloque('footer', 'footer')
-fuentes   = '\n'.join(re.findall(r'<link[^>]+fonts\.(?:googleapis|gstatic)\.com[^>]*>', home))
 
-# en las paginas internas, los anclas de la home tienen que volver a la home
-def a_la_home(html):
-    return re.sub(r'href="#([a-z-]+)"', r'href="index.html#\1"', html)
+barra    = bloque(r'(<div class="barra">.*?\n</div>)', 'la barra de arriba')
+cabecera = bloque(r'(<header class="cab".*?</header>)', 'la cabecera')
+pie      = bloque(r'(<footer class="pie".*?</footer>)', 'el pie')
+wpp      = bloque(r'(<a class="wpp".*?</a>)', 'el botón de WhatsApp')
+sprite   = bloque(r'(<svg class="sprite-rasgado".*?</svg>)', 'el sprite del filo de pincel')
+fuentes  = '\n'.join(re.findall(r'<link[^>]+fonts\.(?:googleapis|gstatic)\.com[^>]*>', home))
 
-menu_i   = a_la_home(menu)
-header_i = a_la_home(header)
-footer_i = a_la_home(footer)
+# El menú de la home apunta a sus propias secciones. Desde una interna, cada
+# entrada tiene que llevar a la página de verdad.
+A_PAGINA = {
+    '#': 'index.html',
+    '#somos': 'somos.html',
+    '#entrenamientos': 'entrenamientos.html',
+    '#equipo': 'profes.html',
+    '#gimnasio': 'gym.html',
+    '#precios': 'precios.html',
+    '#rutina': 'rutina.html',
+    '#contacto': 'contacto.html',
+}
+
+
+def a_paginas(html, actual):
+    """Reescribe los enlaces del chrome y marca en qué página estamos."""
+    html = html.replace(' aria-current="page"', '')
+
+    def cambiar(m):
+        destino = A_PAGINA.get(m.group(1))
+        return 'href="%s"' % destino if destino else m.group(0)
+
+    html = re.sub(r'href="(#[a-z-]*)"', cambiar, html)
+    # La entrada del menú que corresponde a esta página queda marcada
+    html = html.replace('<a href="%s"' % actual, '<a href="%s" aria-current="page"' % actual, 1)
+    return html
+
 
 PLANTILLA = """<!DOCTYPE html>
 <html lang="es-AR">
@@ -49,323 +71,217 @@ PLANTILLA = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {fuentes}
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/estilo.css">
 </head>
-<body class="interior">
+<body>
 
-{preloader}
+{barra}
 
-{header}
+{cabecera}
 
-{menu}
-
-<main class="pagina">
+<main>
 {contenido}
 </main>
 
-{footer}
+{pie}
 
-<script src="js/main.js"></script>
+{wpp}
+
+{sprite}
+
+<script src="js/home.js"></script>
 </body>
 </html>
 """
 
+WA = "5493548592487"
+
+
+def _wa(t):
+    return "https://wa.me/%s?text=%s" % (WA, _up.quote(t))
+
+
+# ── Piezas que se repiten ────────────────────────────────────────────────
+TILDE = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
+         '<path d="m5 12 4.5 4.5L19 7"/></svg>')
+FLECHA = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
+          '<path d="M5 12h13m-5-5 5 5-5 5"/></svg>')
+
+
+def cabecera_pagina(volanta, titulo, bajada, foto, filo='b'):
+    return f"""  <section class="cab-int">
+    <div class="cab-int__foto" style="background-image:url('img/{foto}')"></div>
+    <div class="cab-int__velo"></div>
+    <div class="env cab-int__in">
+      <span class="volanta volanta--plana" data-sube>{volanta}</span>
+      <h1 data-sube>{titulo}</h1>
+      <p class="cab-int__bajada" data-sube>{bajada}</p>
+    </div>
+    <svg class="filo filo--abajo" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-{filo}"/></svg>
+  </section>
+"""
+
+
+def cierre(titulo, texto, cta, href, externo=True, filo='a', encima='blanco'):
+    """`encima` es el color de la sección de arriba: el filo se pinta de ese
+    color, si no queda una costura entre el gris y el blanco del pincel."""
+    tgt = ' target="_blank" rel="noopener"' if externo else ''
+    tono = ' filo--gris' if encima == 'gris' else ''
+    return f"""
+  <section class="cierre">
+    <svg class="filo filo--arriba{tono}" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-{filo}"/></svg>
+    <div class="env cierre__in" data-sube>
+      <h2>{titulo}</h2>
+      <p>{texto}</p>
+      <a class="btn" href="{href}"{tgt}>{cta}</a>
+    </div>
+  </section>
+"""
+
+
+def acordeon(items, claro=True):
+    clase = 'acordeon acordeon--claro' if claro else 'acordeon'
+    filas = []
+    for i, (q, r) in enumerate(items):
+        abierto = ' is-abierto' if i == 0 else ''
+        expand = 'true' if i == 0 else 'false'
+        filas.append(f"""        <div class="acor{abierto}">
+          <button class="acor__cab" type="button" aria-expanded="{expand}">
+            {q}
+            <i>{FLECHA}</i>
+          </button>
+          <div class="acor__cuerpo"><div><p>{r}</p></div></div>
+        </div>""")
+    return '      <div class="%s">\n%s\n      </div>' % (clase, '\n'.join(filas))
+
+
 CONTENIDO = {}
-
-# ── iPhone con el sitio real adentro (un iframe, no una captura) ──
-def _iphone(pagina, etiqueta="Volcano Fitness"):
-    return (
-        '<div class="iphone">\n'
-        '        <div class="iphone__marco">\n'
-        '          <div class="iphone__isla"></div>\n'
-        '          <iframe class="iphone__pantalla" src="{}" title="{} visto desde un celular"\n'
-        '                  loading="lazy" scrolling="yes"></iframe>\n'
-        '        </div>\n'
-        '      </div>'
-    ).format(pagina, etiqueta)
-
-
-
-def _panel(titulo, bajada, foto, pos="center"):
-    """Panel a pantalla completa, el mismo componente que usa la home."""
-    return (
-        '  <section class="panel panel--interior">\n'
-        '    <div class="panel__media" style="background-image:url(\'img/{}\');background-position:{}"></div>\n'
-        '    <div class="panel__scrim"></div>\n'
-        '    <div class="panel__body">\n'
-        '      <h1 class="panel__title" data-letras>{}</h1>\n'
-        '      <p class="panel__lead" data-sube>{}</p>\n'
-        '    </div>\n'
-        '  </section>\n'
-    ).format(foto, pos, titulo, bajada)
-
-
-
-# ── Teléfono dibujado con CSS, con la rutina del día adentro ──
-TELEFONO = """<div class="tel">
-        <div class="tel__marco">
-          <div class="tel__barra"><span></span></div>
-          <div class="tel__cuerpo">
-            <div class="tel__top">
-              <span class="tel__lbl">Hoy &middot; D&iacute;a 2 de 4</span>
-              <h3 class="tel__titulo">Tren inferior</h3>
-            </div>
-            <ul class="tel__lista">
-              <li><span class="tel__ej">Sentadilla con barra</span><b>4 &times; 8</b><em>40 kg</em></li>
-              <li><span class="tel__ej">Prensa 45&deg;</span><b>3 &times; 12</b><em>100 kg</em></li>
-              <li><span class="tel__ej">Peso muerto rumano</span><b>3 &times; 10</b><em>35 kg</em></li>
-              <li><span class="tel__ej">B&uacute;lgaras</span><b>3 &times; 10</b><em>10 kg</em></li>
-              <li class="tel__mas"><span>y 3 ejercicios m&aacute;s</span></li>
-            </ul>
-            <div class="tel__pie">
-              <span class="tel__check">&#10003;</span> Carg&aacute; tus kilos al terminar
-            </div>
-          </div>
-        </div>
-      </div>"""
-
-
-# ─────────────────────────────── Tu rutina ───────────────────────────────
-ejercicios = [
-    ("Sentadilla con barra",        "4", "8",        "90 s", "40 kg"),
-    ("Prensa 45°",                  "3", "12",       "75 s", "100 kg"),
-    ("Peso muerto rumano",          "3", "10",       "90 s", "35 kg"),
-    ("Búlgaras con mancuernas",     "3", "10 x pierna", "60 s", "10 kg"),
-    ("Extensión de cuádriceps",     "3", "15",       "45 s", "30 kg"),
-    ("Camilla femoral",             "3", "12",       "45 s", "25 kg"),
-    ("Elevación de gemelos",        "4", "20",       "40 s", "50 kg"),
-]
-filas = '\n'.join(
-    f"""        <tr>
-          <td class="rt__n">{i}</td>
-          <td class="rt__ej">{n}</td>
-          <td class="rt__num">{s}</td>
-          <td class="rt__num">{r}</td>
-          <td class="rt__num rt__desc">{d}</td>
-          <td class="rt__num rt__peso">{p}</td>
-        </tr>""" for i,(n,s,r,d,p) in enumerate(ejercicios, 1))
-
-CONTENIDO['rutina'] = f"""  <header class="cabecera">
-    <span class="lbl">Tu rutina · Día 2 de 4</span>
-    <h1 class="cabecera__titulo">Tren inferior completo</h1>
-    <p class="cabecera__bajada">Mirá el trabajo del día y empezá. Los kilos que ves
-    al final son los de la última vez que lo hiciste.</p>
-  </header>
-
-  <section class="rutina">
-    <div class="tabla-scroll">
-      <table class="rt">
-        <caption class="visualmente-oculto">Ejercicios del día, con series, repeticiones, descanso y el peso de la última sesión</caption>
-        <thead>
-          <tr>
-            <th scope="col"><span class="visualmente-oculto">Orden</span></th>
-            <th scope="col">Ejercicio</th>
-            <th scope="col">Series</th>
-            <th scope="col">Reps</th>
-            <th scope="col">Descanso</th>
-            <th scope="col">La última vez</th>
-          </tr>
-        </thead>
-        <tbody>
-{filas}
-        </tbody>
-      </table>
-    </div>
-
-    <aside class="vista-movil">
-      <div class="vista-movil__txt">
-        <span class="lbl">As&iacute; se ve en el celular</span>
-        <h2 class="seccion__tit">La rutina, donde entren&aacute;s</h2>
-        <p>No hace falta acordarse de nada: abr&iacute;s y lo primero que ves es el trabajo
-        del d&iacute;a, con los kilos de la &uacute;ltima vez al lado de cada ejercicio.</p>
-        <p class="vista-movil__nota">Es la pantalla de verdad, no una foto: tocala y
-        prob&aacute;la.</p>
-      </div>
-      {_iphone("socios.html?demo=1")}
-    </aside>
-
-    <aside class="nota">
-      <h2>Antes de empezar</h2>
-      <p>Diez minutos de bici o cinta suave y movilidad de cadera. Si algo te molesta,
-      pará y avisale a tu entrenador: se cambia el ejercicio, no se soporta.</p>
-    </aside>
-
-    <div class="cierre">
-      <p class="cierre__aviso">Esta es una rutina de ejemplo, para mostrar cómo se ve.
-      La tuya la arma tu entrenador.</p>
-      <a class="pill" href="index.html#contacto">Pedí la tuya</a>
-    </div>
-  </section>
-"""
-
-# ──────────────────────────────── Los profes ─────────────────────────────
-silueta = """<svg class="silueta" viewBox="0 0 64 64" aria-hidden="true">
-            <circle cx="32" cy="23" r="12"/>
-            <path d="M8 60c0-13.3 10.7-22 24-22s24 8.7 24 22"/>
-          </svg>"""
-
-CONTENIDO['profes'] = f"""  <header class="cabecera">
-    <span class="lbl">Nuestro equipo</span>
-    <h1 class="cabecera__titulo">Entrenadores</h1>
-    <p class="cabecera__bajada">No te dejan solo frente a la máquina: corrigen tu técnica, ajustan las cargas
-    y te acompañan en cada etapa.</p>
-  </header>
-
-  <section class="equipo">
-    <article class="profe">
-      <div class="profe__foto">
-        <img src="img/profe-ludmi.jpg" alt="Ludmi Porrino" width="900" height="1200" loading="lazy">
-      </div>
-      <div class="profe__datos">
-        <h2 class="profe__nombre">Ludmi Porrino</h2>
-      </div>
-    </article>
-
-    <article class="profe profe--vacio">
-      <div class="profe__foto">
-        <div class="profe__ph">
-          {silueta}
-        </div>
-      </div>
-      <div class="profe__datos">
-        <h2 class="profe__nombre">&nbsp;</h2>
-      </div>
-    </article>
-
-    <article class="profe profe--vacio">
-      <div class="profe__foto">
-        <div class="profe__ph">
-          {silueta}
-        </div>
-      </div>
-      <div class="profe__datos">
-        <h2 class="profe__nombre">&nbsp;</h2>
-      </div>
-    </article>
-  </section>
-"""
-
-
-# ──────────────────────────────── El gym ─────────────────────────────────
-fotos = [
-    ("hero-1.jpg",        "Los racks, con la luz cálida detrás", "ancha"),
-    ("gym.jpg",           "Las cintas, contra el ventanal", ""),
-    ("hero-2.jpg",        "Barras y discos", ""),
-    ("entrenamientos.jpg","Las máquinas de tren inferior", ""),
-    ("contacto.jpg",      "La sala, bajo los arcos de luz", ""),
-]
-galeria = '\n'.join(
-    f'      <figure class="shot {c}"><img src="img/{f}" alt="{a}" loading="lazy">'
-    f'<figcaption>{a}</figcaption></figure>' for f,a,c in fotos)
-
-equipo = [
-    ("Fuerza", [
-        "Jaula de sentadillas con barra olímpica y discos",
-        "Multipower (barra guiada)",
-        "Bancos planos y regulables",
-        "Mancuernas con su rack",
-        "Barra de dominadas",
-    ]),
-    ("Máquinas", [
-        "Cruce de poleas y multiestación",
-        "Extensión de cuádriceps",
-        "Camilla femoral",
-    ]),
-    ("Cardio", [
-        "Cintas de correr con pantalla",
-        "Bicicletas fijas",
-    ]),
-    ("La sala", [
-        "Espejos de pared entera",
-        "Pantallas y equipo de música",
-        "Ventanales a la calle, con luz natural",
-    ]),
-]
-listas = '\n'.join(
-    '      <div class="equipo__grupo">\n'
-    f'        <h3 class="equipo__tit">{t}</h3>\n        <ul>\n'
-    + '\n'.join(f'          <li>{x}</li>' for x in items)
-    + '\n        </ul>\n      </div>' for t, items in equipo)
 
 DIRECCION = "Sarmiento 518"
 CIUDAD = "La Falda, Córdoba"
 MAPA_Q = "Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina"
 
-CONTENIDO['gym'] = f"""  <header class="cabecera">
-    <span class="lbl">Las instalaciones</span>
-    <h1 class="cabecera__titulo">El gimnasio</h1>
-    <p class="cabecera__bajada">Paredes negras, luz cálida detrás de los racks y ventanales
-    a la calle. Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno.</p>
-  </header>
+MAPA = f"""      <div class="mapa">
+        <iframe title="Mapa: {DIRECCION}, {CIUDAD}" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q={MAPA_Q}&amp;z=16&amp;output=embed"></iframe>
+      </div>"""
 
-  <section class="galeria">
-{galeria}
+
+# ─────────────────────────────── Somos Volcano ───────────────────────────
+pilares = [
+    ("Tu rutina", "Nadie entrena a ciegas. Tu entrenador te arma el plan según de dónde "
+     "venís y a dónde querés llegar, y lo va corrigiendo. Lo tenés siempre a mano, con los "
+     "kilos de la última vez al lado de cada ejercicio."),
+    ("El acompañamiento", "No te dejamos solo frente a la máquina. Te miramos la técnica, "
+     "ajustamos las cargas y te damos una mano el día que no tenés ganas. Esa es la parte "
+     "que hace la diferencia entre entrenar y sólo ir al gimnasio."),
+    ("El lugar", "Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno. "
+     "Paredes oscuras, luz cálida y música: un lugar al que dan ganas de volver."),
+    ("El ritmo", "La constancia le gana a la intensidad. Preferimos que vengas tres veces "
+     "por semana durante un año antes que cinco veces durante un mes. Por eso medimos el "
+     "progreso: para que lo veas y no aflojes."),
+]
+pilares_html = "\n".join(
+    f"""        <article class="pilar">
+          <span class="pilar__n">{i:02d}</span>
+          <h3>{t}</h3>
+          <p>{d}</p>
+        </article>""" for i, (t, d) in enumerate(pilares, 1))
+
+busca = [
+    "Entrenadores que corrigen y explican",
+    "Un plan armado para vos, no uno genérico",
+    "Progreso medido, para que lo veas",
+    "Equipamiento nuevo y sin esperas",
+    "Un lugar donde nadie te mira raro",
+]
+busca_html = "\n".join(f'          <li>{TILDE}{x}</li>' for x in busca)
+
+faq_somos = [
+    ("¿Sirve si nunca entrené?",
+     "Sí, y es el caso más común. Se arranca con una evaluación para ver de dónde partís, "
+     "y el plan se arma desde ahí. Nadie te va a tirar a la sala a ver cómo te las arreglás."),
+    ("¿Hace falta reservar?",
+     "Para la sala no: venís en el horario que te quede bien. Para las clases de funcional y "
+     "para los turnos uno a uno sí, porque los cupos son limitados."),
+    ("¿Qué llevo la primera vez?",
+     "Ropa cómoda, calzado deportivo, una toalla y agua. Nada más."),
+    ("¿Puedo probar antes de asociarme?",
+     "Sí. La primera clase es de prueba y no tiene costo. Escribinos por WhatsApp y "
+     "arreglamos el día."),
+    ("¿Dónde están y en qué horarios?",
+     "En Sarmiento 518, La Falda. Lunes a viernes de 7 a 12 y de 14 a 22, sábados de 9 a 12."),
+]
+
+CONTENIDO['somos'] = (
+    cabecera_pagina("Quiénes somos", "Somos Volcano",
+                    "Un gimnasio donde se entrena en serio y se pasa bien. Música fuerte, "
+                    "buenas vibras y entrenos que te hacen sudar pero también reír.",
+                    "contacto.jpg")
+    + f"""
+  <section class="sec">
+    <div class="env duo" data-sube>
+      <div class="duo__txt">
+        <span class="volanta">La historia</span>
+        <h2 class="titulo-sec">Cómo empezó</h2>
+        <p>[COMPLETAR: en qué año abrió Volcano, quién lo fundó y por qué. Dos o tres párrafos
+        contando la historia real del gimnasio: de dónde salió la idea, cómo era el primer
+        local y cómo se llegó al de ahora.]</p>
+        <p>Hoy estamos en {DIRECCION}, en La Falda, con equipamiento nuevo y un equipo que
+        conoce a cada uno de los que entrena acá.</p>
+      </div>
+      <div class="duo__foto"><img src="img/contacto.jpg" alt="El equipo de Volcano Fitness" loading="lazy"></div>
+    </div>
   </section>
 
-  <section class="equipo-lista">
-    <h2 class="seccion__tit">Qué vas a encontrar</h2>
-    <div class="equipo__grid">
-{listas}
-    </div>
-    <p class="equipo__nota">Si buscás algo puntual y no lo ves en la lista, preguntanos:
-    el equipamiento se sigue sumando.</p>
-  </section>
-
-  <section class="ig">
-    <div class="ig__txt">
-      <span class="lbl">D&iacute;a a d&iacute;a</span>
-      <h2 class="seccion__tit">Mir&aacute; c&oacute;mo es entrenar ac&aacute;</h2>
-      <p>En Instagram subimos las clases, las rutinas y c&oacute;mo va quedando el lugar.
-      Es la forma m&aacute;s honesta de ver el gimnasio antes de venir.</p>
-      <a class="pill" href="https://instagram.com/volcano_fitnesslafalda"
-         target="_blank" rel="noopener">
-        <svg class="ig__ico" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="2.5" y="2.5" width="19" height="19" rx="5.4"/>
-          <circle cx="12" cy="12" r="4.6"/>
-          <circle class="ig__pto" cx="17.6" cy="6.4" r="1.3"/>
-        </svg>
-        @volcano_fitnesslafalda
-      </a>
-    </div>
-    <div class="ig__tira">
-      <figure style="background-image:url('img/hero-2.jpg')"></figure>
-      <figure style="background-image:url('img/entrenamientos.jpg')"></figure>
-      <figure style="background-image:url('img/gym.jpg')"></figure>
-      <figure style="background-image:url('img/profes.jpg')"></figure>
+  <section class="sec sec--gris">
+    <div class="env duo duo--invertido" data-sube>
+      <div class="duo__txt">
+        <span class="volanta">Qué buscamos</span>
+        <h2 class="titulo-sec">Que entrenar te dure toda la vida</h2>
+        <p>No creemos en los planes de tres semanas ni en los resultados de un verano. Nos
+        interesa que aprendas a entrenar, que entiendas por qué hacés cada ejercicio y que
+        sigas viniendo cuando se te pase el envión del principio.</p>
+        <ul class="lista-check">
+{busca_html}
+        </ul>
+      </div>
+      <div class="duo__foto"><img src="img/profes.jpg" alt="Entrenamiento con seguimiento en Volcano" loading="lazy"></div>
     </div>
   </section>
 
-  <section class="donde">
-    <div class="donde__datos">
-      <h2 class="seccion__tit">Dónde estamos</h2>
-      <p class="donde__dir">{DIRECCION}<br><span>{CIUDAD}</span></p>
-      <dl class="donde__dl">
-        <dt>Horarios</dt><dd>Lunes a viernes, 7 a 12 y 14 a 22 h<br>Sábados, 9 a 12 h</dd>
-        <dt>Teléfono</dt><dd><a href="tel:+543548592487">3548 59-2487</a> · <a href="https://wa.me/5493548592487?text=Hola%21%20Quiero%20probar%20una%20clase%20en%20Volcano." target="_blank" rel="noopener">WhatsApp</a></dd>
-      </dl>
-      <div class="donde__acciones">
-        <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPA_Q}"
-           target="_blank" rel="noopener">Cómo llegar</a>
-        <a class="pill pill--ghost" href="index.html#contacto">Probá una clase</a>
+  <section class="sec">
+    <div class="env">
+      <div class="sec__cab sec__cab--centro" data-sube>
+        <span class="volanta">Cómo trabajamos</span>
+        <h2 class="titulo-sec">Cuatro cosas que no negociamos</h2>
+      </div>
+      <div class="pilares" data-sube>
+{pilares_html}
       </div>
     </div>
-    <div class="donde__mapa">
-      <iframe title="Mapa: {DIRECCION}, {CIUDAD}" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://maps.google.com/maps?q={MAPA_Q}&amp;z=16&amp;output=embed"></iframe>
+  </section>
+
+  <section class="sec sec--gris">
+    <div class="env">
+      <div class="sec__cab sec__cab--centro" data-sube>
+        <span class="volanta">Preguntas</span>
+        <h2 class="titulo-sec">Lo que más nos preguntan</h2>
+      </div>
+      <div data-sube>
+{acordeon(faq_somos)}
+      </div>
     </div>
   </section>
 """
-
-
+    + cierre("La primera clase es de prueba y no tiene costo",
+             "Venís, entrenás y ves si te gusta. No pagás nada ni dejás datos de tarjeta.",
+             "Probá una clase", _wa('Hola! Quiero probar una clase en Volcano.'), encima='gris'))
 
 
 # ─────────────────────────── Entrenamientos ──────────────────────────────
-import urllib.parse as _up
-WA = "5493548592487"
-def _wa(t): return f"https://wa.me/{WA}?text={_up.quote(t)}"
-
-anclas = ["musculacion","funcional","personalizado","acondicionamiento"]
+anclas = ["musculacion", "funcional", "personalizado", "acondicionamiento"]
 
 disciplinas = [
     ("Musculación", "hero-2.jpg",
@@ -393,150 +309,204 @@ disciplinas = [
      "Consultar por acondicionamiento", _wa("Hola! Quiero consultar por acondicionamiento en Volcano.")),
 ]
 
-tarjetas = "\n".join(
-    f"""      <article class="disc" id="{anclas[i]}">
-        <div class="disc__foto"><img src="img/{img}" alt="{nom}" loading="lazy"></div>
+discs = "\n".join(
+    f"""      <article class="disc" id="{anclas[i]}" data-sube>
+        <div class="disc__foto"><img src="img/{img}" alt="{nom} en Volcano Fitness" loading="lazy"></div>
         <div class="disc__txt">
-          <h2 class="disc__nom">{nom}</h2>
-          <p class="disc__desc">{desc}</p>
-          <ul class="disc__tags">{''.join(f'<li>{t}</li>' for t in tags)}</ul>
-          <a class="pill pill--sm" href="{href}" target="_blank" rel="noopener">{cta}</a>
+          <span class="volanta">0{i + 1}</span>
+          <h2>{nom}</h2>
+          <p>{desc}</p>
+          <ul class="tags">{''.join(f'<li>{t}</li>' for t in tags)}</ul>
+          <a class="btn" href="{href}" target="_blank" rel="noopener">{cta}</a>
         </div>
-      </article>""" for i,(nom, img, desc, tags, cta, href) in enumerate(disciplinas))
+      </article>""" for i, (nom, img, desc, tags, cta, href) in enumerate(disciplinas))
 
-CONTENIDO['entrenamientos'] = f"""  <header class="cabecera">
-    <span class="lbl">Qué hacemos</span>
-    <h1 class="cabecera__titulo">Entrenamientos</h1>
-    <p class="cabecera__bajada">Vengas de donde vengas, hay una forma de entrenar para vos.
-    Todas incluyen el seguimiento de un entrenador.</p>
-  </header>
-
-  <section class="discs">
-{tarjetas}
-  </section>
-
-  <section class="destacado">
-    <div class="destacado__txt">
-      <span class="lbl">Incluido en todos los planes</span>
-      <h2 class="seccion__tit">Tu rutina, siempre a mano</h2>
-      <p>Entrás con tu usuario y ahí está el trabajo del día: los ejercicios, las series y
-      los kilos que levantaste la última vez. Tu entrenador la actualiza y te llega al toque.</p>
-      <a class="pill" href="rutina.html">Ver cómo funciona</a>
+CONTENIDO['entrenamientos'] = (
+    cabecera_pagina("Qué hacemos", "Entrenamientos",
+                    "Vengas de donde vengas, hay una forma de entrenar para vos. "
+                    "Todas incluyen el seguimiento de un entrenador.",
+                    "entrenamientos.jpg", filo='c')
+    + f"""
+  <section class="sec">
+    <div class="env discs">
+{discs}
     </div>
-    <div class="destacado__tel">{TELEFONO}</div>
   </section>
 
-  <section class="cierre">
-    <p class="cierre__aviso">¿No sabés por dónde empezar? Escribinos y lo vemos juntos.</p>
-    <a class="pill pill--ghost" href="{_wa('Hola! No sé por dónde empezar, me orientan?')}"
-       target="_blank" rel="noopener">Escribinos</a>
+  <section class="sec sec--gris">
+    <div class="env duo" data-sube>
+      <div class="duo__txt">
+        <span class="volanta">Incluido en todos los planes</span>
+        <h2 class="titulo-sec">Tu rutina, siempre a mano</h2>
+        <p>Entrás con tu usuario y ahí está el trabajo del día: los ejercicios, las series y
+        los kilos que levantaste la última vez. Tu entrenador la actualiza y te llega al toque.</p>
+        <a class="btn" href="rutina.html">Ver cómo funciona</a>
+      </div>
+      <div class="duo__foto"><img src="img/mockup-celular.jpg" alt="El área de socios de Volcano en el celular" loading="lazy"></div>
+    </div>
   </section>
 """
+    + cierre("¿No sabés por dónde empezar?",
+             "Contanos cómo venís entrenando y lo vemos juntos. Sin compromiso.",
+             "Escribinos", _wa('Hola! No sé por dónde empezar, me orientan?'), filo='b', encima='gris'))
 
 
-# ─────────────────────────── Somos Volcano ───────────────────────────────
-pilares = [
-    ("Tu rutina", "Nadie entrena a ciegas. Tu entrenador te arma el plan según de dónde "
-     "venís y a dónde querés llegar, y lo va corrigiendo. Lo tenés siempre a mano, con los "
-     "kilos de la última vez al lado de cada ejercicio."),
-    ("El acompañamiento", "No te dejamos solo frente a la máquina. Te miramos la técnica, "
-     "ajustamos las cargas y te damos una mano el día que no tenés ganas. Esa es la parte "
-     "que hace la diferencia entre entrenar y sólo ir al gimnasio."),
-    ("El lugar", "Equipamiento nuevo y espacio suficiente para entrenar sin esperar turno. "
-     "Paredes oscuras, luz cálida y música: un lugar al que dan ganas de volver."),
-    ("El ritmo", "La constancia le gana a la intensidad. Preferimos que vengas tres veces "
-     "por semana durante un año antes que cinco veces durante un mes. Por eso medimos el "
-     "progreso: para que lo veas y no aflojes."),
-]
-pilares_html = "\n".join(
-    f"""      <article class="pilar">
-        <span class="pilar__n">{i:02d}</span>
-        <h3 class="pilar__tit">{t}</h3>
-        <p>{d}</p>
-      </article>""" for i,(t,d) in enumerate(pilares, 1))
+# ──────────────────────────────── Los profes ─────────────────────────────
+def profe(nombre, rol, foto=None):
+    if foto:
+        marco = f'<div class="profe__foto"><img src="img/{foto}" alt="{nombre}" loading="lazy"></div>'
+    else:
+        marco = ('<div class="profe__foto profe__foto--vacia">'
+                 '<img src="img/logo.png" alt="" width="520" height="396"></div>')
+    return f"""        <article class="profe">
+          {marco}
+          <h3>{nombre}</h3>
+          <span>{rol}</span>
+        </article>"""
 
-faq = [
-    ("¿Sirve si nunca entrené?",
-     "Sí, y es el caso más común. Se arranca con una evaluación para ver de dónde partís, "
-     "y el plan se arma desde ahí. Nadie te va a tirar a la sala a ver cómo te las arreglás."),
-    ("¿Hace falta reservar?",
-     "Para la sala no: venís en el horario que te quede bien. Para las clases de funcional y "
-     "para los turnos uno a uno sí, porque los cupos son limitados."),
-    ("¿Qué llevo la primera vez?",
-     "Ropa cómoda, calzado deportivo, una toalla y agua. Nada más."),
-    ("¿Puedo probar antes de asociarme?",
-     "Sí. La primera clase es de prueba y no tiene costo. Escribinos por WhatsApp y "
-     "arreglamos el día."),
-    ("¿Dónde están y en qué horarios?",
-     "En Sarmiento 518, La Falda. Lunes a viernes de 7 a 12 y de 14 a 22, sábados de 9 a 12."),
-]
-faq_html = "\n".join(
-    f"""      <details class="faq">
-        <summary>{q}</summary>
-        <p>{r}</p>
-      </details>""" for q,r in faq)
 
-CONTENIDO['somos'] = f"""""" + _panel("Somos Volcano", "Un gimnasio donde se entrena en serio y se pasa bien. Música fuerte, buenas vibras y entrenos que te hacen sudar pero también reír.", "contacto.jpg") + """
-  <section class="intro-dos">
-    <div class="intro-dos__txt">
-      <h2 class="seccion__tit">Cómo empezó</h2>
-      <p>[COMPLETAR: en qué año abrió Volcano, quién lo fundó y por qué. Dos o tres párrafos
-      contando la historia real del gimnasio: de dónde salió la idea, cómo era el primer
-      local y cómo se llegó al de ahora.]</p>
-      <p>Hoy estamos en Sarmiento 518, en La Falda, con equipamiento nuevo y un equipo que
-      conoce a cada uno de los que entrena acá.</p>
+equipo_html = "\n".join([
+    profe("Ludmi Porrino", "Entrenadora", "profe-ludmi.jpg"),
+    profe("[COMPLETAR: nombre]", "[COMPLETAR: especialidad]"),
+    profe("[COMPLETAR: nombre]", "[COMPLETAR: especialidad]"),
+    profe("[COMPLETAR: nombre]", "[COMPLETAR: especialidad]"),
+])
+
+CONTENIDO['profes'] = (
+    cabecera_pagina("Nuestro equipo", "Entrenadores",
+                    "No te dejan solo frente a la máquina: corrigen tu técnica, ajustan "
+                    "las cargas y te acompañan en cada etapa.",
+                    "profes.jpg")
+    + f"""
+  <section class="sec">
+    <div class="env">
+      <div class="equipo__grid" data-sube>
+{equipo_html}
+      </div>
     </div>
-    <figure class="intro-dos__foto">
-      <img src="img/contacto.jpg" alt="El equipo de Volcano Fitness" loading="lazy">
-    </figure>
-  </section>
-
-  <section class="mision">
-    <div class="mision__txt">
-      <span class="lbl">Qué buscamos</span>
-      <h2 class="seccion__tit">Que entrenar te dure toda la vida</h2>
-      <p>No creemos en los planes de tres semanas ni en los resultados de un verano. Nos
-      interesa que aprendas a entrenar, que entiendas por qué hacés cada ejercicio y que
-      sigas viniendo cuando se te pase el envión del principio.</p>
-    </div>
-    <ul class="mision__lista">
-      <li>Entrenadores que corrigen y explican</li>
-      <li>Un plan armado para vos, no uno genérico</li>
-      <li>Progreso medido, para que lo veas</li>
-      <li>Equipamiento nuevo y sin esperas</li>
-      <li>Un lugar donde nadie te mira raro</li>
-    </ul>
-  </section>
-
-  <section class="pilares-sec">
-    <div class="cabecera-sec">
-      <span class="lbl">Cómo trabajamos</span>
-      <h2 class="seccion__tit">Cuatro cosas que no negociamos</h2>
-    </div>
-    <div class="pilares">
-{pilares_html}
-    </div>
-  </section>
-
-  <section class="faqs">
-    <div class="cabecera-sec">
-      <span class="lbl">Preguntas</span>
-      <h2 class="seccion__tit">Lo que más nos preguntan</h2>
-    </div>
-    <div class="faqs__lista">
-{faq_html}
-    </div>
-  </section>
-
-  <section class="cierre">
-    <p class="cierre__aviso">La primera clase es de prueba y no tiene costo.</p>
-    <a class="pill" href="{_wa('Hola! Quiero probar una clase en Volcano.')}"
-       target="_blank" rel="noopener">Probá una clase</a>
   </section>
 """
+    + cierre("Entrenás acompañado desde el primer día",
+             "Contanos tu objetivo y te decimos con qué entrenador conviene que arranques.",
+             "Hablar con un entrenador", _wa('Hola! Quiero que me orienten con un entrenador.'),
+             filo='c'))
+
+
+# ──────────────────────────────── El gym ─────────────────────────────────
+fotos = [
+    ("hero-1.jpg", "Los racks, con la luz cálida detrás", "shot--ancha"),
+    ("gym.jpg", "Las cintas, contra el ventanal", ""),
+    ("hero-2.jpg", "Barras y discos", ""),
+    ("entrenamientos.jpg", "Las máquinas de tren inferior", ""),
+    ("contacto.jpg", "La sala, bajo los arcos de luz", ""),
+]
+galeria = '\n'.join(
+    f'        <figure class="shot {c}"><img src="img/{f}" alt="{a}" loading="lazy">'
+    f'<figcaption>{a}</figcaption></figure>' for f, a, c in fotos)
+
+equipamiento = [
+    ("Fuerza", [
+        "Jaula de sentadillas con barra olímpica y discos",
+        "Multipower (barra guiada)",
+        "Bancos planos y regulables",
+        "Mancuernas con su rack",
+        "Barra de dominadas",
+    ]),
+    ("Máquinas", [
+        "Cruce de poleas y multiestación",
+        "Extensión de cuádriceps",
+        "Camilla femoral",
+    ]),
+    ("Cardio", [
+        "Cintas de correr con pantalla",
+        "Bicicletas fijas",
+    ]),
+    ("La sala", [
+        "Espejos de pared entera",
+        "Pantallas y equipo de música",
+        "Ventanales a la calle, con luz natural",
+    ]),
+]
+equipos_html = '\n'.join(
+    '        <div class="equipo-grupo">\n'
+    f'          <h3>{t}</h3>\n          <ul>\n'
+    + '\n'.join(f'            <li>{x}</li>' for x in items)
+    + '\n          </ul>\n        </div>' for t, items in equipamiento)
+
+CONTENIDO['gym'] = (
+    cabecera_pagina("Las instalaciones", "El gimnasio",
+                    "Paredes negras, luz cálida detrás de los racks y ventanales a la "
+                    "calle. Equipamiento nuevo y espacio suficiente para entrenar sin "
+                    "esperar turno.",
+                    "gym.jpg")
+    + f"""
+  <section class="sec">
+    <div class="env">
+      <div class="shots" data-sube>
+{galeria}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--gris">
+    <div class="env">
+      <div class="sec__cab sec__cab--centro" data-sube>
+        <span class="volanta">Equipamiento</span>
+        <h2 class="titulo-sec">Qué vas a encontrar</h2>
+        <p>Si buscás algo puntual y no lo ves en la lista, preguntanos: el equipamiento
+        se sigue sumando.</p>
+      </div>
+      <div class="equipos" data-sube>
+{equipos_html}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="env">
+      <div class="sec__cab" data-sube>
+        <span class="volanta">Día a día</span>
+        <h2 class="titulo-sec">Mirá cómo es entrenar acá</h2>
+        <p>En Instagram subimos las clases, las rutinas y cómo va quedando el lugar. Es la
+        forma más honesta de ver el gimnasio antes de venir.</p>
+        <a class="btn" href="https://instagram.com/volcano_fitnesslafalda" target="_blank" rel="noopener">@volcano_fitnesslafalda</a>
+      </div>
+      <div class="ig-tira" data-sube>
+        <figure style="background-image:url('img/hero-2.jpg')"></figure>
+        <figure style="background-image:url('img/entrenamientos.jpg')"></figure>
+        <figure style="background-image:url('img/gym.jpg')"></figure>
+        <figure style="background-image:url('img/profes.jpg')"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--gris">
+    <div class="env donde" data-sube>
+      <div>
+        <span class="volanta">Dónde estamos</span>
+        <p class="donde__dir">{DIRECCION}<span>{CIUDAD}</span></p>
+        <dl class="donde__dl">
+          <div><dt>Horarios</dt><dd>Lunes a viernes, 7 a 12 y 14 a 22 h<br>Sábados, 9 a 12 h</dd></div>
+          <div><dt>Teléfono</dt><dd><a href="tel:+543548592487">3548 59-2487</a> · <a href="{_wa('Hola! Quiero probar una clase en Volcano.')}" target="_blank" rel="noopener">WhatsApp</a></dd></div>
+        </dl>
+        <div class="donde__acciones">
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={MAPA_Q}" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="btn btn--linea" href="contacto.html">Probá una clase</a>
+        </div>
+      </div>
+{MAPA}
+    </div>
+  </section>
+""")
 
 
 # ────────────────────────────── Precios ──────────────────────────────────
+ICONOS_PLAN = {
+    "Libre": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg>',
+    "Full": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6m0 0-3 6m3-6 3 6M7 11l5-2 5 2"/></svg>',
+    "Personalizado": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8h4m-2-2v4"/></svg>',
+}
+
 planes = [
     ("Libre", "Para quien ya sabe lo que hace y quiere entrenar por su cuenta.",
      ["Sala y cardio sin límite", "Tu rutina en el área de socios", "Seguimiento del entrenador"], False),
@@ -545,118 +515,239 @@ planes = [
     ("Personalizado", "Uno a uno con tu entrenador, con turnos reservados para vos.",
      ["Todo lo del plan Full", "Turnos uno a uno", "Plan ajustado semana a semana"], False),
 ]
+
 planes_html = "\n".join(
-    '      <article class="plan{}">\n{}        <h3 class="plan__nom">{}</h3>\n'
-    '        <p class="plan__desc">{}</p>\n'
-    '        <p class="plan__precio"><span class="plan__signo">$</span><em>[—]</em><small>/mes</small></p>\n'
-    '        <ul class="plan__lista">{}</ul>\n'
-    '        <a class="pill{}" href="{}" target="_blank" rel="noopener">Consultar</a>\n'
-    '      </article>'.format(
-        ' plan--destacado' if dest else '',
-        '        <span class="plan__tag">El más elegido</span>\n' if dest else '',
-        n, d, ''.join('<li>{}</li>'.format(x) for x in items),
-        '' if dest else ' pill--ghost',
-        _wa('Hola! Quiero consultar el plan ' + n + '.'))
-    for n, d, items, dest in planes)
+    """        <article class="plan{dest}">
+          <span class="plan__ico">{ico}</span>
+          <h3>{nom}{tag}</h3>
+          <!-- Cuando estén los valores: <span class="sig">$</span><span class="num">18000</span><span class="per">/mes</span> -->
+          <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
+          <p class="plan__nota">{desc}</p>
+          <ul>{items}</ul>
+          <a class="btn" href="{href}" target="_blank" rel="noopener">Consultar</a>
+        </article>""".format(
+        dest=' plan--destacado' if dest else '',
+        ico=ICONOS_PLAN[nom],
+        nom=nom,
+        tag=' <span class="volanta" style="margin-left:8px;vertical-align:middle">El más elegido</span>' if dest else '',
+        desc=desc,
+        items=''.join('<li>%s%s</li>' % (TILDE, x) for x in items),
+        href=_wa('Hola! Quiero consultar el plan ' + nom + '.'))
+    for nom, desc, items, dest in planes)
+
+faq_precios = [
+    ("¿Hay que firmar permanencia?",
+     "No. Los planes son mes a mes y podés cambiar o dar de baja cuando quieras. Tampoco "
+     "cobramos matrícula."),
+    ("¿Cómo se paga?",
+     "[COMPLETAR: efectivo, transferencia, débito o tarjeta. Aclarar si hay descuento por "
+     "pago adelantado.]"),
+    ("¿Tienen plan para estudiantes o familias?",
+     "[COMPLETAR si existe. Si no, se saca esta pregunta.]"),
+    ("¿Puedo congelar el plan si viajo?",
+     "[COMPLETAR las condiciones.]"),
+]
 
 CONTENIDO['precios'] = (
-    '  <header class="cabecera">\n'
-    '    <span class="lbl">Planes</span>\n'
-    '    <h1 class="cabecera__titulo">Precios</h1>\n'
-    '    <p class="cabecera__bajada">Sin matr&iacute;cula y sin permanencia. La primera clase es\n'
-    '    de prueba y no tiene costo.</p>\n'
-    '  </header>\n\n'
-    '  <section class="planes">\n' + planes_html + '\n  </section>\n\n'
-    '  <p class="planes__nota"><strong>Los valores est&aacute;n por confirmar.</strong> '
-    'Escribinos y te pasamos el precio actualizado.</p>\n\n'
-    '  <section class="faqs">\n'
-    '    <div class="cabecera-sec"><span class="lbl">Sobre los planes</span>\n'
-    '      <h2 class="seccion__tit">Antes de decidir</h2></div>\n'
-    '    <div class="faqs__lista">\n'
-    '      <details class="faq"><summary>&iquest;Hay que firmar permanencia?</summary>\n'
-    '        <p>No. Los planes son mes a mes y pod&eacute;s cambiar o dar de baja cuando quieras.</p></details>\n'
-    '      <details class="faq"><summary>&iquest;C&oacute;mo se paga?</summary>\n'
-    '        <p>[COMPLETAR: efectivo, transferencia, d&eacute;bito o tarjeta. Aclarar si hay\n'
-    '        descuento por pago adelantado.]</p></details>\n'
-    '      <details class="faq"><summary>&iquest;Tienen plan para estudiantes o familias?</summary>\n'
-    '        <p>[COMPLETAR si existe. Si no, se saca esta pregunta.]</p></details>\n'
-    '      <details class="faq"><summary>&iquest;Puedo congelar el plan si viajo?</summary>\n'
-    '        <p>[COMPLETAR las condiciones.]</p></details>\n'
-    '    </div>\n  </section>\n\n'
-    '  <section class="cierre">\n'
-    '    <p class="cierre__aviso">&iquest;No sab&eacute;s qu&eacute; plan te conviene? Contanos c&oacute;mo\n'
-    '    entren&aacute;s y lo vemos.</p>\n'
-    '    <a class="pill" href="' + _wa('Hola! Quiero que me ayuden a elegir un plan.') + '"\n'
-    '       target="_blank" rel="noopener">Escribinos</a>\n'
-    '  </section>\n')
+    cabecera_pagina("Planes", "Precios",
+                    "Sin matrícula y sin permanencia. La primera clase es de prueba y no "
+                    "tiene costo.",
+                    "hero-1.jpg", filo='a')
+    + f"""
+  <section class="sec">
+    <div class="env">
+      <div class="precios__grid" data-sube>
+{planes_html}
+      </div>
+      <p class="precios__pie"><strong>Los valores están por confirmar.</strong>
+      Escribinos y te pasamos el precio actualizado.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--gris">
+    <div class="env">
+      <div class="sec__cab sec__cab--centro" data-sube>
+        <span class="volanta">Sobre los planes</span>
+        <h2 class="titulo-sec">Antes de decidir</h2>
+      </div>
+      <div data-sube>
+{acordeon(faq_precios)}
+      </div>
+    </div>
+  </section>
+"""
+    + cierre("¿No sabés qué plan te conviene?",
+             "Contanos cómo entrenás y cuántos días por semana podés venir, y lo vemos.",
+             "Escribinos", _wa('Hola! Quiero que me ayuden a elegir un plan.'), filo='c', encima='gris'))
+
 
 # ────────────────────────────── Contacto ─────────────────────────────────
-def _via(href, lbl, dato, pie, ext=True):
-    if href:
-        tgt = ' target="_blank" rel="noopener"' if ext else ''
-        ini = '      <a class="via" href="{}"{}>'.format(href, tgt); fin = '      </a>'
-    else:
-        ini = '      <div class="via via--info">'; fin = '      </div>'
-    return (ini + '\n        <span class="via__lbl">{}</span>\n'
-            '        <span class="via__dato">{}</span>\n'
-            '        <span class="via__pie">{}</span>\n'.format(lbl, dato, pie) + fin)
+ICO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0-7.8-4.5L3 21l4.5-1.2A9 9 0 0 0 12 21z"/></svg>'
+ICO_TEL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>'
+ICO_IG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.4"/>'
+          '<circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.1"/></svg>')
+ICO_PIN = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11z"/>'
+           '<circle cx="12" cy="10" r="2.6"/></svg>')
+ICO_RELOJ = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>'
 
-_vias = "\n".join([
-    _via(_wa('Hola! Quiero hacer una consulta.'), 'WhatsApp', '3548 59-2487', 'Lo m&aacute;s r&aacute;pido'),
-    _via('tel:+543548592487', 'Tel&eacute;fono', '3548 59-2487', 'En horario de atenci&oacute;n', False),
-    _via('https://instagram.com/volcano_fitnesslafalda', 'Instagram', '@volcano_fitnesslafalda', 'Ah&iacute; subimos el d&iacute;a a d&iacute;a'),
-    _via(None, 'D&oacute;nde estamos', 'Sarmiento 518', 'La Falda, C&oacute;rdoba'),
-    _via(None, 'Horarios', '7 a 12 y 14 a 22', 'Lunes a viernes &middot; S&aacute;bados 9 a 12'),
+
+def via(ico, lbl, dato, pie, href=None, externo=True):
+    cuerpo = (f'<span class="via__ico">{ico}</span>\n'
+              f'        <span class="via__lbl">{lbl}</span>\n'
+              f'        <span class="via__dato">{dato}</span>\n'
+              f'        <span class="via__pie">{pie}</span>')
+    if href:
+        tgt = ' target="_blank" rel="noopener"' if externo else ''
+        return f'        <a class="via" href="{href}"{tgt}>\n        {cuerpo}\n        </a>'
+    return f'        <div class="via">\n        {cuerpo}\n        </div>'
+
+
+vias_html = "\n".join([
+    via(ICO_WA, 'WhatsApp', '3548 59-2487', 'Lo más rápido: contestamos en el día',
+        _wa('Hola! Quiero hacer una consulta.')),
+    via(ICO_TEL, 'Teléfono', '3548 59-2487', 'En horario de atención',
+        'tel:+543548592487', externo=False),
+    via(ICO_IG, 'Instagram', '@volcano_fitnesslafalda', 'Ahí subimos el día a día',
+        'https://instagram.com/volcano_fitnesslafalda'),
+    via(ICO_PIN, 'Dónde estamos', DIRECCION, CIUDAD),
+    via(ICO_RELOJ, 'Horarios', '7 a 12 y 14 a 22', 'Lunes a viernes · Sábados 9 a 12'),
 ])
 
 CONTENIDO['contacto'] = (
-    '  <header class="cabecera">\n'
-    '    <span class="lbl">Hablemos</span>\n'
-    '    <h1 class="cabecera__titulo">Contacto</h1>\n'
-    '    <p class="cabecera__bajada">La forma m&aacute;s r&aacute;pida es WhatsApp: contestamos en el\n'
-    '    d&iacute;a. Tambi&eacute;n pod&eacute;s pasar por el gimnasio.</p>\n'
-    '  </header>\n\n'
-    '  <section class="contacto-grid">\n'
-    '    <div class="contacto-vias">\n' + _vias + '\n    </div>\n'
-    '    <div class="donde__mapa">\n'
-    '      <iframe title="Mapa: Sarmiento 518, La Falda" loading="lazy"\n'
-    '        referrerpolicy="no-referrer-when-downgrade"\n'
-    '        src="https://maps.google.com/maps?q=Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina&amp;z=16&amp;output=embed"></iframe>\n'
-    '    </div>\n  </section>\n\n'
-    '  <section class="cierre">\n'
-    '    <p class="cierre__aviso">&iquest;Quer&eacute;s probar una clase? Decinos qu&eacute; d&iacute;a te queda bien.</p>\n'
-    '    <a class="pill" href="' + _wa('Hola! Quiero probar una clase. Que dias tienen lugar?') + '"\n'
-    '       target="_blank" rel="noopener">Coordinar una clase</a>\n'
-    '  </section>\n')
+    cabecera_pagina("Hablemos", "Contacto",
+                    "La forma más rápida es WhatsApp: contestamos en el día. También "
+                    "podés pasar por el gimnasio.",
+                    "contacto.jpg", filo='c')
+    + f"""
+  <section class="sec">
+    <div class="env">
+      <div class="vias" data-sube>
+{vias_html}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--junta">
+    <div class="env" data-sube>
+{MAPA}
+    </div>
+  </section>
+"""
+    + cierre("¿Querés probar una clase?",
+             "Decinos qué día te queda bien y te esperamos. La primera es sin costo.",
+             "Coordinar una clase",
+             _wa('Hola! Quiero probar una clase. Que dias tienen lugar?')))
+
+
+# ─────────────────────────────── Tu rutina ───────────────────────────────
+ejercicios = [
+    ("Sentadilla con barra", "4", "8", "90 s", "40 kg"),
+    ("Prensa 45°", "3", "12", "75 s", "100 kg"),
+    ("Peso muerto rumano", "3", "10", "90 s", "35 kg"),
+    ("Búlgaras con mancuernas", "3", "10 x pierna", "60 s", "10 kg"),
+    ("Extensión de cuádriceps", "3", "15", "45 s", "30 kg"),
+    ("Camilla femoral", "3", "12", "45 s", "25 kg"),
+    ("Elevación de gemelos", "4", "20", "40 s", "50 kg"),
+]
+filas = '\n'.join(
+    f"""            <tr>
+              <td class="rt__n">{i}</td>
+              <td class="rt__ej">{n}</td>
+              <td class="rt__num">{s}</td>
+              <td class="rt__num">{r}</td>
+              <td class="rt__num">{d}</td>
+              <td class="rt__num rt__peso">{p}</td>
+            </tr>""" for i, (n, s, r, d, p) in enumerate(ejercicios, 1))
+
+CONTENIDO['rutina'] = (
+    cabecera_pagina("Tu rutina · Día 2 de 4", "Tren inferior completo",
+                    "Mirá el trabajo del día y empezá. Los kilos que ves al final son los "
+                    "de la última vez que lo hiciste.",
+                    "entrenamientos.jpg", filo='a')
+    + f"""
+  <section class="sec">
+    <div class="env" data-sube>
+      <div class="tabla-scroll">
+        <table class="rt">
+          <caption class="sr">Ejercicios del día, con series, repeticiones, descanso y el peso de la última sesión</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr">Orden</span></th>
+              <th scope="col">Ejercicio</th>
+              <th scope="col">Series</th>
+              <th scope="col">Reps</th>
+              <th scope="col">Descanso</th>
+              <th scope="col">La última vez</th>
+            </tr>
+          </thead>
+          <tbody>
+{filas}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--junta">
+    <div class="env" data-sube>
+      <div class="aviso">
+        <h2>Antes de empezar</h2>
+        <p>Diez minutos de bici o cinta suave y movilidad de cadera. Si algo te molesta,
+        pará y avisale a tu entrenador: se cambia el ejercicio, no se soporta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--gris">
+    <div class="env duo" data-sube>
+      <div class="duo__txt">
+        <span class="volanta">Así se ve en el celular</span>
+        <h2 class="titulo-sec">La rutina, donde entrenás</h2>
+        <p>No hace falta acordarse de nada: abrís y lo primero que ves es el trabajo del
+        día, con los kilos de la última vez al lado de cada ejercicio.</p>
+        <p>Es la pantalla de verdad, no una foto: tocala y probala.</p>
+      </div>
+      <div class="fono">
+        <iframe src="socios.html?demo=1" title="El área de socios vista desde un celular" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+"""
+    + cierre("Esta es una rutina de ejemplo",
+             "Sirve para mostrar cómo se ve. La tuya la arma tu entrenador, según de dónde venís.",
+             "Pedí la tuya", _wa('Hola! Quiero que me armen una rutina.'), filo='b', encima='gris'))
 
 
 PAGINAS = {
-  'somos.html': ('Somos Volcano — Volcano Fitness',
-                  'Quiénes somos, cómo trabajamos y qué podés esperar de Volcano Fitness, el gimnasio de La Falda.',
-                  CONTENIDO['somos']),
-  'precios.html': ('Precios — Volcano Fitness',
-                  'Planes y precios de Volcano Fitness, el gimnasio de La Falda.',
-                  CONTENIDO['precios']),
-  'contacto.html': ('Contacto — Volcano Fitness',
-                  'Cómo contactarnos y dónde estamos: Sarmiento 518, La Falda, Córdoba.',
-                  CONTENIDO['contacto']),
-  'entrenamientos.html': ('Entrenamientos — Volcano Fitness',
-                  'Musculación, funcional, entrenamiento personalizado y acondicionamiento en Volcano Fitness, La Falda.',
-                  CONTENIDO['entrenamientos']),
-  'gym.html':    ('El gimnasio — Volcano Fitness',
-                  'El gimnasio de Volcano Fitness en Sarmiento 518, La Falda: equipamiento, fotos y cómo llegar.',
-                  CONTENIDO['gym']),
-  'rutina.html': ('Tu rutina — Volcano Fitness',
-                  'La rutina del día para los socios de Volcano Fitness: ejercicios, series, repeticiones y los kilos de la última vez.',
-                  CONTENIDO['rutina']),
-  'profes.html': ('Entrenadores — Volcano Fitness',
-                  'El equipo de entrenadores de Volcano Fitness, el gimnasio de La Falda.',
-                  CONTENIDO['profes']),
+    'somos.html': ('Somos Volcano — Volcano Fitness',
+                   'Quiénes somos, cómo trabajamos y qué podés esperar de Volcano Fitness, el gimnasio de La Falda.',
+                   CONTENIDO['somos']),
+    'precios.html': ('Precios — Volcano Fitness',
+                     'Planes y precios de Volcano Fitness, el gimnasio de La Falda.',
+                     CONTENIDO['precios']),
+    'contacto.html': ('Contacto — Volcano Fitness',
+                      'Cómo contactarnos y dónde estamos: Sarmiento 518, La Falda, Córdoba.',
+                      CONTENIDO['contacto']),
+    'entrenamientos.html': ('Entrenamientos — Volcano Fitness',
+                            'Musculación, funcional, entrenamiento personalizado y acondicionamiento en Volcano Fitness, La Falda.',
+                            CONTENIDO['entrenamientos']),
+    'gym.html': ('El gimnasio — Volcano Fitness',
+                 'El gimnasio de Volcano Fitness en Sarmiento 518, La Falda: equipamiento, fotos y cómo llegar.',
+                 CONTENIDO['gym']),
+    'rutina.html': ('Tu rutina — Volcano Fitness',
+                    'La rutina del día para los socios de Volcano Fitness: ejercicios, series, repeticiones y los kilos de la última vez.',
+                    CONTENIDO['rutina']),
+    'profes.html': ('Entrenadores — Volcano Fitness',
+                    'El equipo de entrenadores de Volcano Fitness, el gimnasio de La Falda.',
+                    CONTENIDO['profes']),
 }
 
 for archivo, (titulo, desc, contenido) in PAGINAS.items():
     (base / archivo).write_text(PLANTILLA.format(
         titulo=titulo, desc=desc, fuentes=fuentes,
-        preloader=preloader, header=header_i, menu=menu_i,
-        footer=footer_i, contenido=contenido), encoding='utf-8')
+        barra=barra,
+        cabecera=a_paginas(cabecera, archivo),
+        pie=a_paginas(pie, archivo),
+        wpp=wpp, sprite=sprite,
+        contenido=contenido), encoding='utf-8')
     print('generada', archivo)

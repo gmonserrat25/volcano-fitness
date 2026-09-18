@@ -53,10 +53,10 @@
     });
   }
 
-  /* ── Acordeón del "¿Por qué Volcano?" ──
-     Se abre de a uno, como en la referencia. */
-  var acordeon = document.getElementById('acordeon');
-  if (acordeon) {
+  /* ── Acordeones ──
+     Se abren de a uno, como en la referencia. Hay uno en la home y otro en
+     varias páginas internas, así que se enganchan todos. */
+  document.querySelectorAll('.acordeon').forEach(function (acordeon) {
     acordeon.addEventListener('click', function (e) {
       var cabAcor = e.target.closest('.acor__cab');
       if (!cabAcor) return;
@@ -71,7 +71,7 @@
         cabAcor.setAttribute('aria-expanded', 'true');
       }
     });
-  }
+  });
 
   /* ── Testimonios: los tres nombres cambian la cita ── */
   var nombres = document.querySelector('.testi__nombres');

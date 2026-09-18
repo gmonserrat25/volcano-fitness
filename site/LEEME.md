@@ -549,29 +549,64 @@ La home (`index.html`) está calcada del shot *Gym Fitness Studio Website Design
 (FITMAS) de Sowat Ahshan en Dribbble. **Reemplazó a la home vieja**, la que estaba
 calcada de go180.nl (paneles apilados, fondo oscuro, cortina de entrada).
 
+### Las páginas internas también
+
+Las siete páginas que genera `paginas.py` (somos, entrenamientos, profes, gym,
+precios, contacto y rutina) están **en el mismo estilo que la home**: misma hoja
+(`css/estilo.css`), mismo guion (`js/home.js`) y las mismas piezas —la volanta, los
+botones, el acordeón, las tarjetas de plan, la grilla de entrenadores y el filo de
+pincel—.
+
+`paginas.py` ya no lee la home vieja: le saca a **`index.html`** la barra de arriba,
+la cabecera, el pie, el botón de WhatsApp y el sprite del filo. Tocás esas piezas en
+la home, corrés `python3 paginas.py` y las siete se actualizan solas.
+
+El menú apunta a las páginas de verdad (antes hacía scroll dentro de la home) y marca
+con `aria-current="page"` en cuál estás.
+
 ### Dónde quedó la home vieja
 
-No se borró: pasó a ser **`_plantilla-interna.html`**, y no se sirve —no hay ningún
-enlace que lleve a ella—. Se conserva porque `paginas.py` le saca el preloader, el
-header, el menú y el pie para generar las páginas internas, que siguen usando
-`css/style.css` y por lo tanto siguen teniendo el look viejo.
+`_plantilla-interna.html`. Ya no la usa nadie: quedó como respaldo de la maquetación
+de go180 por si hace falta mirarla. No se sirve, no hay enlaces que lleven a ella y
+`deploy-pages.py` la deja fuera del sitio publicado.
 
-Dicho de otra forma: **la home es nueva y las páginas internas siguen siendo las de
-antes**. Si en algún momento hay que pasarlas también al estilo nuevo, el trabajo es
-rehacer `paginas.py` contra `css/estilo.css`; por ahora conviven.
-
-El guion arranca con `PLANTILLA_CHROME = '_plantilla-interna.html'`: si algún día se
-quiere mover el header o el pie, se toca ese archivo, no la home.
+`css/style.css` y `js/main.js` **siguen haciendo falta**, pero sólo para
+`socios.html`, que es una mini-app aparte con su propio chrome y todavía está en el
+estilo viejo.
 
 ### Los archivos
 
 | Archivo | Para qué |
 |---|---|
-| `index.html` | La home nueva |
-| `css/estilo.css` | Su hoja de estilos (la vieja, `css/style.css`, sigue para las internas) |
-| `js/home.js` | Su comportamiento (no pisa el `js/main.js` de las internas) |
-| `_plantilla-interna.html` | La home vieja, ahora sólo plantilla de `paginas.py` |
+| `index.html` | La home |
+| `css/estilo.css` | La hoja de todo el sitio: home e internas |
+| `js/home.js` | El comportamiento de todo el sitio |
+| `paginas.py` | Genera las siete internas a partir del chrome de `index.html` |
+| `verificar.py` | Chequea las generadas: chrome completo, hojas nuevas, nada del estilo viejo |
+| `deploy-pages.py` | Publica el sitio en la rama `gh-pages` |
 | `armar-preview.py` | Arma `_preview/`, la home como página suelta para pasarla por link |
+| `_plantilla-interna.html` | La home vieja, sólo de respaldo |
+| `css/style.css`, `js/main.js`, `css/socios.css`, `js/socios.js` | Sólo para `socios.html` |
+
+### Componentes nuevos de las internas
+
+Están al final de `css/estilo.css`, bajo el título **PÁGINAS INTERNAS**:
+
+- `.cab-int` — la cabecera de página: banda oscura con foto, volanta, título y filo
+  de pincel abajo.
+- `.sec` / `.sec--gris` — el envoltorio de cada sección; alternan blanco y gris.
+- `.duo` — dos columnas de texto y foto, con `--invertido` para dar vuelta el orden.
+- `.pilares` / `.pilar` — tarjetas numeradas, con el número en contorno.
+- `.discs` / `.disc` — las disciplinas, en filas que alternan foto a izquierda y derecha.
+- `.shots` — la galería del gimnasio, con la primera foto a doble ancho.
+- `.vias` — las tarjetas de contacto.
+- `.rt` — la tabla de la rutina.
+- `.fono` — el marco de celular con `socios.html` adentro, en vivo.
+- `.cierre` — la franja oscura de llamada a la acción con la que terminan casi todas.
+
+**Ojo con el filo de pincel:** se pinta del color de la sección de *arriba*. Si esa
+sección es gris hay que agregarle `filo--gris`, si no queda una costura blanca contra
+el gris. En `paginas.py` eso lo maneja el parámetro `encima` de `cierre()`.
 
 ### Qué se mantuvo del original y qué se cambió
 

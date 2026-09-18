@@ -740,3 +740,230 @@ ul{margin:0;padding:0;list-style:none}
   html{scroll-behavior:auto}
   [data-sube]{opacity:1;transform:none}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PÁGINAS INTERNAS
+   La home está calcada del shot; estas páginas reusan sus
+   piezas (volanta, botones, tarjetas, acordeón, filo de
+   pincel) para que todo el sitio hable el mismo idioma.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Cabecera de página: banda oscura con foto y filo abajo ── */
+.cab-int{position:relative;background:var(--tinta);color:#fff;overflow:hidden}
+.cab-int__foto{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:.34;filter:grayscale(.55);
+}
+.cab-int__velo{
+  position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(8,11,18,.95) 0%,rgba(8,11,18,.78) 48%,rgba(8,11,18,.42) 100%);
+}
+.cab-int__in{position:relative;z-index:3;padding-block:clamp(54px,7.5vw,104px) clamp(74px,9.5vw,136px)}
+.cab-int h1{font-size:clamp(34px,5.8vw,66px);margin-top:16px;max-width:16ch}
+.cab-int__bajada{color:var(--texto-osc);max-width:58ch;margin-top:18px;font-size:17px}
+
+/* ── Envoltorio de sección ── */
+.sec{padding-block:clamp(48px,6.5vw,92px)}
+.sec--gris{background:var(--papel-2)}
+.sec--junta{padding-top:0}
+.sec__cab{margin-bottom:clamp(30px,4vw,48px)}
+.sec__cab--centro{text-align:center}
+.sec__cab p{color:var(--texto-2);margin-top:14px;max-width:58ch}
+.sec__cab--centro p{margin-inline:auto}
+
+/* ── Dos columnas: texto y foto ── */
+.duo{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,4.6vw,72px);align-items:center;
+}
+.duo--invertido .duo__foto{order:-1}
+.duo__foto{border-radius:var(--radio);overflow:hidden;aspect-ratio:4/3.2}
+.duo__foto img{width:100%;height:100%;object-fit:cover}
+.duo__txt p{color:var(--texto-2);margin-top:16px}
+.duo__txt .btn{margin-top:26px}
+
+/* Lista con tilde, para los "qué buscamos" */
+.lista-check{display:grid;gap:12px;margin-top:24px}
+.lista-check li{display:flex;align-items:flex-start;gap:12px;color:var(--texto-2)}
+.lista-check svg{flex:0 0 auto;width:19px;height:19px;margin-top:4px;stroke:var(--acento);stroke-width:2;fill:none}
+
+/* ── Pilares: tarjetas numeradas ── */
+.pilares{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pilar{
+  background:var(--papel-2);border-radius:var(--radio);
+  padding:clamp(24px,2.6vw,34px);
+  transition:background .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease);
+}
+.pilar:hover{background:var(--papel);box-shadow:var(--sombra-alta);transform:translateY(-6px)}
+.pilar__n{
+  display:block;font-size:34px;font-weight:800;line-height:1;
+  color:transparent;-webkit-text-stroke:1.5px var(--acento);margin-bottom:16px;
+}
+.pilar h3{font-size:18px;margin-bottom:10px}
+.pilar p{color:var(--texto-2);font-size:15px}
+
+/* ── Cierre: la franja de llamada a la acción ── */
+.cierre{
+  position:relative;background:var(--tinta);color:#fff;overflow:hidden;
+  text-align:center;
+}
+.cierre__in{position:relative;z-index:3;padding-block:clamp(60px,8vw,104px)}
+.cierre h2{font-size:clamp(24px,3.4vw,38px);max-width:22ch;margin-inline:auto}
+.cierre p{color:var(--texto-osc);margin-top:16px;max-width:52ch;margin-inline:auto}
+.cierre .btn{margin-top:28px}
+
+/* ── Disciplinas: filas alternadas foto/texto ── */
+.discs{display:grid;gap:clamp(40px,6vw,86px)}
+.disc{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(26px,4.4vw,66px);align-items:center;
+  scroll-margin-top:110px;
+}
+.disc:nth-child(even) .disc__foto{order:1}
+.disc__foto{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:4/3.1}
+.disc__foto img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.disc:hover .disc__foto img{transform:scale(1.04)}
+.disc h2{font-size:clamp(24px,3.2vw,36px);margin-top:14px}
+.disc p{color:var(--texto-2);margin-top:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
+.tags li{
+  padding:7px 15px;border-radius:999px;background:var(--papel-2);
+  font-size:13px;font-weight:700;color:var(--texto);
+}
+
+/* ── Galería del gimnasio ── */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.shot{
+  position:relative;margin:0;border-radius:var(--radio);overflow:hidden;
+  aspect-ratio:4/3;background:var(--tinta);
+}
+.shot--ancha{grid-column:span 2;aspect-ratio:8/3.2}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.shot:hover img{transform:scale(1.05)}
+.shot figcaption{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:34px 22px 18px;color:#fff;font-size:14px;font-weight:700;
+  background:linear-gradient(180deg,rgba(8,11,18,0),rgba(8,11,18,.9));
+}
+
+/* ── Listas de equipamiento ── */
+.equipos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.equipo-grupo{background:var(--papel);border-radius:var(--radio);padding:clamp(22px,2.4vw,30px)}
+.equipo-grupo h3{
+  font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acento);padding-bottom:14px;margin-bottom:16px;
+  border-bottom:1px solid var(--linea);
+}
+.equipo-grupo{transition:box-shadow .3s var(--ease), transform .3s var(--ease)}
+.equipo-grupo:hover{box-shadow:var(--sombra-alta);transform:translateY(-4px)}
+.equipo-grupo li{
+  display:flex;align-items:flex-start;gap:10px;
+  color:var(--texto-2);font-size:15px;padding:6px 0;
+}
+.equipo-grupo li::before{
+  content:"";flex:0 0 auto;width:6px;height:6px;margin-top:9px;
+  background:var(--acento);border-radius:50%;
+}
+
+/* ── Tira de Instagram ── */
+.ig-tira{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+.ig-tira figure{
+  margin:0;border-radius:12px;overflow:hidden;aspect-ratio:1;
+  background-size:cover;background-position:center;
+  transition:transform .35s var(--ease);
+}
+.ig-tira figure:hover{transform:translateY(-5px)}
+
+/* ── Dónde estamos: datos + mapa ── */
+.donde{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(26px,4vw,56px);align-items:stretch}
+.donde__dl{margin:24px 0 0;display:grid;gap:16px}
+.donde__dl dt{
+  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acento);margin-bottom:4px;
+}
+.donde__dl dd{margin:0;color:var(--texto-2)}
+.donde__dl a:hover{color:var(--acento)}
+.donde__dir{font-size:clamp(22px,2.6vw,30px);font-weight:800;margin-top:18px;line-height:1.25}
+.donde__dir span{display:block;font-size:16px;font-weight:600;color:var(--texto-2);margin-top:4px}
+.donde__acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.mapa{border-radius:var(--radio);overflow:hidden;min-height:320px;background:var(--papel-2)}
+.mapa iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+
+/* ── Vías de contacto ── */
+.vias{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.via{
+  display:block;background:var(--papel-2);border-radius:var(--radio);
+  padding:clamp(22px,2.4vw,30px);
+  transition:background .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease);
+}
+a.via:hover{background:var(--papel);box-shadow:var(--sombra-alta);transform:translateY(-5px)}
+.via__ico{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:var(--papel);margin-bottom:18px}
+a.via:hover .via__ico{background:var(--acento)}
+.via__ico svg{width:22px;height:22px;stroke:var(--acento);stroke-width:1.7;fill:none}
+a.via:hover .via__ico svg{stroke:#fff}
+.via__lbl{display:block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-2)}
+.via__dato{display:block;font-size:19px;font-weight:800;margin:6px 0 4px}
+.via__pie{display:block;font-size:14px;color:var(--texto-2)}
+
+/* ── Tabla de la rutina ── */
+.tabla-scroll{overflow-x:auto;border-radius:var(--radio);border:1px solid var(--linea)}
+.rt{width:100%;border-collapse:collapse;background:var(--papel);min-width:660px}
+.rt thead th{
+  text-align:left;padding:16px 18px;background:var(--papel-2);
+  font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-2);
+  white-space:nowrap;
+}
+.rt td{padding:15px 18px;border-top:1px solid var(--linea);font-size:15px}
+.rt tbody tr:hover{background:var(--papel-2)}
+.rt__n{width:46px;color:transparent;-webkit-text-stroke:1.2px var(--acento);font-weight:800}
+.rt__ej{font-weight:700}
+.rt__num{color:var(--texto-2);white-space:nowrap}
+.rt__peso{font-weight:800;color:var(--acento)}
+
+/* ── Marco de teléfono con la pantalla real adentro ── */
+.fono{
+  position:relative;width:min(300px,100%);margin-inline:auto;
+  border-radius:38px;padding:11px;background:var(--tinta);
+  box-shadow:var(--sombra-alta);
+}
+.fono::before{
+  content:"";position:absolute;left:50%;top:20px;transform:translateX(-50%);
+  width:82px;height:22px;border-radius:999px;background:#000;z-index:2;
+}
+.fono iframe{
+  display:block;width:100%;height:560px;border:0;border-radius:28px;background:var(--papel);
+}
+
+/* ── Caja de aviso ── */
+.aviso{
+  background:var(--papel-2);border-left:3px solid var(--acento);
+  border-radius:0 var(--radio) var(--radio) 0;
+  padding:clamp(22px,2.4vw,30px);
+}
+.aviso h2{font-size:18px;margin-bottom:10px}
+.aviso p{color:var(--texto-2);font-size:15px}
+
+/* ── El acordeón, cuando va sobre fondo claro ── */
+.acordeon--claro .acor{background:var(--papel-2);border-color:var(--linea)}
+.acordeon--claro .acor__cab{color:var(--texto)}
+.acordeon--claro .acor__cab i{background:var(--papel)}
+.acordeon--claro .acor__cab i svg{stroke:var(--texto)}
+.acordeon--claro .acor.is-abierto .acor__cab i svg{stroke:#fff}
+.acordeon--claro .acor__cuerpo p{color:var(--texto-2)}
+
+/* ── Responsive de las internas ── */
+@media (max-width:1080px){
+  .pilares,.equipos{grid-template-columns:repeat(2,1fr)}
+  .duo,.disc,.donde{grid-template-columns:1fr}
+  .duo--invertido .duo__foto,.disc:nth-child(even) .disc__foto{order:0}
+  .shots{grid-template-columns:repeat(2,1fr)}
+  .shot--ancha{grid-column:span 2}
+}
+
+@media (max-width:720px){
+  .pilares,.equipos,.vias,.shots{grid-template-columns:1fr}
+  .shot--ancha{grid-column:span 1;aspect-ratio:4/3}
+  .ig-tira{grid-template-columns:repeat(2,1fr)}
+  .cab-int h1{max-width:none}
+}
