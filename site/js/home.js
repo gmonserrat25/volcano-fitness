@@ -114,7 +114,7 @@
     var actual = 0;
     var solo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var reloj = null;
-    var ESPERA = 7000;
+    var ESPERA = 5000;
 
     function mostrar(i) {
       actual = (i + slides.length) % slides.length;
