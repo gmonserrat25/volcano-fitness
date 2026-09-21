@@ -700,22 +700,22 @@ ul{margin:0;padding:0;list-style:none}
 .app__texto .titulo-sec{font-size:clamp(34px,5vw,58px)}
 .app__bajada{margin-top:12px;font-size:clamp(19px,2.2vw,26px);font-weight:600}
 .app__parrafo{margin-top:18px;max-width:44ch;color:var(--texto-osc)}
+/* Es el botón de línea de siempre, sólo recoloreado para fondo oscuro: el
+   radio, el padding y el hover los sigue poniendo .btn--linea, así cuando
+   cambie la familia de botones éste cambia con ella. */
 .app__btn{
-  margin-top:32px;border-radius:999px;padding:15px 30px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
-  box-shadow:none;backdrop-filter:blur(8px);
+  margin-top:32px;
+  color:#fff;border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.06);
 }
-.app__btn:hover{background:var(--acento);border-color:var(--acento);box-shadow:0 14px 30px rgba(31,98,206,.38)}
-.app__btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* El hover se resuelve con color: ni saltito ni halo del color de acento */
+.app__btn:hover{transform:none;box-shadow:none;border-color:var(--acento)}
+/* Volanta plana, la misma pieza que el hero: cuadradito y versalita */
 .app__pronto{
-  margin-top:18px;display:flex;align-items:center;gap:9px;
+  margin-top:20px;display:flex;align-items:center;gap:10px;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
   color:var(--texto-osc);
 }
-.app__punto{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--acento-luz);box-shadow:0 0 0 4px rgba(76,141,236,.18);
-}
+.app__pronto::before{content:"";width:8px;height:8px;background:var(--acento)}
 
 /* ── Los dos teléfonos ── */
 .app__escena{position:relative;height:clamp(460px,50vw,600px);perspective:1500px}
@@ -823,8 +823,8 @@ ul{margin:0;padding:0;list-style:none}
   background:rgba(255,255,255,.12);
 }
 .uiapp__barra i{
-  display:block;height:100%;border-radius:999px;
-  background:linear-gradient(90deg,var(--acento) 0%,var(--acento-luz) 100%);
+  display:block;width:50%;height:100%;border-radius:999px;
+  background:var(--acento);
 }
 .uiapp__progreso span{
   display:block;margin-top:calc(var(--w) * .022);
