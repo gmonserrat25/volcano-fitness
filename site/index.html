@@ -417,7 +417,137 @@
   </div>
 </section>
 
-<!-- ░░ 10 · TESTIMONIOS ░░
+<!-- ░░ 10 · LA APP ░░
+     Calcada de la portada de Apple que trajo Guada: fondo negro con el
+     resplandor detrás del teléfono, el texto a la izquierda y dos iPhone
+     inclinados a la derecha (uno de frente y otro de dorso, asomando).
+     El naranja del original se cambia por el azul del volcán.
+     La pantalla NO es una foto: es la app maquetada en HTML, así queda
+     nítida en cualquier tamaño y se edita como el resto del sitio.
+     OJO: la app todavía no existe, esto es una propuesta de cómo se vería. -->
+<section class="app" id="app">
+  <svg class="filo filo--arriba" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-b"/></svg>
+  <span class="app__resplandor" aria-hidden="true"></span>
+
+  <div class="env app__grid">
+
+    <div class="app__texto" data-sube>
+      <span class="volanta">App Volcano</span>
+      <h2 class="titulo-sec">Descargá la app.</h2>
+      <p class="app__bajada">Tu rutina, en el bolsillo.</p>
+      <p class="app__parrafo">
+        Abrís la app y ahí está el trabajo del día: los ejercicios, las series y los
+        kilos que levantaste la última vez. La carga tu entrenador y se actualiza sola,
+        así entrenás sin andar anotando nada.
+      </p>
+
+      <a class="btn app__btn" href="#contacto">
+        Avisame cuando salga
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <p class="app__pronto">
+        <span class="app__punto" aria-hidden="true"></span>
+        Próximamente para iPhone y Android
+      </p>
+    </div>
+
+    <div class="app__escena" data-sube>
+
+      <!-- El de atrás: se ve el dorso con el módulo de cámaras -->
+      <div class="iph iph--dorso" aria-hidden="true">
+        <div class="iph__lomo">
+          <div class="iph__camaras">
+            <span class="iph__lente"></span>
+            <span class="iph__lente"></span>
+            <span class="iph__lente"></span>
+            <span class="iph__flash"></span>
+          </div>
+          <span class="iph__grabado">VOLCANO</span>
+        </div>
+      </div>
+
+      <!-- El de adelante: la app -->
+      <div class="iph iph--frente">
+        <span class="iph__isla" aria-hidden="true"></span>
+        <div class="iph__pantalla">
+          <div class="uiapp">
+
+            <div class="uiapp__estado" aria-hidden="true">
+              <span>9:41</span>
+              <span class="uiapp__estado-ic">
+                <svg viewBox="0 0 17 12"><path d="M1 9.4h2v2.2H1zM5 7h2v4.6H5zM9 4.6h2v7H9zM13 2h2v9.6h-2z"/></svg>
+                <svg viewBox="0 0 16 12"><path d="M8 10.4 9.7 8.5a2.4 2.4 0 0 0-3.4 0zM8 6.7c1.3 0 2.5.5 3.4 1.3l1.5-1.6a7.3 7.3 0 0 0-9.8 0l1.5 1.6A5 5 0 0 1 8 6.7z"/></svg>
+                <svg viewBox="0 0 26 12"><rect x="1" y="2.2" width="20" height="7.6" rx="2.3" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="2.9" y="4" width="13.6" height="4" rx="1.1"/><path d="M22.8 5.1v3.8a2 2 0 0 0 0-3.8z"/></svg>
+              </span>
+            </div>
+
+            <div class="uiapp__top">
+              <span class="uiapp__marca">
+                <svg class="uiapp__volcan" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3.4 20.6 17.2H3.4z"/>
+                  <path class="uiapp__grieta" d="M12 4.6v12.6"/>
+                  <rect x="4.4" y="19.2" width="15.2" height="2.2" rx="1.1"/>
+                </svg>
+                VOLCANO
+              </span>
+              <span class="uiapp__avatar">G</span>
+            </div>
+
+            <p class="uiapp__dia">Martes · Semana 3</p>
+            <h3 class="uiapp__rutina">Tren superior</h3>
+
+            <div class="uiapp__progreso">
+              <div class="uiapp__barra"><i style="width:50%"></i></div>
+              <span>3 de 6 ejercicios</span>
+            </div>
+
+            <ul class="uiapp__lista">
+              <li class="is-hecho">
+                <span class="uiapp__tilde"><svg viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 6.8"/></svg></span>
+                <span class="uiapp__ej"><b>Press de banca</b><small>4 × 8 · 45 kg</small></span>
+              </li>
+              <li class="is-hecho">
+                <span class="uiapp__tilde"><svg viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 6.8"/></svg></span>
+                <span class="uiapp__ej"><b>Remo con barra</b><small>4 × 10 · 40 kg</small></span>
+              </li>
+              <li class="is-hecho">
+                <span class="uiapp__tilde"><svg viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 6.8"/></svg></span>
+                <span class="uiapp__ej"><b>Dominadas asistidas</b><small>3 × 8 · −20 kg</small></span>
+              </li>
+              <li class="is-ahora">
+                <span class="uiapp__tilde"></span>
+                <span class="uiapp__ej"><b>Press militar</b><small>3 × 10 · 22 kg</small></span>
+                <span class="uiapp__ahora">Ahora</span>
+              </li>
+              <li>
+                <span class="uiapp__tilde"></span>
+                <span class="uiapp__ej"><b>Curl de bíceps</b><small>3 × 12 · 12 kg</small></span>
+              </li>
+              <li>
+                <span class="uiapp__tilde"></span>
+                <span class="uiapp__ej"><b>Fondos en paralelas</b><small>3 × 10 · libre</small></span>
+              </li>
+            </ul>
+
+            <div class="uiapp__tabs" aria-hidden="true">
+              <span class="is-activa"><svg viewBox="0 0 24 24"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg>Rutina</span>
+              <span><svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V7"/></svg>Progreso</span>
+              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>Clases</span>
+              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6.4 7-6.4s7 2.8 7 6.4"/></svg>Perfil</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <svg class="filo filo--abajo" preserveAspectRatio="none" aria-hidden="true"><use href="#filo-a"/></svg>
+</section>
+
+<!-- ░░ 11 · TESTIMONIOS ░░
      Foto a sangre por la izquierda y la tarjeta negra montada encima.
      Los textos son de muestra hasta que estén los reales. -->
 <section class="testi">
@@ -454,7 +584,7 @@
   </div>
 </section>
 
-<!-- ░░ 11 · PRECIOS ░░ (el del medio, negro y más alto) -->
+<!-- ░░ 12 · PRECIOS ░░ (el del medio, negro y más alto) -->
 <section class="precios" id="precios">
   <div class="env">
     <div class="centro" data-sube>
@@ -513,7 +643,7 @@
   </div>
 </section>
 
-<!-- ░░ 12 · TU RUTINA (el split "GymFit Goal" del original) ░░ -->
+<!-- ░░ 13 · TU RUTINA (el split "GymFit Goal" del original) ░░ -->
 <section class="meta">
   <div class="env meta__grid">
     <div data-sube>
@@ -545,7 +675,7 @@
   </div>
 </section>
 
-<!-- ░░ 13 · EL GIMNASIO ░░ (la grilla de tres del blog, con las fotos del lugar) -->
+<!-- ░░ 14 · EL GIMNASIO ░░ (la grilla de tres del blog, con las fotos del lugar) -->
 <section class="galeria" id="gimnasio">
   <div class="env">
     <div class="centro" data-sube>
@@ -592,7 +722,7 @@
 
 </main>
 
-<!-- ░░ 14 · FRANJA DE CONTACTO + PIE ░░ -->
+<!-- ░░ 15 · FRANJA DE CONTACTO + PIE ░░ -->
 <footer class="pie" id="contacto">
   <div class="env contacto-fila">
     <div>

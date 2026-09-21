@@ -673,6 +673,215 @@ ul{margin:0;padding:0;list-style:none}
 .wpp:hover{transform:translateY(-3px)}
 .wpp svg{width:21px;height:21px;fill:currentColor}
 
+/* ═══ 10 · LA APP ══════════════════════════════════════════
+   La portada de Apple que trajo Guada, pasada a Volcano: negro
+   con el resplandor detrás de los teléfonos (naranja allá, el
+   azul del volcán acá), texto a la izquierda y dos iPhone
+   inclinados a la derecha.
+   Los teléfonos y la pantalla de la app son CSS puro, no una
+   foto: todo se mide en múltiplos de --w, así que el conjunto
+   escala entero cambiando un solo número. */
+.app{position:relative;overflow:hidden;background:#05070C;color:#fff}
+.app__resplandor{
+  position:absolute;z-index:0;pointer-events:none;
+  top:-14%;right:-8%;width:min(1120px,94%);height:128%;
+  background:
+    radial-gradient(44% 40% at 52% 44%, rgba(142,190,255,.50) 0%, rgba(76,141,236,.34) 30%, rgba(31,98,206,.22) 50%, transparent 74%),
+    radial-gradient(72% 62% at 56% 52%, rgba(21,77,160,.52) 0%, transparent 72%);
+}
+.app__grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  gap:clamp(26px,4vw,56px);align-items:center;
+  padding-block:clamp(86px,10vw,146px);
+}
+
+/* ── La columna de texto ── */
+.app__texto .titulo-sec{font-size:clamp(34px,5vw,58px)}
+.app__bajada{margin-top:12px;font-size:clamp(19px,2.2vw,26px);font-weight:600}
+.app__parrafo{margin-top:18px;max-width:44ch;color:var(--texto-osc)}
+.app__btn{
+  margin-top:32px;border-radius:999px;padding:15px 30px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
+  box-shadow:none;backdrop-filter:blur(8px);
+}
+.app__btn:hover{background:var(--acento);border-color:var(--acento);box-shadow:0 14px 30px rgba(31,98,206,.38)}
+.app__btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.app__pronto{
+  margin-top:18px;display:flex;align-items:center;gap:9px;
+  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--texto-osc);
+}
+.app__punto{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--acento-luz);box-shadow:0 0 0 4px rgba(76,141,236,.18);
+}
+
+/* ── Los dos teléfonos ── */
+.app__escena{position:relative;height:clamp(460px,50vw,600px);perspective:1500px}
+.iph{
+  --w:clamp(190px,20.5vw,290px);
+  position:absolute;width:var(--w);aspect-ratio:9/19.3;
+  padding:calc(var(--w) * .032);
+  border-radius:calc(var(--w) * .158);
+  /* el canto de titanio: reflejos claros en las esquinas, oscuro al medio */
+  background:linear-gradient(145deg,#A8C6F2 0%,#33456180 4%,#0E141F 34%,#1B2637 62%,#2E3F5B 88%,#9CC0F2 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.22) inset,
+    0 0 0 1px rgba(255,255,255,.07),
+    0 44px 80px -26px rgba(0,0,0,.92);
+}
+.iph--frente{z-index:3;left:2%;top:0;transform:rotate(-8.5deg) rotateY(-11deg)}
+.iph--dorso{z-index:2;right:-4%;top:23%;transform:rotate(-8.5deg) rotateY(-11deg)}
+.iph__pantalla{
+  position:relative;width:100%;height:100%;overflow:hidden;
+  border-radius:calc(var(--w) * .126);background:#080C14;
+}
+.iph__isla{
+  position:absolute;z-index:4;top:calc(var(--w) * .058);left:50%;transform:translateX(-50%);
+  width:calc(var(--w) * .28);height:calc(var(--w) * .076);
+  border-radius:999px;background:#05070C;
+}
+
+/* El dorso, con el módulo de cámaras */
+.iph__lomo{
+  position:relative;width:100%;height:100%;overflow:hidden;
+  border-radius:calc(var(--w) * .126);
+  background:linear-gradient(152deg,#5C97EE 0%,#2A5BA8 24%,#132449 58%,#1F62CE 100%);
+}
+.iph__camaras{
+  position:absolute;top:calc(var(--w) * .055);left:calc(var(--w) * .055);
+  width:calc(var(--w) * .42);height:calc(var(--w) * .42);
+  border-radius:calc(var(--w) * .13);
+  background:linear-gradient(150deg,rgba(255,255,255,.20),rgba(0,0,0,.34));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+.iph__lente{
+  position:absolute;width:calc(var(--w) * .15);height:calc(var(--w) * .15);border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #55678a 0%, #10151f 54%, #04060b 100%);
+  box-shadow:0 0 0 calc(var(--w) * .012) rgba(255,255,255,.22);
+}
+.iph__lente:nth-child(1){top:calc(var(--w) * .045);left:calc(var(--w) * .045)}
+.iph__lente:nth-child(2){top:calc(var(--w) * .045);left:calc(var(--w) * .225)}
+.iph__lente:nth-child(3){top:calc(var(--w) * .225);left:calc(var(--w) * .045)}
+.iph__flash{
+  position:absolute;top:calc(var(--w) * .258);left:calc(var(--w) * .258);
+  width:calc(var(--w) * .085);height:calc(var(--w) * .085);border-radius:50%;
+  background:radial-gradient(circle,#fff7dd 0%,#c9b487 100%);
+}
+.iph__grabado{
+  position:absolute;left:0;right:0;bottom:calc(var(--w) * .11);text-align:center;
+  font-size:calc(var(--w) * .07);font-weight:800;letter-spacing:.24em;
+  color:rgba(255,255,255,.26);
+}
+
+/* ── La app, maquetada dentro de la pantalla ── */
+.uiapp{
+  --p:calc(var(--w) * .055);
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  padding:0 var(--p) calc(var(--w) * .035);
+  background:
+    radial-gradient(130% 56% at 50% -10%, rgba(31,98,206,.50) 0%, transparent 62%),
+    linear-gradient(180deg,#0B1220 0%,#070B12 100%);
+  font-size:calc(var(--w) * .043);line-height:1.35;color:#fff;
+  text-align:left;
+}
+.uiapp__estado{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:calc(var(--w) * .052);
+  font-size:calc(var(--w) * .042);font-weight:700;
+}
+.uiapp__estado-ic{display:flex;align-items:center;gap:calc(var(--w) * .022)}
+.uiapp__estado-ic svg{height:calc(var(--w) * .042);width:auto;fill:currentColor}
+
+.uiapp__top{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:calc(var(--w) * .055);
+}
+.uiapp__marca{
+  display:inline-flex;align-items:center;gap:calc(var(--w) * .028);
+  font-size:calc(var(--w) * .047);font-weight:800;letter-spacing:.16em;
+}
+.uiapp__volcan{width:calc(var(--w) * .078);height:auto;fill:var(--acento-luz)}
+.uiapp__volcan .uiapp__grieta{stroke:#0B1220;stroke-width:1.6;fill:none}
+.uiapp__avatar{
+  display:grid;place-items:center;
+  width:calc(var(--w) * .105);height:calc(var(--w) * .105);border-radius:50%;
+  background:var(--acento);font-size:calc(var(--w) * .046);font-weight:800;
+}
+
+.uiapp__dia{
+  margin-top:calc(var(--w) * .07);
+  font-size:calc(var(--w) * .037);font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--acento-luz);
+}
+.uiapp__rutina{margin-top:calc(var(--w) * .014);font-size:calc(var(--w) * .097)}
+
+.uiapp__progreso{margin-top:calc(var(--w) * .055)}
+.uiapp__barra{
+  height:calc(var(--w) * .024);border-radius:999px;overflow:hidden;
+  background:rgba(255,255,255,.12);
+}
+.uiapp__barra i{
+  display:block;height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--acento) 0%,var(--acento-luz) 100%);
+}
+.uiapp__progreso span{
+  display:block;margin-top:calc(var(--w) * .022);
+  font-size:calc(var(--w) * .036);color:#8C99AE;
+}
+
+.uiapp__lista{margin-top:calc(var(--w) * .05)}
+.uiapp__lista li{
+  display:flex;align-items:center;gap:calc(var(--w) * .042);
+  padding-block:calc(var(--w) * .038);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.uiapp__lista li:first-child{border-top:0}
+.uiapp__tilde{
+  flex:0 0 auto;display:grid;place-items:center;
+  width:calc(var(--w) * .078);height:calc(var(--w) * .078);border-radius:50%;
+  border:1.4px solid rgba(255,255,255,.24);
+}
+.uiapp__tilde svg{width:70%;height:70%;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.uiapp__lista .is-hecho .uiapp__tilde{background:var(--acento);border-color:var(--acento)}
+.uiapp__lista .is-hecho b{color:#8C99AE;text-decoration:line-through}
+.uiapp__ej b{display:block;font-size:calc(var(--w) * .045);font-weight:700}
+.uiapp__ej small{display:block;font-size:calc(var(--w) * .036);color:#8C99AE}
+.uiapp__lista .is-ahora{
+  border-top-color:transparent;border-radius:calc(var(--w) * .04);
+  margin-inline:calc(var(--w) * -.035);padding-inline:calc(var(--w) * .035);
+  background:rgba(31,98,206,.16);box-shadow:inset 0 0 0 1px rgba(76,141,236,.32);
+}
+.uiapp__lista .is-ahora + li{border-top-color:transparent}
+.uiapp__ahora{
+  margin-left:auto;border-radius:999px;
+  padding:calc(var(--w) * .012) calc(var(--w) * .032);
+  background:var(--acento);
+  font-size:calc(var(--w) * .031);font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+}
+
+.uiapp__tabs{
+  margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);
+  padding-top:calc(var(--w) * .045);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.uiapp__tabs span{
+  display:flex;flex-direction:column;align-items:center;gap:calc(var(--w) * .018);
+  font-size:calc(var(--w) * .031);font-weight:700;color:#66738A;
+}
+.uiapp__tabs svg{
+  width:calc(var(--w) * .082);height:calc(var(--w) * .082);
+  fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+}
+.uiapp__tabs .is-activa{color:var(--acento-luz)}
+/* la rayita de abajo del iPhone */
+.uiapp__tabs::after{
+  content:"";grid-column:1/-1;justify-self:center;
+  width:calc(var(--w) * .34);height:calc(var(--w) * .012);border-radius:999px;
+  margin-top:calc(var(--w) * .035);background:rgba(255,255,255,.34);
+}
+
 /* ═══ Entradas al hacer scroll ═════════════════════════════ */
 [data-sube]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease), transform .7s var(--ease)}
 [data-sube].is-visible{opacity:1;transform:none}
@@ -710,7 +919,17 @@ ul{margin:0;padding:0;list-style:none}
   .dest--oscura{margin-block:0;padding-block:clamp(28px,3.4vw,48px)}
   .inc.is-activa{transform:none}
 
-  .nosotros__grid,.porque,.meta__grid,.testi__grid{grid-template-columns:1fr}
+  .nosotros__grid,.porque,.meta__grid,.testi__grid,.app__grid{grid-template-columns:1fr}
+  /* Apilada, la escena de los teléfonos va abajo y se achica */
+  .app__grid{gap:clamp(34px,7vw,60px)}
+  .app__parrafo{max-width:56ch}
+  .app__escena{height:clamp(430px,84vw,560px)}
+  .app__resplandor{top:18%;right:-16%;width:130%;height:86%}
+  /* Apilada la escena es más ancha que los dos teléfonos, así que el par se
+     centra a mano; si no, quedan uno en cada punta y se pierde el montaje. */
+  .iph{--w:clamp(178px,33vw,264px)}
+  .iph--frente{left:50%;transform:translateX(-90%) rotate(-8.5deg) rotateY(-11deg)}
+  .iph--dorso{left:50%;right:auto;top:20%;transform:translateX(-5%) rotate(-8.5deg) rotateY(-11deg)}
   .porque__fotos{padding:0 0 70px 40px}
   .testi__foto{border-radius:var(--radio-g)}
   .testi__caja{margin-left:0;margin-top:-40px;margin-inline:clamp(12px,3vw,40px)}
@@ -734,6 +953,10 @@ ul{margin:0;padding:0;list-style:none}
   .hero__marca{display:none}
   .cifras__in{grid-template-columns:repeat(2,1fr);gap:34px}
   .cifra{justify-content:flex-start}
+  /* En el celular sólo cambian el tamaño y el alto: el centrado del par ya
+     viene del tramo de arriba. */
+  .app__escena{height:clamp(440px,118vw,540px)}
+  .iph{--w:clamp(188px,53vw,236px)}
   .equipo__grid{grid-template-columns:1fr}
   .contacto-fila{grid-template-columns:1fr;gap:22px}
   .contacto-fila > div + div{border-left:0;border-top:1px solid var(--linea-osc);padding-top:22px}
