@@ -7,25 +7,42 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root{
-  /* Claros: el original es un sitio de fondo blanco con bandas negras */
-  --papel:      #FFFFFF;
-  --papel-2:    #F3F4F6;   /* gris de las tarjetas */
-  --tinta:      #12161F;   /* negro de las bandas, girado al azul del logo */
-  --tinta-2:    #1B2130;   /* tarjetas dentro de las bandas oscuras */
-  --texto:      #161B22;
-  --texto-2:    #6B7280;   /* párrafos grises */
-  --texto-osc:  #A9B2C3;   /* párrafos sobre fondo oscuro */
+  /* Sin esto el scroll, los inputs y el autofill del navegador siguen
+     dibujándose en claro y cantan sobre el fondo negro. */
+  color-scheme:dark;
 
-  /* El acento. En la referencia es rojo #FF2D20; acá, el azul del volcán */
+  /* ── Tema negro ──
+     El original de FITMAS es de fondo blanco con bandas negras, y así estaba
+     esto. Ahora va todo en negro, que es de donde viene la marca: el logo es
+     el volcán azul sobre negro y el gimnasio tiene las paredes negras, así
+     que las fotos dejan de pelearse con el fondo.
+
+     Los nombres de las variables se conservan para no reescribir 180 reglas:
+     --papel sigue siendo "el fondo de la sección" y --tinta "la banda", sólo
+     que ahora la banda es un paso más CLARA que el fondo, que es como se
+     separan las superficies cuando todo es oscuro. */
+  --papel:      #0A0D13;   /* fondo base */
+  --papel-2:    #141A24;   /* tarjetas sobre el fondo base */
+  --tinta:      #10151E;   /* las bandas, apenas elevadas */
+  --tinta-2:    #1B2230;   /* tarjetas dentro de las bandas */
+  --texto:      #ECEFF4;
+  --texto-2:    #98A3B4;   /* párrafos secundarios */
+  --texto-osc:  #A9B2C3;   /* párrafos dentro de las bandas */
+
+  /* El acento. En la referencia es rojo #FF2D20; acá, el azul del volcán.
+     Sobre negro el azul pleno queda oscuro para texto chico, así que el que
+     se escribe es --acento-luz y el pleno queda para fondos de botón. */
   --acento:     #1F62CE;
   --acento-osc: #154DA0;   /* hover de botones */
-  --acento-luz: #4C8DEC;   /* volantas y textos chicos sobre oscuro */
+  --acento-luz: #5C97EE;   /* todo el azul que va escrito */
 
-  --linea:      #E5E7EB;
+  --linea:      rgba(255,255,255,.10);
   --linea-osc:  rgba(255,255,255,.10);
 
-  --sombra:     0 18px 40px rgba(18,22,31,.08);
-  --sombra-alta:0 26px 60px rgba(18,22,31,.16);
+  /* En negro una sombra clara no existe: se van al negro puro y la elevación
+     la termina de marcar el borde de cada superficie. */
+  --sombra:     0 18px 40px rgba(0,0,0,.45);
+  --sombra-alta:0 26px 60px rgba(0,0,0,.6);
 
   --radio:      14px;
   --radio-g:    22px;
@@ -59,17 +76,19 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ── Piezas que se repiten ──────────────────────────────── */
 
-/* Volanta: la pastillita blanca con el texto chico en acento */
+/* Volanta: la pastillita con el texto chico en acento. Era blanca sobre el
+   fondo blanco y se separaba con la sombra; en negro la sombra no existe,
+   así que la pastilla se dibuja un paso más clara y con su borde. */
 .volanta{
   display:inline-block;
   padding:6px 18px;border-radius:999px;
-  background:var(--papel);
-  box-shadow:0 6px 18px rgba(18,22,31,.10);
-  color:var(--acento);
+  background:var(--tinta-2);
+  border:1px solid var(--linea);
+  color:var(--acento-luz);
   font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   line-height:1.6;
 }
-.volanta--osc{background:var(--papel);color:var(--acento)}
+.volanta--osc{background:var(--tinta-2);color:var(--acento-luz)}
 /* Variante sin pastilla, con el cuadradito al lado (la del hero) */
 .volanta--plana{
   background:none;box-shadow:none;padding:0;
@@ -97,8 +116,8 @@ ul{margin:0;padding:0;list-style:none}
 }
 .btn:hover{background:var(--acento-osc);transform:translateY(-2px);box-shadow:0 14px 30px rgba(21,77,160,.36)}
 .btn--linea{
-  background:none;color:var(--acento);
-  border:1.5px solid var(--acento);box-shadow:none;
+  background:none;color:var(--acento-luz);
+  border:1.5px solid var(--acento-luz);box-shadow:none;
   border-radius:999px;padding:12px 26px;
 }
 .btn--linea:hover{background:var(--acento);color:#fff}
@@ -109,7 +128,7 @@ ul{margin:0;padding:0;list-style:none}
 .leer{
   display:inline-block;position:relative;padding-bottom:4px;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--acento);
+  color:var(--acento-luz);
 }
 .leer::after{
   content:"";position:absolute;left:0;bottom:0;height:2px;width:26px;
@@ -144,7 +163,7 @@ ul{margin:0;padding:0;list-style:none}
   color:var(--texto-2);transition:color .2s var(--ease);
   font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
 }
-.barra__redes a:hover{color:var(--acento)}
+.barra__redes a:hover{color:var(--acento-luz)}
 
 /* ═══ 2 · CABECERA ═════════════════════════════════════════ */
 .cab{
@@ -155,7 +174,7 @@ ul{margin:0;padding:0;list-style:none}
   box-shadow:0 1px 0 var(--linea);
   transition:box-shadow .3s var(--ease);
 }
-.cab.is-pegada{box-shadow:0 10px 30px rgba(18,22,31,.10)}
+.cab.is-pegada{box-shadow:0 10px 30px rgba(0,0,0,.55)}
 .cab__in{display:flex;align-items:center;gap:clamp(14px,1.8vw,30px);min-height:78px}
 /* El logo viene con el volcán arriba y la palabra en blanco abajo. Sobre la
    cabecera clara la palabra se pierde, así que se recorta el volcán y el
@@ -179,7 +198,7 @@ ul{margin:0;padding:0;list-style:none}
   background:var(--acento);transition:width .28s var(--ease);
 }
 .nav a:hover::after,.nav a[aria-current="page"]::after{width:100%}
-.nav a[aria-current="page"]{color:var(--acento)}
+.nav a[aria-current="page"]{color:var(--acento-luz)}
 
 /* Antes el teléfono llevaba un tubo dentro de un círculo celeste a la
    izquierda. Ahora sólo la línea azul, que ya lo separa del menú. */
@@ -264,11 +283,12 @@ ul{margin:0;padding:0;list-style:none}
 /* La del medio va en negro y sobresale, igual que en el diseño */
 /* La del medio es mas alta y sobresale por arriba y por abajo */
 .dest--oscura{
-  background:var(--tinta);color:#fff;
+  background:var(--tinta-2);color:#fff;
+  border:1.5px solid var(--acento);
   padding-block:calc(clamp(28px,3.4vw,48px) + 26px);
   margin-block:-26px;
   border-radius:var(--radio);
-  box-shadow:var(--sombra-alta);
+  box-shadow:0 26px 60px rgba(0,0,0,.6), 0 0 0 6px rgba(31,98,206,.12);
 }
 .dest--oscura .dest__txt{color:var(--texto-osc)}
 .dest:first-child{border-radius:var(--radio) 0 0 var(--radio)}
@@ -409,8 +429,8 @@ ul{margin:0;padding:0;list-style:none}
 .inc:first-child{border-radius:var(--radio) 0 0 var(--radio)}
 .inc:last-child{border-radius:0 var(--radio) var(--radio) 0}
 /* La primera aparece "activa", como en el diseño */
-.inc.is-activa{background:var(--papel);box-shadow:var(--sombra-alta);transform:scale(1.03);border-radius:var(--radio);position:relative;z-index:2}
-.inc:hover{background:var(--papel);box-shadow:var(--sombra-alta)}
+.inc.is-activa{background:var(--tinta-2);box-shadow:var(--sombra-alta);transform:scale(1.03);border-radius:var(--radio);position:relative;z-index:2}
+.inc:hover{background:var(--tinta-2);box-shadow:var(--sombra-alta)}
 .inc h3{font-size:19px;margin-bottom:10px}
 .inc p{color:var(--texto-2);font-size:15px;margin-bottom:22px}
 
@@ -436,7 +456,7 @@ ul{margin:0;padding:0;list-style:none}
   padding:18px 18px 24px;text-align:center;
   transition:background .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease);
 }
-.profe:hover{background:var(--papel);box-shadow:var(--sombra-alta);transform:translateY(-6px)}
+.profe:hover{background:var(--tinta-2);box-shadow:var(--sombra-alta);transform:translateY(-6px)}
 .profe__foto{border-radius:12px;overflow:hidden;aspect-ratio:1/1.22;background:var(--tinta)}
 .profe__foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25)}
 /* Mientras no esten las fotos del resto del equipo, va el volcan sobre el fondo oscuro */
@@ -454,7 +474,7 @@ ul{margin:0;padding:0;list-style:none}
 .profe:hover .profe__redes{opacity:1;transform:none}
 /* Antes eran dos logos en cuadraditos; ahora el nombre de la red en pastilla */
 .profe__redes a{
-  padding:6px 14px;border-radius:999px;background:var(--papel);
+  padding:6px 14px;border-radius:999px;background:var(--tinta-2);
   border:1px solid var(--linea);
   font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
   transition:background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
@@ -473,7 +493,9 @@ ul{margin:0;padding:0;list-style:none}
 .testi__foto img{width:100%;height:100%;object-fit:cover}
 /* La tarjeta negra monta sobre la foto */
 .testi__caja{
-  background:var(--tinta);border-radius:var(--radio-g);
+  /* Era la caja negra que destacaba sobre el fondo blanco. En negro la
+     sombra no la recorta, así que la termina el borde. */
+  background:var(--tinta);border:1px solid var(--linea);border-radius:var(--radio-g);
   padding:clamp(34px,4vw,56px);text-align:center;color:#fff;
   margin-left:clamp(-90px,-7vw,-20px);
   box-shadow:var(--sombra-alta);
@@ -509,14 +531,15 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:var(--radio);padding:clamp(30px,3vw,42px) clamp(24px,2.4vw,34px);
 }
 .plan--destacado{
-  background:var(--tinta);color:#fff;
+  background:var(--tinta-2);color:#fff;
+  border:1.5px solid var(--acento);
   padding-block:clamp(44px,4.4vw,62px);
-  box-shadow:var(--sombra-alta);z-index:2;
+  box-shadow:0 26px 60px rgba(0,0,0,.6), 0 0 0 6px rgba(31,98,206,.12);z-index:2;
 }
 /* Arriba a la izquierda sobresalía un cuadrado azul con el icono del plan.
    Ahora el nombre del plan arranca directo. */
 .plan h3{font-size:21px}
-.plan__precio{display:flex;align-items:flex-start;gap:3px;margin:14px 0 18px;color:var(--acento)}
+.plan__precio{display:flex;align-items:flex-start;gap:3px;margin:14px 0 18px;color:var(--acento-luz)}
 .plan--destacado .plan__precio{color:#fff}
 .plan__precio .sig{font-size:17px;font-weight:800;margin-top:10px}
 .plan__precio .num{font-size:clamp(38px,4.4vw,54px);font-weight:800;line-height:1}
@@ -626,7 +649,7 @@ ul{margin:0;padding:0;list-style:none}
 .pie__fotos a:hover img{transform:scale(1.08)}
 /* El grupo también va redondeado, para que el botón de adentro sea la misma
    pastilla que todos los demás */
-.news{display:flex;background:var(--papel);border-radius:999px;overflow:hidden;margin-top:18px;max-width:330px;padding:4px 4px 4px 6px}
+.news{display:flex;background:var(--tinta-2);border:1px solid var(--linea);border-radius:999px;overflow:hidden;margin-top:18px;max-width:330px;padding:4px 4px 4px 6px}
 .news input{flex:1;min-width:0;border:0;padding:10px 14px;font:inherit;font-size:14px;color:var(--texto);background:none}
 .news input::placeholder{color:#9AA1AC}
 .news__pie{margin-top:14px}
