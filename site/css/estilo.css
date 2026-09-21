@@ -250,21 +250,6 @@ ul{margin:0;padding:0;list-style:none}
 }
 .hero__acciones{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 
-/* Las pastillas PREV / NEXT pegadas a los bordes */
-.flecha{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
-  width:54px;height:96px;background:var(--papel);
-  display:grid;place-items:center;
-  font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--texto);
-  writing-mode:vertical-rl;
-  transition:background .25s var(--ease), color .25s var(--ease);
-}
-.flecha:hover,.flecha:focus-visible{background:var(--acento);color:#fff}
-.flecha:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.flecha--izq{left:0;border-radius:0 999px 999px 0}
-.flecha--der{right:0;border-radius:999px 0 0 999px;rotate:180deg}
-
 /* ═══ 4 · TRES TARJETAS QUE PISAN EL HERO ══════════════════ */
 /* En el original las tarjetas no pisan el hero: van sobre el blanco,
    despues del filo de pincel. */
@@ -721,7 +706,6 @@ ul{margin:0;padding:0;list-style:none}
   .barra__dato--horario{display:none}
   .hero{min-height:auto}
   .hero__in{padding-block:clamp(80px,16vw,120px)}
-  .flecha{display:none}
   .hero__marca{display:none}
   .cifras__in{grid-template-columns:repeat(2,1fr);gap:34px}
   .cifra{justify-content:flex-start}

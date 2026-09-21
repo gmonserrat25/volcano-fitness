@@ -100,8 +100,13 @@
   }
 
   /* ── Carrusel del hero ──
-     Las pastillas PREV/NEXT del diseño original cambian la portada. Las
-     diapositivas salen del HTML: para cambiarlas no hace falta tocar esto. */
+     Las portadas se pasan solas, sin controles: las pastillas PREV/NEXT del
+     diseño original se dieron de baja. Antes esto se frenaba mientras el
+     mouse estaba sobre el hero, y como el hero ocupa la pantalla entera
+     bastaba con dejar el puntero quieto para que no girara nunca.
+     Las diapositivas salen del HTML: para cambiarlas no hace falta tocar
+     esto. Lo único que lo detiene es la pestaña en segundo plano, y no
+     arranca si el sistema pide menos movimiento. */
   var hero = document.querySelector('.hero');
   var slides = hero ? [].slice.call(hero.querySelectorAll('.hero__slide')) : [];
 
@@ -134,30 +139,8 @@
       clearInterval(reloj);
       reloj = null;
     }
-    function ir(paso) {
-      mostrar(actual + paso);
-      // si la tocás, el automático arranca de cero y no te corta la lectura
-      frenar();
-      arrancar();
-    }
 
-    var izq = hero.querySelector('.flecha--izq');
-    var der = hero.querySelector('.flecha--der');
-    if (izq) izq.addEventListener('click', function () { ir(-1); });
-    if (der) der.addEventListener('click', function () { ir(1); });
-
-    // con el teclado, estando dentro del hero
-    hero.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { ir(-1); }
-      else if (e.key === 'ArrowRight') { ir(1); }
-    });
-
-    // se frena mientras el mouse está encima o hay foco adentro
-    hero.addEventListener('mouseenter', frenar);
-    hero.addEventListener('mouseleave', arrancar);
-    hero.addEventListener('focusin', frenar);
-    hero.addEventListener('focusout', arrancar);
-    // y con la pestaña en segundo plano no tiene sentido que siga girando
+    // con la pestaña en segundo plano no tiene sentido que siga girando
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) frenar(); else arrancar();
     });
