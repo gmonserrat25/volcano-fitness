@@ -102,10 +102,12 @@ def _wa(t):
 
 
 # ── Piezas que se repiten ────────────────────────────────────────────────
+# La tilde sigue en pie sólo para la lista de "qué buscamos" de somos.html,
+# que todavía tiene su regla .lista-check svg en el CSS. La flecha del
+# acordeón se dio de baja: ahora el <i> va vacío y el signo + / − lo pone
+# el CSS, igual que en la home.
 TILDE = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
          '<path d="m5 12 4.5 4.5L19 7"/></svg>')
-FLECHA = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
-          '<path d="M5 12h13m-5-5 5 5-5 5"/></svg>')
 
 
 def cabecera_pagina(volanta, titulo, bajada, foto, filo='b'):
@@ -148,7 +150,7 @@ def acordeon(items, claro=True):
         filas.append(f"""        <div class="acor{abierto}">
           <button class="acor__cab" type="button" aria-expanded="{expand}">
             {q}
-            <i>{FLECHA}</i>
+            <i aria-hidden="true"></i>
           </button>
           <div class="acor__cuerpo"><div><p>{r}</p></div></div>
         </div>""")
@@ -501,11 +503,10 @@ CONTENIDO['gym'] = (
 
 
 # ────────────────────────────── Precios ──────────────────────────────────
-ICONOS_PLAN = {
-    "Libre": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6m18-6v6M6 7v10m12-10v10M6 12h12"/></svg>',
-    "Full": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6m0 0-3 6m3-6 3 6M7 11l5-2 5 2"/></svg>',
-    "Personalizado": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8h4m-2-2v4"/></svg>',
-}
+# Cada plan traía su icono en un cuadrado azul que sobresalía arriba a la
+# izquierda, y cada ítem de la lista su tilde dibujada. Se dieron de baja
+# junto con el resto de los iconos, y la lista la ordena la viñeta cuadrada
+# que pone el CSS en .plan li::before.
 
 planes = [
     ("Libre", "Para quien ya sabe lo que hace y quiere entrenar por su cuenta.",
@@ -518,7 +519,6 @@ planes = [
 
 planes_html = "\n".join(
     """        <article class="plan{dest}">
-          <span class="plan__ico">{ico}</span>
           <h3>{nom}{tag}</h3>
           <!-- Cuando estén los valores: <span class="sig">$</span><span class="num">18000</span><span class="per">/mes</span> -->
           <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
@@ -527,11 +527,10 @@ planes_html = "\n".join(
           <a class="btn" href="{href}" target="_blank" rel="noopener">Consultar</a>
         </article>""".format(
         dest=' plan--destacado' if dest else '',
-        ico=ICONOS_PLAN[nom],
         nom=nom,
         tag=' <span class="volanta" style="margin-left:8px;vertical-align:middle">El más elegido</span>' if dest else '',
         desc=desc,
-        items=''.join('<li>%s%s</li>' % (TILDE, x) for x in items),
+        items=''.join('<li>%s</li>' % x for x in items),
         href=_wa('Hola! Quiero consultar el plan ' + nom + '.'))
     for nom, desc, items, dest in planes)
 
