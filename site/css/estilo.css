@@ -84,10 +84,12 @@ ul{margin:0;padding:0;list-style:none}
 .centro{text-align:center}
 .centro .titulo-sec{margin-inline:auto}
 
-/* Botón principal: rectángulo de esquinas apenas redondeadas, como el original */
+/* Botón principal. Una sola forma en todo el sitio: la pastilla. Antes había
+   dos (este rectángulo de 8px y el .btn--linea redondeado) y en el hero se
+   veían los dos juntos, uno al lado del otro. */
 .btn{
   display:inline-flex;align-items:center;gap:10px;
-  padding:14px 26px;border-radius:8px;
+  padding:14px 26px;border-radius:999px;
   background:var(--acento);color:#fff;
   font-size:14px;font-weight:700;letter-spacing:.01em;white-space:nowrap;
   box-shadow:0 10px 24px rgba(31,98,206,.30);
@@ -102,19 +104,18 @@ ul{margin:0;padding:0;list-style:none}
 .btn--linea:hover{background:var(--acento);color:#fff}
 .btn--chico{padding:10px 20px;font-size:13px}
 
-/* Enlace "LEER MÁS" con la flecha en un círculo */
+/* Enlace "LEER MÁS". Antes la flecha iba en un círculo gris al lado; ahora el
+   enlace se sostiene solo, con la línea que se dibuja al pasar el mouse. */
 .leer{
-  display:inline-flex;align-items:center;gap:12px;
+  display:inline-block;position:relative;padding-bottom:4px;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acento);
 }
-.leer i{
-  display:grid;place-items:center;
-  width:34px;height:34px;border-radius:50%;
-  background:var(--papel-2);color:var(--texto);
-  transition:background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+.leer::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:26px;
+  background:currentColor;transition:width .28s var(--ease);
 }
-.leer i svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none}
-.leer:hover i{background:var(--acento);color:#fff;transform:translateX(3px)}
+.leer:hover::after{width:100%}
 
 /* Filo de pincel. Se apoya en el sprite de <symbol> del final del body */
 .sprite-rasgado{position:absolute;width:0;height:0;overflow:hidden}
@@ -134,12 +135,16 @@ ul{margin:0;padding:0;list-style:none}
   font-size:13px;color:var(--texto-2);
 }
 .barra__in{display:flex;align-items:center;gap:26px;min-height:46px;flex-wrap:wrap}
-.barra__dato{display:inline-flex;align-items:center;gap:8px}
-.barra__dato svg{width:15px;height:15px;stroke:var(--acento);stroke-width:1.8;fill:none}
-.barra__redes{margin-left:auto;display:inline-flex;align-items:center;gap:14px}
-.barra__redes a{color:var(--texto-2);transition:color .2s var(--ease)}
+/* El cuadradito azul es la misma marca que usa la volanta del hero */
+.barra__dato{display:inline-flex;align-items:center;gap:10px}
+.barra__dato::before{content:"";flex:0 0 auto;width:6px;height:6px;background:var(--acento)}
+/* Las redes van con el nombre escrito, no con el logo */
+.barra__redes{margin-left:auto;display:inline-flex;align-items:center;gap:20px}
+.barra__redes a{
+  color:var(--texto-2);transition:color .2s var(--ease);
+  font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+}
 .barra__redes a:hover{color:var(--acento)}
-.barra__redes svg{width:15px;height:15px;fill:currentColor}
 
 /* ═══ 2 · CABECERA ═════════════════════════════════════════ */
 .cab{
@@ -176,19 +181,19 @@ ul{margin:0;padding:0;list-style:none}
 .nav a:hover::after,.nav a[aria-current="page"]::after{width:100%}
 .nav a[aria-current="page"]{color:var(--acento)}
 
-.cab__tel{display:inline-flex;align-items:center;gap:12px;flex:0 0 auto;white-space:nowrap}
-.cab__tel .ico{
-  display:grid;place-items:center;width:38px;height:38px;border-radius:50%;
-  background:rgba(31,98,206,.10);
+/* Antes el teléfono llevaba un tubo dentro de un círculo celeste a la
+   izquierda. Ahora sólo la línea azul, que ya lo separa del menú. */
+.cab__tel{
+  display:inline-flex;align-items:center;flex:0 0 auto;white-space:nowrap;
+  padding-left:16px;border-left:2px solid var(--acento);
 }
-.cab__tel .ico svg{width:17px;height:17px;stroke:var(--acento);stroke-width:1.8;fill:none}
 .cab__tel b{font-size:15px;font-weight:800;letter-spacing:-.01em}
 .cab__tel span{display:block;font-size:11px;color:var(--texto-2);font-weight:600;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
 
 .nav__cta{display:none}
 
 .burger{
-  display:none;width:44px;height:44px;border:1px solid var(--linea);border-radius:10px;
+  display:none;width:44px;height:44px;border:1px solid var(--linea);border-radius:999px;
   place-items:center;
 }
 .burger span{display:block;width:18px;height:2px;background:var(--texto);margin:3px 0;transition:transform .3s var(--ease),opacity .2s}
@@ -284,8 +289,6 @@ ul{margin:0;padding:0;list-style:none}
 .dest:first-child{border-radius:var(--radio) 0 0 var(--radio)}
 .dest:last-child{border-radius:0 var(--radio) var(--radio) 0}
 .dest:hover{box-shadow:var(--sombra-alta);transform:translateY(-8px)}
-.dest__ico{width:46px;height:46px;stroke:var(--acento);stroke-width:1.6;fill:none;margin-bottom:22px}
-.dest--oscura .dest__ico{stroke:#fff}
 .dest h3{font-size:20px;margin:12px 0 10px}
 .dest__txt{color:var(--texto-2);font-size:15px}
 .dest .btn{margin-top:auto}
@@ -314,23 +317,21 @@ ul{margin:0;padding:0;list-style:none}
 /* Pestañas Misión / Cómo / Con qué */
 .pest{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 .pest button{
-  padding:9px 20px;border-radius:7px;background:var(--papel-2);
+  padding:9px 22px;border-radius:999px;background:var(--papel-2);
   font-size:13px;font-weight:700;color:var(--texto);
   transition:background .22s var(--ease), color .22s var(--ease);
 }
 .pest button[aria-selected="true"]{background:var(--acento);color:#fff}
 .panel-pest{
-  display:none;gap:18px;align-items:flex-start;
+  display:none;
   margin-top:24px;padding-top:24px;border-top:1px solid var(--linea);
 }
-.panel-pest.is-activo{display:flex}
-.panel-pest svg{flex:0 0 auto;width:40px;height:40px;stroke:var(--acento);stroke-width:1.5;fill:none}
+.panel-pest.is-activo{display:block}
 .panel-pest p{color:var(--texto-2);font-size:15px}
 
 .nosotros__pie{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:34px}
-.ayuda{display:inline-flex;align-items:center;gap:12px}
-.ayuda .ico{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;box-shadow:var(--sombra)}
-.ayuda .ico svg{width:19px;height:19px;stroke:var(--acento);stroke-width:1.8;fill:none}
+/* El teléfono de ayuda: antes un tubo en un círculo blanco, ahora la línea */
+.ayuda{display:inline-flex;align-items:center;padding-left:16px;border-left:2px solid var(--acento)}
 .ayuda span{display:block;font-size:12px;color:var(--texto-2);font-weight:600}
 .ayuda b{font-size:16px;font-weight:800}
 
@@ -360,13 +361,9 @@ ul{margin:0;padding:0;list-style:none}
 }
 .entreno:hover{background:var(--acento);border-color:transparent;transform:translateY(-6px)}
 .entreno:hover p, .entreno:hover .leer{color:#fff}
-.entreno__ico{width:40px;height:40px;stroke:#fff;stroke-width:1.5;fill:none;margin-bottom:20px}
 .entreno h3{font-size:18px;margin-bottom:8px}
 .entreno p{font-size:14px;margin-bottom:18px}
-.entreno .leer{color:#fff;gap:8px}
-.entreno .leer i{width:auto;height:auto;background:none;color:inherit}
-.entreno .leer i svg{width:16px;height:16px;stroke:currentColor}
-.entreno .leer:hover i{background:none;color:inherit}
+.entreno .leer{color:#fff}
 
 /* Por qué Volcano: fotos + acordeón */
 .porque{
@@ -389,7 +386,6 @@ ul{margin:0;padding:0;list-style:none}
   padding:20px 30px;display:flex;align-items:center;gap:18px;
   box-shadow:0 18px 40px rgba(31,98,206,.35);
 }
-.sello svg{width:42px;height:42px;stroke:#fff;stroke-width:1.5;fill:none}
 .sello b{display:block;font-size:34px;font-weight:800;line-height:1}
 .sello span{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88)}
 
@@ -401,11 +397,18 @@ ul{margin:0;padding:0;list-style:none}
   font-size:16px;font-weight:700;color:#fff;
 }
 .acor__cab i{
-  flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:8px;
+  flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:999px;
   background:rgba(255,255,255,.08);transition:background .25s var(--ease), transform .3s var(--ease);
 }
 .acor__cab i svg{width:15px;height:15px;stroke:#fff;stroke-width:2;fill:none}
-.acor.is-abierto .acor__cab i{background:var(--acento);transform:rotate(90deg)}
+/* Donde el <i> quedó vacío (la home, ya sin la flecha) el signo lo pone el
+   CSS: + cerrado y − abierto. Con el :empty las páginas que todavía traen el
+   SVG adentro siguen andando igual. */
+.acor__cab i:empty{font-style:normal;font-size:19px;font-weight:700;line-height:1}
+.acor__cab i:empty::before{content:"+"}
+.acor.is-abierto .acor__cab i:empty::before{content:"–"}
+.acor.is-abierto .acor__cab i{background:var(--acento)}
+.acor.is-abierto .acor__cab i:not(:empty){transform:rotate(90deg)}
 .acor__cuerpo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
 .acor.is-abierto .acor__cuerpo{grid-template-rows:1fr}
 .acor__cuerpo > div{overflow:hidden}
@@ -422,14 +425,7 @@ ul{margin:0;padding:0;list-style:none}
 .inc:last-child{border-radius:0 var(--radio) var(--radio) 0}
 /* La primera aparece "activa", como en el diseño */
 .inc.is-activa{background:var(--papel);box-shadow:var(--sombra-alta);transform:scale(1.03);border-radius:var(--radio);position:relative;z-index:2}
-.inc.is-activa .leer i{background:var(--acento);color:#fff}
 .inc:hover{background:var(--papel);box-shadow:var(--sombra-alta)}
-.inc__ico{
-  display:grid;place-items:center;width:62px;height:62px;border-radius:12px;
-  background:var(--papel);box-shadow:var(--sombra);margin-bottom:24px;
-}
-.inc.is-activa .inc__ico{box-shadow:none;background:var(--papel-2)}
-.inc__ico svg{width:32px;height:32px;stroke:var(--acento);stroke-width:1.5;fill:none}
 .inc h3{font-size:19px;margin-bottom:10px}
 .inc p{color:var(--texto-2);font-size:15px;margin-bottom:22px}
 
@@ -440,13 +436,11 @@ ul{margin:0;padding:0;list-style:none}
   padding-block:clamp(84px,9vw,124px);
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
 }
-.cifra{display:flex;align-items:center;gap:16px;justify-content:center}
-.cifra__ico{
-  flex:0 0 auto;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;
-  background:var(--acento);
-}
-.cifra__ico svg{width:28px;height:28px;stroke:#fff;stroke-width:1.5;fill:none}
-.cifra b{display:block;color:#fff;font-size:clamp(28px,3.4vw,40px);font-weight:800;line-height:1}
+/* Antes cada número traía su icono en un círculo azul al costado. Ahora el
+   número es lo único que se ve, y lo que separa las columnas es la línea. */
+.cifra{display:flex;align-items:center;justify-content:center;text-align:center}
+.cifra + .cifra{border-left:1px solid var(--linea-osc)}
+.cifra b{display:block;color:#fff;font-size:clamp(34px,4.4vw,54px);font-weight:800;line-height:1;margin-bottom:10px}
 .cifra span{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--texto-osc)}
 
 /* ═══ 9 · ENTRENADORES ═════════════════════════════════════ */
@@ -473,13 +467,14 @@ ul{margin:0;padding:0;list-style:none}
   transition:opacity .3s var(--ease), transform .3s var(--ease);
 }
 .profe:hover .profe__redes{opacity:1;transform:none}
+/* Antes eran dos logos en cuadraditos; ahora el nombre de la red en pastilla */
 .profe__redes a{
-  display:grid;place-items:center;width:32px;height:32px;border-radius:8px;
-  background:var(--papel-2);transition:background .2s var(--ease), color .2s var(--ease);
+  padding:6px 14px;border-radius:999px;background:var(--papel);
+  border:1px solid var(--linea);
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
 }
-.profe__redes a:first-child{background:var(--acento);color:#fff}
-.profe__redes a:hover{background:var(--acento);color:#fff}
-.profe__redes svg{width:14px;height:14px;fill:currentColor}
+.profe__redes a:hover{background:var(--acento);border-color:transparent;color:#fff}
 
 /* ═══ 10 · TESTIMONIOS ═════════════════════════════════════ */
 .testi{padding-block:clamp(40px,6vw,80px)}
@@ -533,14 +528,9 @@ ul{margin:0;padding:0;list-style:none}
   padding-block:clamp(44px,4.4vw,62px);
   box-shadow:var(--sombra-alta);z-index:2;
 }
-/* El icono azul que sobresale por arriba a la izquierda */
-.plan__ico{
-  position:absolute;left:clamp(24px,2.4vw,34px);top:-30px;
-  display:grid;place-items:center;width:64px;height:64px;border-radius:12px;
-  background:var(--acento);box-shadow:0 14px 30px rgba(31,98,206,.34);
-}
-.plan__ico svg{width:32px;height:32px;stroke:#fff;stroke-width:1.5;fill:none}
-.plan h3{font-size:21px;margin-top:18px}
+/* Arriba a la izquierda sobresalía un cuadrado azul con el icono del plan.
+   Ahora el nombre del plan arranca directo. */
+.plan h3{font-size:21px}
 .plan__precio{display:flex;align-items:flex-start;gap:3px;margin:14px 0 18px;color:var(--acento)}
 .plan--destacado .plan__precio{color:#fff}
 .plan__precio .sig{font-size:17px;font-weight:800;margin-top:10px}
@@ -550,10 +540,12 @@ ul{margin:0;padding:0;list-style:none}
 .plan__nota{color:var(--texto-2);font-size:14px;padding-bottom:20px;border-bottom:1px solid var(--linea)}
 .plan--destacado .plan__nota{color:var(--texto-osc);border-color:var(--linea-osc)}
 .plan ul{margin:20px 0 26px;display:grid;gap:9px}
-.plan li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--texto-2)}
+/* Cada ítem llevaba su tilde dibujada. Queda la viñeta cuadrada azul, la
+   misma que usa la volanta del hero. */
+.plan li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--texto-2)}
+.plan li::before{content:"";flex:0 0 auto;width:7px;height:7px;margin-top:8px;background:var(--acento)}
 .plan--destacado li{color:var(--texto-osc)}
-.plan li svg{flex:0 0 auto;width:17px;height:17px;margin-top:3px;stroke:var(--acento);stroke-width:1.8;fill:none}
-.plan--destacado li svg{stroke:var(--acento-luz)}
+.plan--destacado li::before{background:var(--acento-luz)}
 .plan__precio--pendiente .num{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.01em}
 .precios__pie{text-align:center;margin-top:30px;color:var(--texto-2);font-size:14px}
 
@@ -561,12 +553,10 @@ ul{margin:0;padding:0;list-style:none}
 .meta{padding-block:clamp(50px,7vw,96px)}
 .meta__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,70px);align-items:center}
 .meta__lista{display:grid;gap:22px;margin:30px 0 34px}
+/* Los tres puntos iban con su cuadrado azul y un icono adentro. Ahora los
+   ordena la misma viñeta cuadrada del resto del sitio. */
 .meta__lista li{display:flex;gap:16px}
-.meta__lista .ico{
-  flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:9px;
-  background:var(--acento);
-}
-.meta__lista .ico svg{width:21px;height:21px;stroke:#fff;stroke-width:1.5;fill:none}
+.meta__lista li::before{content:"";flex:0 0 auto;width:7px;height:7px;margin-top:9px;background:var(--acento)}
 .meta__lista h3{font-size:16px;margin-bottom:4px}
 .meta__lista p{font-size:14px;color:var(--texto-2)}
 .meta__foto{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:4/3.2}
@@ -597,8 +587,8 @@ ul{margin:0;padding:0;list-style:none}
 }
 .tarjeta-foto__txt{position:relative;z-index:2;padding:26px 24px;color:#fff}
 .tarjeta-foto__meta{display:flex;gap:18px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-luz);margin-bottom:10px}
-.tarjeta-foto__meta span{display:inline-flex;align-items:center;gap:6px}
-.tarjeta-foto__meta svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.8;fill:none}
+.tarjeta-foto__meta span{display:inline-flex;align-items:center;gap:8px}
+.tarjeta-foto__meta span::before{content:"";width:6px;height:6px;background:currentColor}
 .tarjeta-foto h3{font-size:19px;margin-bottom:8px}
 .tarjeta-foto p{font-size:14px;color:var(--texto-osc)}
 
@@ -617,13 +607,10 @@ ul{margin:0;padding:0;list-style:none}
   padding-block:clamp(34px,4vw,50px);
   border-bottom:1px solid var(--linea-osc);
 }
-.contacto-fila > div{display:flex;align-items:center;gap:16px;padding-inline:clamp(10px,2vw,30px)}
+/* Los tres datos venían con su icono en un círculo. Ahora sólo el rótulo
+   chico arriba y el dato grande abajo, que es lo que se lee. */
+.contacto-fila > div{display:flex;align-items:center;padding-inline:clamp(10px,2vw,30px)}
 .contacto-fila > div + div{border-left:1px solid var(--linea-osc)}
-.contacto-fila .ico{
-  flex:0 0 auto;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
-  background:rgba(255,255,255,.07);
-}
-.contacto-fila .ico svg{width:20px;height:20px;stroke:#fff;stroke-width:1.7;fill:none}
 .contacto-fila span{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-osc)}
 .contacto-fila b{font-size:17px;font-weight:800}
 
@@ -636,11 +623,14 @@ ul{margin:0;padding:0;list-style:none}
 .pie__cols h4::after{content:"";position:absolute;left:0;bottom:0;width:38px;height:2px;background:var(--acento)}
 .pie img.logo{height:44px;width:auto;margin-bottom:20px}
 .pie__sobre{font-size:14px;color:var(--texto-osc);max-width:34ch}
-.pie__redes{display:flex;gap:9px;margin-top:22px}
-.pie__redes a{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.07);transition:background .22s var(--ease)}
-.pie__redes a:first-child{background:var(--acento)}
+/* Las redes con el nombre escrito, en pastilla, en vez del logo en un cuadro */
+.pie__redes{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.pie__redes a{
+  padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.07);
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .22s var(--ease);
+}
 .pie__redes a:hover{background:var(--acento)}
-.pie__redes svg{width:15px;height:15px;fill:currentColor}
 .pie__links li{margin-bottom:11px}
 .pie__links a{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--texto-osc);transition:color .2s var(--ease),transform .2s var(--ease)}
 .pie__links a::before{content:"»";color:var(--acento-luz);font-weight:800}
@@ -649,8 +639,10 @@ ul{margin:0;padding:0;list-style:none}
 .pie__fotos a{border-radius:7px;overflow:hidden;aspect-ratio:1;background:var(--tinta-2)}
 .pie__fotos img{width:100%;height:100%;object-fit:cover;transition:transform .35s var(--ease)}
 .pie__fotos a:hover img{transform:scale(1.08)}
-.news{display:flex;background:var(--papel);border-radius:8px;overflow:hidden;margin-top:18px;max-width:330px}
-.news input{flex:1;min-width:0;border:0;padding:14px 16px;font:inherit;font-size:14px;color:var(--texto);background:none}
+/* El grupo también va redondeado, para que el botón de adentro sea la misma
+   pastilla que todos los demás */
+.news{display:flex;background:var(--papel);border-radius:999px;overflow:hidden;margin-top:18px;max-width:330px;padding:4px 4px 4px 6px}
+.news input{flex:1;min-width:0;border:0;padding:10px 14px;font:inherit;font-size:14px;color:var(--texto);background:none}
 .news input::placeholder{color:#9AA1AC}
 .news__pie{margin-top:14px}
 .pie__legal{
@@ -671,7 +663,6 @@ ul{margin:0;padding:0;list-style:none}
   transition:transform .25s var(--ease);
 }
 .wpp:hover{transform:translateY(-3px)}
-.wpp svg{width:21px;height:21px;fill:currentColor}
 
 /* ═══ Entradas al hacer scroll ═════════════════════════════ */
 [data-sube]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease), transform .7s var(--ease)}
