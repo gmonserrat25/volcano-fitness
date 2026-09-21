@@ -524,9 +524,10 @@ planes_html = "\n".join(
           <p class="plan__precio plan__precio--pendiente"><span class="num">A confirmar</span></p>
           <p class="plan__nota">{desc}</p>
           <ul>{items}</ul>
-          <a class="btn" href="{href}" target="_blank" rel="noopener">Consultar</a>
+          <a class="btn{linea}" href="{href}" target="_blank" rel="noopener">Consultar</a>
         </article>""".format(
         dest=' plan--destacado' if dest else '',
+        linea='' if dest else ' btn--linea',
         ico=ICONOS_PLAN[nom],
         nom=nom,
         tag=' <span class="volanta" style="margin-left:8px;vertical-align:middle">El más elegido</span>' if dest else '',

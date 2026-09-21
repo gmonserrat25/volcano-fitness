@@ -19,6 +19,7 @@
   /* El acento. En la referencia es rojo #FF2D20; acá, el azul del volcán */
   --acento:     #1F62CE;
   --acento-osc: #154DA0;   /* hover de botones */
+  --acento-mas: #113E82;   /* el mismo botón, apretado */
   --acento-luz: #4C8DEC;   /* volantas y textos chicos sobre oscuro */
 
   --linea:      #E5E7EB;
@@ -28,6 +29,7 @@
   --sombra-alta:0 26px 60px rgba(18,22,31,.16);
 
   --radio:      14px;
+  --radio-btn:  3px;       /* un solo radio para todos los botones */
   --radio-g:    22px;
   --gut:        clamp(18px, 4vw, 40px);
   --ancho:      1240px;
@@ -84,22 +86,48 @@ ul{margin:0;padding:0;list-style:none}
 .centro{text-align:center}
 .centro .titulo-sec{margin-inline:auto}
 
-/* Botón principal: rectángulo de esquinas apenas redondeadas, como el original */
+/* Botón principal: rectángulo de esquina casi recta, como el original.
+   Plano a propósito: sin halo azul debajo y sin saltito al pasar el mouse.
+   El hover sólo oscurece el relleno y el clic lo hunde un punto más. */
 .btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:14px 26px;border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;border-radius:var(--radio-btn);
+  border:1px solid var(--acento);
   background:var(--acento);color:#fff;
-  font-size:14px;font-weight:700;letter-spacing:.01em;white-space:nowrap;
-  box-shadow:0 10px 24px rgba(31,98,206,.30);
-  transition:background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+  font-size:14px;font-weight:700;white-space:nowrap;
+  transition:background .16s ease, border-color .16s ease, color .16s ease;
 }
-.btn:hover{background:var(--acento-osc);transform:translateY(-2px);box-shadow:0 14px 30px rgba(21,77,160,.36)}
+.btn:hover{background:var(--acento-osc);border-color:var(--acento-osc)}
+.btn:active{background:var(--acento-mas);border-color:var(--acento-mas)}
+.btn:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
+
+/* Secundario. Exactamente la misma caja que el principal —mismo alto, mismo
+   radio—, lo único que cambia es el relleno. Se pinta de tinta y no de azul:
+   el azul queda reservado para la acción que de verdad importa. */
 .btn--linea{
-  background:none;color:var(--acento);
-  border:1.5px solid var(--acento);box-shadow:none;
-  border-radius:999px;padding:12px 26px;
+  background:none;color:var(--texto);
+  border-color:rgba(18,22,31,.28);
 }
-.btn--linea:hover{background:var(--acento);color:#fff}
+.btn--linea:hover{background:var(--texto);border-color:var(--texto);color:#fff}
+.btn--linea:active{background:var(--tinta);border-color:var(--tinta);color:#fff}
+
+/* El mismo secundario, pero apoyado sobre foto o sobre banda oscura */
+.btn--claro{
+  background:none;color:#fff;border-color:rgba(255,255,255,.55);
+}
+.btn--claro:hover{background:#fff;border-color:#fff;color:var(--texto)}
+.btn--claro:active{background:rgba(255,255,255,.85);border-color:transparent;color:var(--texto)}
+
+/* Tercer nivel: enlace subrayado, para los pies de tarjeta. Tres botones
+   azules idénticos en fila era lo que más cantaba a plantilla. */
+.btn--texto{
+  padding:0 0 5px;border:0;border-radius:0;background:none;
+  border-bottom:2px solid var(--acento);
+  color:var(--texto);
+  transition:color .16s ease, border-color .16s ease;
+}
+.btn--texto:hover{color:var(--acento)}
+.btn--texto:focus-visible{outline:2px solid var(--acento);outline-offset:4px}
 .btn--chico{padding:10px 20px;font-size:13px}
 
 /* Enlace "LEER MÁS" con la flecha en un círculo */
@@ -289,6 +317,8 @@ ul{margin:0;padding:0;list-style:none}
 .dest h3{font-size:20px;margin:12px 0 10px}
 .dest__txt{color:var(--texto-2);font-size:15px}
 .dest .btn{margin-top:auto}
+.dest--oscura .btn--texto{color:#fff}
+.dest--oscura .btn--texto:hover{color:var(--acento-luz);border-bottom-color:var(--acento-luz)}
 .dest__txt{margin-bottom:24px}
 
 /* ═══ 5 · SOBRE NOSOTROS ═══════════════════════════════════ */
@@ -314,11 +344,14 @@ ul{margin:0;padding:0;list-style:none}
 /* Pestañas Misión / Cómo / Con qué */
 .pest{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 .pest button{
-  padding:9px 20px;border-radius:7px;background:var(--papel-2);
-  font-size:13px;font-weight:700;color:var(--texto);
-  transition:background .22s var(--ease), color .22s var(--ease);
+  padding:9px 20px;border-radius:var(--radio-btn);
+  border:1px solid var(--linea);background:none;
+  font-size:13px;font-weight:700;color:var(--texto-2);
+  transition:border-color .16s ease, color .16s ease, background .16s ease;
 }
-.pest button[aria-selected="true"]{background:var(--acento);color:#fff}
+.pest button:hover{border-color:rgba(18,22,31,.28);color:var(--texto)}
+.pest button[aria-selected="true"]{background:var(--texto);border-color:var(--texto);color:#fff}
+.pest button:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
 .panel-pest{
   display:none;gap:18px;align-items:flex-start;
   margin-top:24px;padding-top:24px;border-top:1px solid var(--linea);
@@ -387,7 +420,7 @@ ul{margin:0;padding:0;list-style:none}
   position:absolute;right:6%;bottom:22px;
   background:var(--acento);border-radius:var(--radio);
   padding:20px 30px;display:flex;align-items:center;gap:18px;
-  box-shadow:0 18px 40px rgba(31,98,206,.35);
+  box-shadow:0 18px 40px rgba(18,22,31,.28);
 }
 .sello svg{width:42px;height:42px;stroke:#fff;stroke-width:1.5;fill:none}
 .sello b{display:block;font-size:34px;font-weight:800;line-height:1}
@@ -512,7 +545,7 @@ ul{margin:0;padding:0;list-style:none}
 .estrellas svg{width:17px;height:17px;fill:var(--acento-luz)}
 .testi__nombres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:30px}
 .testi__nombres button{
-  padding:12px 8px;border-radius:9px;background:var(--tinta-2);
+  padding:12px 8px;border-radius:var(--radio-btn);background:var(--tinta-2);
   border:1px solid var(--linea-osc);color:#fff;
   transition:background .25s var(--ease), border-color .25s var(--ease);
 }
@@ -537,7 +570,7 @@ ul{margin:0;padding:0;list-style:none}
 .plan__ico{
   position:absolute;left:clamp(24px,2.4vw,34px);top:-30px;
   display:grid;place-items:center;width:64px;height:64px;border-radius:12px;
-  background:var(--acento);box-shadow:0 14px 30px rgba(31,98,206,.34);
+  background:var(--acento);box-shadow:0 10px 24px rgba(18,22,31,.18);
 }
 .plan__ico svg{width:32px;height:32px;stroke:#fff;stroke-width:1.5;fill:none}
 .plan h3{font-size:21px;margin-top:18px}
@@ -649,7 +682,8 @@ ul{margin:0;padding:0;list-style:none}
 .pie__fotos a{border-radius:7px;overflow:hidden;aspect-ratio:1;background:var(--tinta-2)}
 .pie__fotos img{width:100%;height:100%;object-fit:cover;transition:transform .35s var(--ease)}
 .pie__fotos a:hover img{transform:scale(1.08)}
-.news{display:flex;background:var(--papel);border-radius:8px;overflow:hidden;margin-top:18px;max-width:330px}
+.news{display:flex;background:var(--papel);border-radius:var(--radio-btn);overflow:hidden;margin-top:18px;max-width:330px}
+.news .btn{border-radius:0;border-color:transparent}
 .news input{flex:1;min-width:0;border:0;padding:14px 16px;font:inherit;font-size:14px;color:var(--texto);background:none}
 .news input::placeholder{color:#9AA1AC}
 .news__pie{margin-top:14px}
