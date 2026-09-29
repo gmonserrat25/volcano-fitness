@@ -1,0 +1,32 @@
+# Volcano Fitness
+
+> Gimnasio en La Falda, Córdoba. Musculación, clases de funcional, entrenamiento personalizado y acondicionamiento con cintas y bicicletas. La primera clase no tiene costo.
+
+## Datos
+
+- Rubro: Gimnasio con musculación, funcional, entrenamiento personalizado y acondicionamiento
+- Dirección: Sarmiento 518, La Falda, Córdoba, Argentina
+- Teléfono: +54 3548 592487
+- Horarios: Lunes a viernes de 7 a 12 y de 14 a 22 h; sábados de 9 a 12 h
+- Cómo llegar: https://www.google.com/maps/dir/?api=1&destination=Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina
+- Redes: https://www.instagram.com/volcano_fitnesslafalda
+- Redes: https://www.tiktok.com/@volcano.fitness
+
+## Páginas
+
+- [Inicio](https://gmonserrat25.github.io/volcano-fitness/): Volcano Fitness
+- [Entrenamientos](https://gmonserrat25.github.io/volcano-fitness/entrenamientos.html): Musculación, funcional, personalizado y acondicionamiento
+- [El gimnasio](https://gmonserrat25.github.io/volcano-fitness/gym.html): Instalaciones y cómo llegar
+- [Precios](https://gmonserrat25.github.io/volcano-fitness/precios.html): Planes Libre, Full y Personalizado (valores por confirmar)
+- [Contacto](https://gmonserrat25.github.io/volcano-fitness/contacto.html): WhatsApp, teléfono y mapa
+
+## Preguntas frecuentes
+
+**¿Hay que firmar permanencia?**
+No. Los planes son mes a mes y podés cambiar o dar de baja cuando quieras. Tampoco cobramos matrícula.
+
+**¿Qué horarios tienen?**
+Lunes a viernes de 7 a 12 y de 14 a 22 h. Sábados de 9 a 12 h. Las clases de funcional van con reserva; el resto de la sala es sin turno.
+
+**¿Puedo entrenar si nunca pisé un gimnasio?**
+Sí, es lo más común. Empezás con una evaluación, el entrenador te arma la rutina y te acompaña las primeras semanas hasta que le agarrés la mano.

@@ -1,0 +1,30 @@
+{
+  "url": "https://gmonserrat25.github.io/volcano-fitness",
+  "nombre": "Volcano Fitness",
+  "tipo": "GymOrHealthClub",
+  "rubro": "Gimnasio con musculación, funcional, entrenamiento personalizado y acondicionamiento",
+  "descripcion": "Gimnasio en La Falda, Córdoba. Musculación, clases de funcional, entrenamiento personalizado y acondicionamiento con cintas y bicicletas. La primera clase no tiene costo.",
+  "direccion": {"calle": "Sarmiento 518", "ciudad": "La Falda", "provincia": "Córdoba", "cp": "5172", "pais": "AR"},
+  "telefono": "+54 3548 592487",
+  "email": "",
+  "horarios": [
+    {"dias": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "abre": "07:00", "cierra": "12:00"},
+    {"dias": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "abre": "14:00", "cierra": "22:00"},
+    {"dias": ["Saturday"], "abre": "09:00", "cierra": "12:00"}
+  ],
+  "horarios_texto": "Lunes a viernes de 7 a 12 y de 14 a 22 h; sábados de 9 a 12 h",
+  "sameAs": ["https://www.instagram.com/volcano_fitnesslafalda", "https://www.tiktok.com/@volcano.fitness"],
+  "mapa": "https://www.google.com/maps/dir/?api=1&destination=Sarmiento+518,+La+Falda,+C%C3%B3rdoba,+Argentina",
+  "imagen": "https://gmonserrat25.github.io/volcano-fitness/img/gym.jpg",
+  "paginas": [
+    {"titulo": "Entrenamientos", "url": "/entrenamientos.html", "nota": "Musculación, funcional, personalizado y acondicionamiento"},
+    {"titulo": "El gimnasio", "url": "/gym.html", "nota": "Instalaciones y cómo llegar"},
+    {"titulo": "Precios", "url": "/precios.html", "nota": "Planes Libre, Full y Personalizado (valores por confirmar)"},
+    {"titulo": "Contacto", "url": "/contacto.html", "nota": "WhatsApp, teléfono y mapa"}
+  ],
+  "faq": [
+    {"p": "¿Hay que firmar permanencia?", "r": "No. Los planes son mes a mes y podés cambiar o dar de baja cuando quieras. Tampoco cobramos matrícula."},
+    {"p": "¿Qué horarios tienen?", "r": "Lunes a viernes de 7 a 12 y de 14 a 22 h. Sábados de 9 a 12 h. Las clases de funcional van con reserva; el resto de la sala es sin turno."},
+    {"p": "¿Puedo entrenar si nunca pisé un gimnasio?", "r": "Sí, es lo más común. Empezás con una evaluación, el entrenador te arma la rutina y te acompaña las primeras semanas hasta que le agarrés la mano."}
+  ]
+}
