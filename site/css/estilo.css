@@ -660,6 +660,9 @@ ul{margin:0;padding:0;list-style:none}
 }
 .pie__legal nav{display:flex;gap:18px;flex-wrap:wrap}
 .pie__legal a:hover{color:#fff}
+.pie__credito{margin:0;padding:0 0 20px;text-align:center;font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.3)}
+.pie__credito a{transition:color .2s}
+.pie__credito a:hover{color:rgba(255,255,255,.55)}
 
 /* ═══ WhatsApp flotante (se mantiene del sitio actual) ═════ */
 .wpp{
@@ -740,7 +743,7 @@ ul{margin:0;padding:0;list-style:none}
   .pie__cols{grid-template-columns:1fr}
   .testi__nombres{grid-template-columns:1fr}
   /* que el WhatsApp flotante no tape los enlaces legales */
-  .pie__legal{padding-bottom:84px}
+  .pie__credito{padding-bottom:84px}
   .fotos__chica{right:0;width:44%}
 }
 
